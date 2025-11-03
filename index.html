@@ -21,6 +21,8 @@
       margin:0;
       background:linear-gradient(180deg, var(--bg), #a9896b);
       color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
     header{
@@ -85,11 +87,13 @@
       text-align:center;
     }
     .produtos-foto img{
-      max-width:600px;
-      width:90%;
+      max-width:760px;
+      width:92%;
       border-radius:18px;
       box-shadow:0 12px 30px rgba(0,0,0,0.5);
-      border:2px solid var(--gold);
+      border:3px solid var(--gold);
+      display:block;
+      margin:0 auto;
     }
 
     footer{
@@ -108,8 +112,37 @@
       border-radius:8px;
     }
 
-    @media(max-width:900px){
+    /* Botão voltar ao topo */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      outline: none;
+      background-color: var(--accent);
+      color: white;
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    }
+    #topBtn:hover {
+      background-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+      color: #2a1b0d;
+    }
+
+    /* Pequenos ajustes responsivos */
+    @media(max-width:1000px){
       .hero{grid-template-columns:1fr;gap:24px}
+      .produtos-foto img{width:100%}
+    }
+    @media(max-width:900px){
       .grid{grid-template-columns:1fr}
       .prod-grid{grid-template-columns:1fr}
       .navlinks{display:none}
@@ -123,12 +156,14 @@
     <div class="container">
       <nav>
         <div class="brand">
+          <!-- Logo (certifica-te que logo-bioaura.png está no mesmo diretório do index.html) -->
           <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg">
           <div>
             <h1>BioAura</h1>
             <p>Aluzia-te — valoriza a luz natural da pele</p>
           </div>
         </div>
+
         <div class="navlinks">
           <a href="#sobre">Sobre</a>
           <a href="#produtos">Produtos</a>
@@ -161,8 +196,10 @@
     </div>
   </header>
 
-  <section class="produtos-foto">
-    <img src="produtos-bioaura.png" alt="Produtos BioAura">
+  <!-- Secção com a imagem dos produtos -->
+  <section class="produtos-foto" aria-hidden="false">
+    <!-- Certifica-te que produtos-bioaura.png existe no repositório/public -->
+    <img src="produtos-bioaura.png" alt="Imagem dos produtos BioAura — frascos artesanais">
   </section>
 
   <main class="container">
@@ -200,6 +237,12 @@
             <li>Urucum em pó — 2 g (pigmento dourado)</li>
             <li>Vitamina E — 1 g (~20 gotas)</li>
           </ul>
+          <h5>Resumo do procedimento</h5>
+          <ol>
+            <li>Derreter óleo e manteiga em banho-maria a ~60 °C.</li>
+            <li>Adicionar pigmentos lentamente e misturar até cor uniforme.</li>
+            <li>Peneirar se necessário e embalar em frascos escuros.</li>
+          </ol>
         </div>
 
         <div class="card">
@@ -215,6 +258,12 @@
             <li>Gel de aloe vera — 3 mL</li>
             <li>Óleo essencial de lavanda + conservante natural (opcional)</li>
           </ul>
+          <h5>Resumo do procedimento</h5>
+          <ol>
+            <li>Aquecer fases oleosa e aquosa separadamente a ~70 °C.</li>
+            <li>Verter a fase aquosa sobre a oleosa mexendo para emulsificar.</li>
+            <li>Deixar arrefecer e adicionar óleos essenciais e conservantes a 35–40 °C.</li>
+          </ol>
         </div>
       </div>
     </section>
@@ -290,15 +339,36 @@
     <div>© BioAura — Projeto escolar • Feito para apresentação</div>
   </footer>
 
+  <!-- Botão para voltar ao topo -->
+  <button id="topBtn" title="Voltar ao topo">↑</button>
+
   <script>
+    // Scroll suave nos links internos
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const href = a.getAttribute('href');
         if (href.length > 1) {
           e.preventDefault();
-          document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
       });
+    });
+
+    // Mostrar/esconder o botão "voltar ao topo"
+    const topBtn = document.getElementById("topBtn");
+    const scrollThreshold = 300;
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+        topBtn.style.display = "block";
+      } else {
+        topBtn.style.display = "none";
+      }
+    });
+
+    // Ação ao clicar
+    topBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 </body>
