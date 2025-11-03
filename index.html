@@ -1,439 +1,262 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>BioAura — Cosmética Natural Sustentável</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BioAura - Cosmética Natural</title>
   <style>
-    :root{
-      --bg:#bda48a;           /* BEGE CHOCOLATE SUAVE */
-      --card:#e8d8bd;         /* CREME CLARO */
-      --accent:#6b4a2b;       /* CASTANHO CHOCOLATE */
-      --muted:#3b2b1a;        /* CASTANHO ESCURO TEXTO */
-      --gold:#caa45d;         /* DOURADO QUENTE */
-      --glass: rgba(232,217,193,0.85);
-      --maxw:1100px;
-    }
-    *{box-sizing:border-box}
-    body{
-      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
-      margin:0;
-      background:linear-gradient(180deg, var(--bg), #a9896b);
-      color:var(--muted);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    :root {
+      --chocolate: #6b4226;
+      --chocolate-light: #8b5a2b;
+      --beige: #f5ede0;
+      --accent: #a67b5b;
+      --gold: #d4af37;
     }
 
-    header{
-      background:linear-gradient(90deg, #4b2f1a, #6b4a2b);
-      border-bottom:2px solid var(--gold);
-      box-shadow:0 4px 16px rgba(0,0,0,0.3);
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: var(--beige);
+      color: #333;
+      scroll-behavior: smooth;
     }
 
-    .container{max-width:var(--maxw); margin:0 auto; padding:28px}
-    nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .logoimg{height:70px;width:auto;border-radius:10px}
-    .brand h1{margin:0;font-size:22px;color:#f7efe0;font-family:'Playfair Display',serif}
-    .brand p{margin:0;font-size:12px;color:#e6d3b8}
-    .navlinks a{
-      margin-left:18px;text-decoration:none;color:#f7efe0;
-      font-weight:600;transition:color .2s
-    }
-    .navlinks a:hover{color:var(--gold)}
-
-    .hero{
-      display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;
-      padding:40px 0;
-    }
-    .hero .lead{
-      background:var(--card);border-radius:16px;padding:28px;
-      box-shadow:0 8px 28px rgba(0,0,0,0.15);
-      border:1px solid rgba(0,0,0,0.1);
-    }
-    .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px 0;font-size:32px;color:var(--accent)}
-    .hero p{color:#3a2c1f;line-height:1.6}
-    .cta{margin-top:20px}
-    .btn{
-      display:inline-block;padding:12px 22px;border-radius:12px;
-      background:var(--accent);color:#fff;text-decoration:none;
-      font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s;
-      box-shadow:0 4px 12px rgba(0,0,0,0.25);
-    }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.35)}
-
-    .card{
-      background:var(--card);border-radius:14px;padding:20px;
-      box-shadow:0 6px 22px rgba(0,0,0,0.08);
-      border:1px solid rgba(0,0,0,0.06);
+    header {
+      background-color: var(--chocolate);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
     }
 
-    section{padding:40px 0;border-top:1px solid rgba(0,0,0,0.1)}
-    h3{margin-top:0;font-family:'Playfair Display',serif;font-size:26px;color:var(--accent)}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    ul{margin:10px 0 0 22px;line-height:1.6}
-
-    .formula pre{
-      white-space:pre-wrap;background:#f4e7d1;padding:14px;border-radius:10px;
-      font-family:monospace;overflow:auto;border:1px solid #e0d4c2;
-      font-size:14px;color:#3a3a3a;
+    header img {
+      height: 60px;
+      border-radius: 10px;
     }
 
-    .produtos-foto{
-      background:#4b2f1a;
-      padding:60px 0;
-      text-align:center;
-    }
-    .produtos-foto img{
-      max-width:760px;
-      width:92%;
-      border-radius:18px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.5);
-      border:3px solid var(--gold);
-      display:block;
-      margin:0 auto;
+    nav {
+      margin-top: 10px;
     }
 
-    footer{
-      padding:30px 0;
-      color:#f7efe0;
-      font-size:14px;
-      text-align:center;
-      background:#4b2f1a;
-      border-top:2px solid var(--gold);
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
     }
 
-    footer img{
-      height:55px;
-      display:block;
-      margin:0 auto 10px auto;
-      border-radius:8px;
+    nav a:hover {
+      color: var(--gold);
     }
 
-    /* Botão "voltar ao topo" em forma de bisnaga */
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      color: var(--chocolate);
+      text-align: center;
+    }
+
+    .hero {
+      text-align: center;
+      background-color: var(--chocolate-light);
+      color: white;
+      padding: 80px 20px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+    }
+
+    .hero img {
+      max-width: 250px;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .produtos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .produto {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      flex: 1 1 250px;
+      transition: transform 0.3s;
+    }
+
+    .produto:hover {
+      transform: translateY(-5px);
+    }
+
+    .produto img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 10px;
+    }
+
+    footer {
+      background-color: var(--chocolate);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-top: 3px solid var(--gold);
+    }
+
+    /* Botão em formato de frasco de creme */
     #topBtn {
       display: none;
       position: fixed;
       bottom: 30px;
       right: 30px;
       z-index: 99;
-      cursor: pointer;
-      background: none;
       border: none;
       outline: none;
-      animation: flutuar 3s ease-in-out infinite;
+      width: 70px;
+      height: 70px;
+      background: radial-gradient(circle at top, #d4af37 10%, #8b5a2b 80%);
+      border-radius: 50% 50% 40% 40%;
+      box-shadow: inset 0 3px 6px rgba(255,255,255,0.4), 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      position: fixed;
+      transition: all 0.3s ease;
     }
 
-    .bisnaga {
-      width: 45px;
-      height: 85px;
-      background: linear-gradient(180deg, var(--accent) 8%, #8b623c 65%, var(--gold) 100%);
-      border-radius: 8px 8px 20px 20px;
-      position: relative;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.45);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .bisnaga::before {
+    #topBtn::before {
       content: "";
       position: absolute;
-      top: -10px;
-      left: 9px;
-      width: 27px;
-      height: 10px;
-      background: var(--gold);
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.35);
-    }
-
-    .bisnaga::after {
-      content: "↑";
-      position: absolute;
-      bottom: 8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      color: #fff8e7;
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      width: 50%;
+      height: 10px;
+      background: var(--gold);
+      border-radius: 5px;
     }
 
-    @keyframes flutuar {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    /* brilho suave (opcional) */
-    .bisnaga .reflexo {
+    #topBtn span {
+      color: white;
+      font-size: 22px;
       position: absolute;
-      top: 18%;
-      left: -10%;
-      width: 18px;
-      height: 60%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02));
-      transform: rotate(-12deg);
-      filter: blur(1px);
-      border-radius: 6px;
-      opacity: 0.85;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      font-weight: bold;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.4);
     }
 
-    /* acessibilidade: foco */
-    #topBtn:focus .bisnaga { box-shadow: 0 0 0 3px rgba(202,164,93,0.18); }
-
-    @media(max-width:1000px){
-      .hero{grid-template-columns:1fr;gap:24px}
-      .produtos-foto img{width:100%}
+    #topBtn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.4);
     }
-    @media(max-width:900px){
-      .grid{grid-template-columns:1fr}
-      .prod-grid{grid-template-columns:1fr}
-      .navlinks{display:none}
-      .hero h2{font-size:28px}
+
+    @media (max-width: 768px) {
+      .produtos {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
-
 <body>
+
   <header>
-    <div class="container">
+    <img src="Aluzia-te.png" alt="Logotipo BioAura">
+    <div>
+      <h1>BioAura</h1>
       <nav>
-        <div class="brand" aria-label="BioAura - logótipo e nome">
-          <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg">
-          <div>
-            <h1>BioAura</h1>
-            <p>Aluzia-te — valoriza a luz natural da pele</p>
-          </div>
-        </div>
-
-        <div class="navlinks" role="navigation" aria-label="Menu principal">
-          <a href="#sobre">Sobre</a>
-          <a href="#produtos">Produtos</a>
-          <a href="#ciencia">Fundamentos</a>
-          <a href="#planeamento">Planeamento</a>
-          <a href="#contacto">Contacto</a>
-        </div>
+        <a href="#sobre">Sobre</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#contacto">Contacto</a>
       </nav>
-
-      <div class="hero" role="banner">
-        <div class="lead">
-          <h2>Projeto BioAura — Cosmética Natural Sustentável</h2>
-          <p>Projeto desenvolvido por alunos do 12.º ano (Biologia e Química), com o objetivo de integrar ciência e cuidado corporal, criando cosméticos artesanais seguros e sustentáveis.</p>
-          <div class="cta">
-            <a class="btn" href="#produtos">Ver Produtos</a>
-          </div>
-        </div>
-
-        <div class="card" aria-labelledby="objetivo">
-          <h3 id="objetivo">Objetivo Principal</h3>
-          <p>Produção artesanal de dois cosméticos naturais:</p>
-          <ul>
-            <li>Bronzeador corporal — 150 mL</li>
-            <li>Creme hidratante e suavizante — 100 mL</li>
-          </ul>
-          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.1)">
-          <p style="color:var(--muted);font-size:14px">Utilização de ingredientes seguros e naturais aplicando princípios de química verde, biotecnologia e sustentabilidade.</p>
-        </div>
-      </div>
     </div>
   </header>
 
-  <!-- Secção com a imagem dos produtos -->
-  <section class="produtos-foto" aria-label="Imagem dos produtos BioAura">
-    <img src="produtos-bioaura.png" alt="Produtos BioAura — frascos artesanais">
+  <section class="hero">
+    <h2>Beleza natural, cuidado consciente</h2>
+    <p>Cosmética natural inspirada na harmonia entre o corpo e a natureza.</p>
+    <img src="ChatGPT Image 29_10_2025, 18_41_44.png" alt="Produtos naturais BioAura">
   </section>
 
-  <main class="container" role="main">
-    <section id="sobre">
-      <h3>A Nossa Essência</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>Conceito BioAura</h4>
-          <p>A BioAura nasceu de um projeto escolar com um propósito maior: unir ciência e sustentabilidade em produtos de cosmética natural que respeitam o corpo e o planeta. Desenvolvemos fórmulas simples, com ingredientes reconhecíveis e biodegradáveis sempre que possível.</p>
-          <p><strong>Slogan:</strong> "Aluzia-te" — valoriza a luz natural da pele.</p>
-        </div>
-        <div class="card">
-          <h4>Pilares Fundamentais</h4>
-          <ul>
-            <li>Química Verde</li>
-            <li>Biotecnologia</li>
-            <li>Sustentabilidade</li>
-            <li>Segurança e testes (patch test)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+  <section id="sobre">
+    <h2>Sobre a BioAura</h2>
+    <p>A BioAura é uma marca dedicada à cosmética natural, utilizando ingredientes orgânicos e sustentáveis para promover o equilíbrio entre o bem-estar e o ambiente.</p>
+  </section>
 
-    <section id="produtos">
-      <h3>Os Nossos Produtos</h3>
-      <div class="prod-grid">
-        <div class="card">
-          <h4>Bronzeador Natural — 150 mL</h4>
-          <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
-          <h5>Ingredientes</h5>
-          <ul>
-            <li>Óleo de lavanda enriquecido com vitamina E — 120 mL</li>
-            <li>Manteiga de karité — 20 g</li>
-            <li>Café moído fino — 5 g (pigmento castanho)</li>
-            <li>Cacau em pó 100% — 3 g (pigmento chocolate)</li>
-            <li>Urucum em pó — 2 g (pigmento dourado)</li>
-            <li>Vitamina E — 1 g (~20 gotas)</li>
-          </ul>
-          <h5>Procedimento (resumo)</h5>
-          <ol>
-            <li>Derreter óleo e manteiga em banho-maria a ~60 °C.</li>
-            <li>Adicionar pigmentos lentamente e misturar até cor uniforme.</li>
-            <li>Peneirar se necessário e embalar em frascos escuros.</li>
-          </ol>
-        </div>
-
-        <div class="card">
-          <h4>Creme de Massagem — 100 mL</h4>
-          <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
-          <h5>Ingredientes</h5>
-          <ul>
-            <li>Manteiga de karité — 15 g</li>
-            <li>Óleo de amêndoas doces — 20 mL</li>
-            <li>Óleo de rícino — 5 mL</li>
-            <li>Cera de abelha/vegetal — 5 g</li>
-            <li>Água destilada — 50 mL</li>
-            <li>Gel de aloe vera — 3 mL</li>
-            <li>Óleo essencial de lavanda + conservante natural (opcional)</li>
-          </ul>
-          <h5>Procedimento (resumo)</h5>
-          <ol>
-            <li>Aquecer fases oleosa e aquosa separadamente a ~70 °C.</li>
-            <li>Verter a fase aquosa sobre a oleosa mexendo para emulsificar.</li>
-            <li>Deixar arrefecer e adicionar óleos essenciais e conservantes quando 35–40 °C.</li>
-          </ol>
-        </div>
+  <section id="produtos">
+    <h2>Os Nossos Produtos</h2>
+    <div class="produtos">
+      <div class="produto">
+        <img src="produto1.png" alt="Creme hidratante natural">
+        <h3>Creme Hidratante</h3>
+        <p>Com manteiga de karité e óleo de coco, ideal para hidratar em profundidade.</p>
       </div>
-    </section>
-
-    <section id="ciencia">
-      <h3>Fundamentos Científicos</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>Química</h4>
-          <p><strong>Extração de pigmentos lipossolúveis:</strong> pigmentos hidrofóbicos (café, cacau, urucum) são extraídos para o óleo por semelhança de polaridade.</p>
-          <p><strong>Emulsificação:</strong> união da fase oleosa e aquosa através de emulsificantes (cera vegetal) para estabilidade.</p>
-          <p><strong>Oxidação e antioxidantes:</strong> óleos vegetais oxidam com luz/oxigénio; vitamina E retarda a oxidação.</p>
-        </div>
-        <div class="card">
-          <h4>Biologia da Pele</h4>
-          <ul>
-            <li><strong>Epiderme:</strong> proteção e hidratação.</li>
-            <li><strong>Derme:</strong> vasos, nervos e glândulas.</li>
-            <li><strong>Hipoderme:</strong> reserva energética e proteção térmica.</li>
-          </ul>
-          <p>Os produtos reforçam a barreira cutânea sem interferir na melanogénese.</p>
-        </div>
+      <div class="produto">
+        <img src="produto2.png" alt="Sérum facial regenerador">
+        <h3>Sérum Regenerador</h3>
+        <p>Com ácido hialurónico e extrato de rosa mosqueta para uma pele revitalizada.</p>
       </div>
-
-      <div style="margin-top:18px" class="card formula">
-        <h4>Notas Técnicas</h4>
-        <pre>
-- Banho-maria: 60–70 °C conforme a fase
-- Adicionar conservantes quando a mistura arrefecer a 35–40 °C
-- Embalagem: frascos escuros para reduzir oxidação
-- Testes: patch test para avaliar alergias locais
-        </pre>
+      <div class="produto">
+        <img src="produto3.png" alt="Esfoliante corporal natural">
+        <h3>Esfoliante Corporal</h3>
+        <p>Feito com açúcar mascavado e óleo essencial de laranja doce para uma pele suave.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="planeamento">
-      <h3>Planeamento e Execução</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>1.º Período</h4>
-          <ul>
-            <li>Planeamento do projeto e criação do logótipo.</li>
-            <li>Pesquisa e seleção de ingredientes.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2.º Período</h4>
-          <ul>
-            <li>Criação de patchs de teste e registo de resultados.</li>
-            <li>Ajuste de fórmulas e preparação de recipientes.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>3.º Período</h4>
-          <ul>
-            <li>Produção dos produtos finais, elaboração do relatório e apresentação.</li>
-            <li>Divulgação dos resultados e conclusões.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="contacto">
-      <h3>Contacto</h3>
-      <div class="card">
-        <p>Para mais informações entre em contacto com a equipa responsável.</p>
-      </div>
-    </section>
-  </main>
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Tem alguma questão ou deseja colaborar connosco? Envie-nos uma mensagem para <b>bioaura@contato.pt</b></p>
+  </section>
 
   <footer>
-    <img src="logo-bioaura.png" alt="Logo BioAura">
-    <div>© BioAura — Projeto escolar • Feito para apresentação</div>
+    <p>&copy; 2025 BioAura. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- Botão "voltar ao topo" -->
-  <button id="topBtn" title="Voltar ao topo" aria-label="Voltar ao topo">
-    <div class="bisnaga" role="img" aria-hidden="true">
-      <div class="reflexo" aria-hidden="true"></div>
-    </div>
-  </button>
+  <!-- Botão frasco voltar ao topo -->
+  <button id="topBtn" title="Voltar ao topo"><span>↑</span></button>
 
   <script>
-    // Smooth scroll for in-page links
+    // Scroll suave
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const href = a.getAttribute('href');
         if (href.length > 1) {
           e.preventDefault();
-          const el = document.querySelector(href);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
 
-    // Show/hide top button
+    // Mostrar/esconder botão frasco
     const topBtn = document.getElementById("topBtn");
-    const scrollThreshold = 300;
     window.addEventListener("scroll", () => {
-      if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         topBtn.style.display = "block";
       } else {
         topBtn.style.display = "none";
       }
     });
 
-    // Click action
+    // Clicar e subir
     topBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
-
-    // Ensure bisnaga reflexo subtle animation (optional small loop)
-    (function animateReflexo(){
-      const r = document.querySelector('.bisnaga .reflexo');
-      if (!r) return;
-      r.animate([
-        { left: '-14%', opacity: 0.6 },
-        { left: '60%', opacity: 0.08 },
-        { left: '140%', opacity: 0 }
-      ], {
-        duration: 2600,
-        iterations: Infinity,
-        easing: 'ease-in-out'
-      });
-    })();
   </script>
 </body>
 </html>
