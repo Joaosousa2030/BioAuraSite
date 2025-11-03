@@ -7,95 +7,106 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#c8b091;           /* BEGE TERROSO */
-      --card:#e5d6bd;         /* TOM CREME PARA CONTRASTE */
-      --accent:#70543a;       /* CASTANHO AVERMELHADO PRINCIPAL */
-      --muted:#4a3b2a;        /* CASTANHO ESCURO TEXTO */
-      --gold:#c9a056;         /* DOURADO TERROSO */
+      --bg:#bda48a;           /* BEGE CHOCOLATE SUAVE */
+      --card:#e8d8bd;         /* CREME CLARO */
+      --accent:#6b4a2b;       /* CASTANHO CHOCOLATE */
+      --muted:#3b2b1a;        /* CASTANHO ESCURO TEXTO */
+      --gold:#caa45d;         /* DOURADO QUENTE */
+      --glass: rgba(232,217,193,0.85);
       --maxw:1100px;
     }
     *{box-sizing:border-box}
     body{
       font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
       margin:0;
-      background:linear-gradient(180deg, var(--bg), #b89b7d);
+      background:linear-gradient(180deg, var(--bg), #a9896b);
       color:var(--muted);
     }
+
     header{
-      background:#3c2a1d;
+      background:linear-gradient(90deg, #4b2f1a, #6b4a2b);
       border-bottom:2px solid var(--gold);
-      box-shadow:0 4px 20px rgba(0,0,0,0.2);
+      box-shadow:0 4px 16px rgba(0,0,0,0.3);
     }
+
     .container{max-width:var(--maxw); margin:0 auto; padding:28px}
     nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:14px}
-    .logoimg{
-      height:70px;
-      width:auto;
-    }
-    .brand h1{margin:0;font-size:22px;color:#f6e9d0;font-family:'Playfair Display',serif}
-    .brand p{margin:0;font-size:12px;color:#d6c3a8}
+    .logoimg{height:70px;width:auto;border-radius:10px}
+    .brand h1{margin:0;font-size:22px;color:#f7efe0;font-family:'Playfair Display',serif}
+    .brand p{margin:0;font-size:12px;color:#e6d3b8}
     .navlinks a{
-      margin-left:18px;text-decoration:none;color:#f6e9d0;
+      margin-left:18px;text-decoration:none;color:#f7efe0;
       font-weight:600;transition:color .2s
     }
     .navlinks a:hover{color:var(--gold)}
+
     .hero{
       display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;
       padding:40px 0;
     }
     .hero .lead{
       background:var(--card);border-radius:16px;padding:28px;
-      box-shadow:0 8px 28px rgba(0,0,0,0.1);
-      border:1px solid rgba(0,0,0,0.05);
+      box-shadow:0 8px 28px rgba(0,0,0,0.15);
+      border:1px solid rgba(0,0,0,0.1);
     }
     .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px 0;font-size:32px;color:var(--accent)}
     .hero p{color:#3a2c1f;line-height:1.6}
     .cta{margin-top:20px}
     .btn{
-      display:inline-block;padding:12px 20px;border-radius:12px;
+      display:inline-block;padding:12px 22px;border-radius:12px;
       background:var(--accent);color:#fff;text-decoration:none;
       font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s;
       box-shadow:0 4px 12px rgba(0,0,0,0.25);
     }
     .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.35)}
+
     .card{
       background:var(--card);border-radius:14px;padding:20px;
-      box-shadow:0 6px 22px rgba(0,0,0,0.09);
+      box-shadow:0 6px 22px rgba(0,0,0,0.08);
       border:1px solid rgba(0,0,0,0.06);
     }
+
     section{padding:40px 0;border-top:1px solid rgba(0,0,0,0.1)}
     h3{margin-top:0;font-family:'Playfair Display',serif;font-size:26px;color:var(--accent)}
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
     .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
     ul{margin:10px 0 0 22px;line-height:1.6}
+
     .formula pre{
-      white-space:pre-wrap;background:#f3e5cc;padding:14px;border-radius:10px;
+      white-space:pre-wrap;background:#f4e7d1;padding:14px;border-radius:10px;
       font-family:monospace;overflow:auto;border:1px solid #e0d4c2;
       font-size:14px;color:#3a3a3a;
     }
 
-    /* Secção de imagem dos produtos */
+    /* Secção com imagem dos produtos */
     .produtos-foto{
-      background:#2a1d14;
+      background:#4b2f1a;
       padding:60px 0;
       text-align:center;
     }
     .produtos-foto img{
       max-width:600px;
       width:90%;
-      border-radius:20px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.4);
+      border-radius:18px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.5);
       border:2px solid var(--gold);
     }
 
     footer{
-      padding:28px 0;
-      color:#f6e9d0;
+      padding:30px 0;
+      color:#f7efe0;
       font-size:14px;
       text-align:center;
-      background:#3c2a1d;
+      background:#4b2f1a;
       border-top:2px solid var(--gold);
+    }
+
+    footer img{
+      height:55px;
+      display:block;
+      margin:0 auto 10px auto;
+      border-radius:8px;
     }
 
     @media(max-width:900px){
@@ -107,12 +118,13 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="container">
       <nav>
         <div class="brand">
-          <img src="Aluzia-te.png" alt="Logo BioAura" class="logoimg">
+          <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg">
           <div>
             <h1>BioAura</h1>
             <p>Aluzia-te — valoriza a luz natural da pele</p>
@@ -130,7 +142,7 @@
       <div class="hero">
         <div class="lead">
           <h2>Projeto BioAura — Cosmética Natural Sustentável</h2>
-          <p>Projeto desenvolvido por alunos do 12.º ano (Biologia e Química) com o objetivo de integrar ciência e cuidado corporal, criando cosméticos artesanais seguros e sustentáveis.</p>
+          <p>Projeto desenvolvido por alunos do 12.º ano (Biologia e Química), unindo ciência, natureza e cuidado corporal. Produção artesanal de cosméticos seguros e sustentáveis, inspirados na luz natural da pele.</p>
           <div class="cta">
             <a class="btn" href="#produtos">Ver Produtos</a>
           </div>
@@ -144,7 +156,7 @@
             <li>Creme hidratante e suavizante — 100 mL</li>
           </ul>
           <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.1)">
-          <p style="color:var(--muted);font-size:14px">Utilização de ingredientes seguros e naturais aplicando conhecimentos de química verde, biotecnologia e sustentabilidade.</p>
+          <p style="color:var(--muted);font-size:14px">Utilização de ingredientes seguros e naturais aplicando princípios de química verde, biotecnologia e sustentabilidade.</p>
         </div>
       </div>
     </div>
@@ -152,22 +164,22 @@
 
   <!-- Secção com a imagem dos produtos -->
   <section class="produtos-foto">
-    <img src="ChatGPT Image 29_10_2025, 18_41_44.png" alt="Produtos BioAura">
+    <img src="produtos-bioaura.png" alt="Produtos BioAura">
   </section>
 
   <main class="container">
     <section id="sobre">
-      <h3>Sobre o Projeto</h3>
+      <h3>A Nossa Essência</h3>
       <div class="grid">
         <div class="card">
           <h4>Conceito BioAura</h4>
-          <p>Uma marca de cosmética natural criada no âmbito do trabalho escolar com foco na produção artesanal, sustentabilidade e segurança dos ingredientes.</p>
+          <p>A BioAura nasceu de um projeto escolar com um propósito maior: unir ciência e sustentabilidade em produtos de cosmética natural que respeitam o corpo e o planeta.</p>
           <p><strong>Slogan:</strong> "Aluzia-te" — valoriza a luz natural da pele.</p>
         </div>
         <div class="card">
-          <h4>Pilares</h4>
+          <h4>Pilares Fundamentais</h4>
           <ul>
-            <li>Química verde</li>
+            <li>Química Verde</li>
             <li>Biotecnologia</li>
             <li>Sustentabilidade</li>
           </ul>
@@ -176,7 +188,7 @@
     </section>
 
     <section id="produtos">
-      <h3>Produtos</h3>
+      <h3>Os Nossos Produtos</h3>
       <div class="prod-grid">
         <div class="card">
           <h4>Bronzeador Natural — 150 mL</h4>
@@ -203,7 +215,7 @@
             <li>Cera de abelha/vegetal — 5 g</li>
             <li>Água destilada — 50 mL</li>
             <li>Gel de aloe vera — 3 mL</li>
-            <li>Óleo essencial de lavanda (1 mL) + conservante natural (opcional)</li>
+            <li>Óleo essencial de lavanda + conservante natural (opcional)</li>
           </ul>
         </div>
       </div>
@@ -228,6 +240,16 @@
           <p>Os produtos reforçam a barreira cutânea sem interferir na melanogénese.</p>
         </div>
       </div>
+
+      <div style="margin-top:18px" class="card formula">
+        <h4>Notas Técnicas</h4>
+        <pre>
+- Banho-maria: 60–70 °C conforme a fase
+- Adicionar conservantes quando a mistura arrefecer a 35–40 °C
+- Embalagem: frascos escuros para reduzir oxidação
+- Testes: patch test para avaliar alergias locais
+        </pre>
+      </div>
     </section>
 
     <section id="planeamento">
@@ -236,21 +258,21 @@
         <div class="card">
           <h4>1.º Período</h4>
           <ul>
-            <li>Planeamento do projeto, criação de logótipo e pesquisa inicial.</li>
-            <li>Recolha de materiais e seleção de ingredientes.</li>
+            <li>Planeamento do projeto e criação do logótipo.</li>
+            <li>Pesquisa e seleção de ingredientes.</li>
           </ul>
         </div>
         <div class="card">
           <h4>2.º Período</h4>
           <ul>
-            <li>Criação de patchs de teste e registo de resultados.</li>
-            <li>Ajuste de fórmulas e preparação de recipientes.</li>
+            <li>Criação de testes preliminares e ajustes de fórmula.</li>
+            <li>Preparação de recipientes e etiquetas.</li>
           </ul>
         </div>
         <div class="card">
           <h4>3.º Período</h4>
           <ul>
-            <li>Produção dos produtos finais, elaboração do relatório e apresentação.</li>
+            <li>Produção final, relatório e apresentação.</li>
             <li>Divulgação dos resultados e conclusões.</li>
           </ul>
         </div>
@@ -260,14 +282,14 @@
     <section id="contacto">
       <h3>Contacto</h3>
       <div class="card">
-        <p>Se quiseres apresentar este trabalho como site, podes contactar a equipa para mais informações (ex.: nomes dos alunos, escola, professor).</p>
-        <p style="color:var(--muted);font-size:14px">Nota: Este site é um suporte visual para o projeto BioAura — utiliza-o para apresentação prática ou para mostrar o relatório de forma interativa.</p>
+        <p>Para mais informações ou se quiseres apresentar o projeto BioAura como site, entra em contacto com a equipa responsável (ex.: nomes dos alunos, escola, professor orientador).</p>
+        <p style="color:var(--muted);font-size:14px">Este site serve como suporte visual para o projeto escolar BioAura — ideal para apresentações ou como relatório interativo.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <img src="Aluzia-te.png" alt="Logo BioAura" style="height:50px;display:block;margin:0 auto 10px auto;">
+    <img src="logo-bioaura.png" alt="Logo BioAura">
     <div>© BioAura — Projeto escolar • Feito para apresentação</div>
   </footer>
 
