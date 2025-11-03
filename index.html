@@ -7,17 +7,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#fcfbf7;
-      --card:#ffffff;
-      --accent:#5aa973;
-      --muted:#6b6b6b;
+      --bg:#f5f1e9;           /* bege claro, quente e natural */
+      --card:#faf7f0;         /* cartão um tom mais claro que o fundo */
+      --accent:#5aa973;       /* verde mantido */
+      --muted:#5c5c5c;        /* cinza um pouco mais escuro para contraste */
       --gold:#d9b76a;
-      --glass: rgba(255,255,255,0.6);
+      --glass: rgba(250,247,240,0.75); /* vidro com leve tom bege */
       --maxw:1100px;
     }
     *{box-sizing:border-box}
-    body{font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial; margin:0; background:linear-gradient(180deg,var(--bg),#f6f7f4); color:#222}
-    header{background:linear-gradient(90deg, rgba(90,169,115,0.12), rgba(217,183,106,0.06));backdrop-filter: blur(4px);}
+    body{
+      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
+      margin:0;
+      background:linear-gradient(180deg, var(--bg), #ede8dc); /* gradiente bege mais quente */
+      color:#333;
+    }
+    header{
+      background:linear-gradient(90deg, rgba(90,169,115,0.15), rgba(217,183,106,0.1));
+      backdrop-filter: blur(4px);
+    }
     .container{max-width:var(--maxw); margin:0 auto; padding:28px}
     nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:14px}
@@ -42,7 +50,11 @@
     .formula pre{white-space:pre-wrap;background:#fbfbfb;padding:12px;border-radius:8px;font-family:monospace;overflow:auto}
 
     footer{padding:24px 0;color:var(--muted);font-size:14px;text-align:center}
-    @media(max-width:900px){.hero{grid-template-columns:1fr} .grid{grid-template-columns:1fr} .navlinks{display:none}}
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .navlinks{display:none}
+    }
   </style>
 </head>
 <body>
