@@ -7,77 +7,96 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#d6c3a8;           /* BEGE ESCURO, QUENTE E RICO */
-      --card:#e8d9c1;         /* CARTÃO BEGE CLARO (CONTRASTE VISÍVEL) */
-      --accent:#4a8a5f;       /* VERDE MAIS ESCURO E NATURAL */
-      --muted:#4a4a4a;        /* CINZA ESCURO PARA TEXTO SECUNDÁRIO */
-      --gold:#c9a056;         /* DOURADO MAIS TERROSO */
-      --glass: rgba(232,217,193,0.85);
+      --bg:#c8b091;           /* BEGE TERROSO */
+      --card:#e5d6bd;         /* TOM CREME PARA CONTRASTE */
+      --accent:#70543a;       /* CASTANHO AVERMELHADO PRINCIPAL */
+      --muted:#4a3b2a;        /* CASTANHO ESCURO TEXTO */
+      --gold:#c9a056;         /* DOURADO TERROSO */
       --maxw:1100px;
     }
     *{box-sizing:border-box}
     body{
       font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
       margin:0;
-      background:linear-gradient(180deg, var(--bg), #c7b396); /* GRADIENTE FORTE */
-      color:#2a2a2a;
+      background:linear-gradient(180deg, var(--bg), #b89b7d);
+      color:var(--muted);
     }
     header{
-      background:linear-gradient(90deg, rgba(74,138,95,0.25), rgba(201,160,86,0.18));
-      backdrop-filter: blur(6px);
-      border-bottom:1px solid rgba(0,0,0,0.08);
+      background:#3c2a1d;
+      border-bottom:2px solid var(--gold);
+      box-shadow:0 4px 20px rgba(0,0,0,0.2);
     }
     .container{max-width:var(--maxw); margin:0 auto; padding:28px}
     nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:14px}
-    .logo{
-      height:64px;width:64px;border-radius:14px;
-      background:linear-gradient(135deg,var(--accent),var(--gold));
-      display:flex;align-items:center;justify-content:center;
-      color:#fff;font-weight:800;font-family:'Playfair Display',serif;
-      box-shadow:0 4px 12px rgba(74,138,95,0.3);
+    .logoimg{
+      height:70px;
+      width:auto;
     }
-    .brand h1{margin:0;font-size:21px;color:#2a2a2a}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    .brand h1{margin:0;font-size:22px;color:#f6e9d0;font-family:'Playfair Display',serif}
+    .brand p{margin:0;font-size:12px;color:#d6c3a8}
     .navlinks a{
-      margin-left:18px;text-decoration:none;color:#3a3a3a;
+      margin-left:18px;text-decoration:none;color:#f6e9d0;
       font-weight:600;transition:color .2s
     }
-    .navlinks a:hover{color:var(--accent)}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;padding:40px 0}
+    .navlinks a:hover{color:var(--gold)}
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;
+      padding:40px 0;
+    }
     .hero .lead{
       background:var(--card);border-radius:16px;padding:28px;
       box-shadow:0 8px 28px rgba(0,0,0,0.1);
       border:1px solid rgba(0,0,0,0.05);
     }
-    .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px 0;font-size:32px;color:#2a2a2a}
-    .hero p{color:#444;line-height:1.6}
+    .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px 0;font-size:32px;color:var(--accent)}
+    .hero p{color:#3a2c1f;line-height:1.6}
     .cta{margin-top:20px}
     .btn{
       display:inline-block;padding:12px 20px;border-radius:12px;
       background:var(--accent);color:#fff;text-decoration:none;
       font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s;
-      box-shadow:0 4px 12px rgba(74,138,95,0.3);
+      box-shadow:0 4px 12px rgba(0,0,0,0.25);
     }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(74,138,95,0.4)}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.35)}
     .card{
       background:var(--card);border-radius:14px;padding:20px;
       box-shadow:0 6px 22px rgba(0,0,0,0.09);
       border:1px solid rgba(0,0,0,0.06);
     }
-
-    section{padding:40px 0;border-top:1px solid rgba(0,0,0,0.08)}
-    h3{margin-top:0;font-family:'Playfair Display',serif;font-size:26px;color:#2a2a2a}
+    section{padding:40px 0;border-top:1px solid rgba(0,0,0,0.1)}
+    h3{margin-top:0;font-family:'Playfair Display',serif;font-size:26px;color:var(--accent)}
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
     .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
     ul{margin:10px 0 0 22px;line-height:1.6}
     .formula pre{
-      white-space:pre-wrap;background:#f5ece0;padding:14px;border-radius:10px;
+      white-space:pre-wrap;background:#f3e5cc;padding:14px;border-radius:10px;
       font-family:monospace;overflow:auto;border:1px solid #e0d4c2;
       font-size:14px;color:#3a3a3a;
     }
 
-    footer{padding:28px 0;color:#555;font-size:14px;text-align:center;background:#c7b396}
+    /* Secção de imagem dos produtos */
+    .produtos-foto{
+      background:#2a1d14;
+      padding:60px 0;
+      text-align:center;
+    }
+    .produtos-foto img{
+      max-width:600px;
+      width:90%;
+      border-radius:20px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.4);
+      border:2px solid var(--gold);
+    }
+
+    footer{
+      padding:28px 0;
+      color:#f6e9d0;
+      font-size:14px;
+      text-align:center;
+      background:#3c2a1d;
+      border-top:2px solid var(--gold);
+    }
 
     @media(max-width:900px){
       .hero{grid-template-columns:1fr;gap:24px}
@@ -93,7 +112,7 @@
     <div class="container">
       <nav>
         <div class="brand">
-          <div class="logo">BA</div>
+          <img src="Aluzia-te.png" alt="Logo BioAura" class="logoimg">
           <div>
             <h1>BioAura</h1>
             <p>Aluzia-te — valoriza a luz natural da pele</p>
@@ -131,6 +150,11 @@
     </div>
   </header>
 
+  <!-- Secção com a imagem dos produtos -->
+  <section class="produtos-foto">
+    <img src="ChatGPT Image 29_10_2025, 18_41_44.png" alt="Produtos BioAura">
+  </section>
+
   <main class="container">
     <section id="sobre">
       <h3>Sobre o Projeto</h3>
@@ -166,12 +190,6 @@
             <li>Urucum em pó — 2 g (pigmento dourado)</li>
             <li>Vitamina E — 1 g (~20 gotas)</li>
           </ul>
-          <h5>Procedimento (resumo)</h5>
-          <ol>
-            <li>Derreter óleo e manteiga em banho-maria a ~60 °C.</li>
-            <li>Adicionar pigmentos lentamente e misturar até cor uniforme.</li>
-            <li>Peneirar se necessário e embalar em frascos escuros.</li>
-          </ol>
         </div>
 
         <div class="card">
@@ -187,12 +205,6 @@
             <li>Gel de aloe vera — 3 mL</li>
             <li>Óleo essencial de lavanda (1 mL) + conservante natural (opcional)</li>
           </ul>
-          <h5>Procedimento (resumo)</h5>
-          <ol>
-            <li>Aquecer fases oleosa e aquosa separadamente a ~70 °C.</li>
-            <li>Verter a fase aquosa sobre a oleosa mexendo para emulsificar.</li>
-            <li>Deixar arrefecer e adicionar óleos essenciais e conservantes quando 35–40 °C.</li>
-          </ol>
         </div>
       </div>
     </section>
@@ -208,7 +220,6 @@
         </div>
         <div class="card">
           <h4>Biologia da Pele</h4>
-          <p>Resumo das camadas da pele e interação com os produtos:</p>
           <ul>
             <li><strong>Epiderme:</strong> proteção e hidratação.</li>
             <li><strong>Derme:</strong> vasos, nervos e glândulas.</li>
@@ -216,17 +227,6 @@
           </ul>
           <p>Os produtos reforçam a barreira cutânea sem interferir na melanogénese.</p>
         </div>
-      </div>
-
-      <div style="margin-top:18px" class="card formula">
-        <h4>Notas técnicas</h4>
-        <p style="color:#555">Condições de preparação, temperatura e segurança:</p>
-        <pre>
-- Banho-maria: 60–70 °C conforme a fase
-- Adicionar conservantes quando a mistura arrefecer a 35–40 °C
-- Embalagem: frascos escuros para reduzir oxidação por luz
-- Testes: patch test para avaliar alergias locais
-        </pre>
       </div>
     </section>
 
@@ -267,9 +267,8 @@
   </main>
 
   <footer>
-    <div class="container">
-      <div>© BioAura — Projeto escolar • Feito para apresentação</div>
-    </div>
+    <img src="Aluzia-te.png" alt="Logo BioAura" style="height:50px;display:block;margin:0 auto 10px auto;">
+    <div>© BioAura — Projeto escolar • Feito para apresentação</div>
   </footer>
 
   <script>
