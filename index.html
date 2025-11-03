@@ -7,53 +7,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#e8dcc9;           /* bege médio-escuro, quente e acolhedor */
-      --card:#f0e6d9;         /* cartão um tom mais claro que o fundo */
-      --accent:#5aa973;       /* verde mantido */
-      --muted:#555555;        /* cinza escuro para bom contraste */
-      --gold:#d9b76a;
-      --glass: rgba(240,230,217,0.8); /* vidro com tom bege escuro */
+      --bg:#d6c3a8;           /* BEGE ESCURO, QUENTE E RICO */
+      --card:#e8d9c1;         /* CARTÃO BEGE CLARO (CONTRASTE VISÍVEL) */
+      --accent:#4a8a5f;       /* VERDE MAIS ESCURO E NATURAL */
+      --muted:#4a4a4a;        /* CINZA ESCURO PARA TEXTO SECUNDÁRIO */
+      --gold:#c9a056;         /* DOURADO MAIS TERROSO */
+      --glass: rgba(232,217,193,0.85);
       --maxw:1100px;
     }
     *{box-sizing:border-box}
     body{
       font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
       margin:0;
-      background:linear-gradient(180deg, var(--bg), #d9ccba); /* gradiente bege escuro */
-      color:#2c2c2c;          /* texto bem escuro para contraste */
+      background:linear-gradient(180deg, var(--bg), #c7b396); /* GRADIENTE FORTE */
+      color:#2a2a2a;
     }
     header{
-      background:linear-gradient(90deg, rgba(90,169,115,0.18), rgba(217,183,106,0.12));
-      backdrop-filter: blur(4px);
+      background:linear-gradient(90deg, rgba(74,138,95,0.25), rgba(201,160,86,0.18));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.08);
     }
     .container{max-width:var(--maxw); margin:0 auto; padding:28px}
     nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:14px}
-    .logo{height:64px;width:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-family:'Playfair Display',serif}
-    .brand h1{margin:0;font-size:20px}
+    .logo{
+      height:64px;width:64px;border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--gold));
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-weight:800;font-family:'Playfair Display',serif;
+      box-shadow:0 4px 12px rgba(74,138,95,0.3);
+    }
+    .brand h1{margin:0;font-size:21px;color:#2a2a2a}
     .brand p{margin:0;font-size:12px;color:var(--muted)}
-    .navlinks a{margin-left:16px;text-decoration:none;color:var(--muted);font-weight:600}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px 0}
-    .hero .lead{background:var(--card);border-radius:14px;padding:26px;box-shadow:0 6px 24px rgba(25,25,25,0.08)}
-    .hero h2{font-family:'Playfair Display',serif;margin:0 0 8px 0;font-size:30px}
-    .hero p{color:var(--muted);line-height:1.5}
-    .cta{margin-top:18px}
-    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(30,30,30,0.07)}
+    .navlinks a{
+      margin-left:18px;text-decoration:none;color:#3a3a3a;
+      font-weight:600;transition:color .2s
+    }
+    .navlinks a:hover{color:var(--accent)}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;padding:40px 0}
+    .hero .lead{
+      background:var(--card);border-radius:16px;padding:28px;
+      box-shadow:0 8px 28px rgba(0,0,0,0.1);
+      border:1px solid rgba(0,0,0,0.05);
+    }
+    .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px 0;font-size:32px;color:#2a2a2a}
+    .hero p{color:#444;line-height:1.6}
+    .cta{margin-top:20px}
+    .btn{
+      display:inline-block;padding:12px 20px;border-radius:12px;
+      background:var(--accent);color:#fff;text-decoration:none;
+      font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s;
+      box-shadow:0 4px 12px rgba(74,138,95,0.3);
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(74,138,95,0.4)}
+    .card{
+      background:var(--card);border-radius:14px;padding:20px;
+      box-shadow:0 6px 22px rgba(0,0,0,0.09);
+      border:1px solid rgba(0,0,0,0.06);
+    }
 
-    /* sections */
-    section{padding:36px 0;border-top:1px solid rgba(0,0,0,0.05)}
-    h3{margin-top:0;font-family:'Playfair Display',serif}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    ul{margin:8px 0 0 20px}
-    .formula pre{white-space:pre-wrap;background:#f7f2ea;padding:12px;border-radius:8px;font-family:monospace;overflow:auto}
+    section{padding:40px 0;border-top:1px solid rgba(0,0,0,0.08)}
+    h3{margin-top:0;font-family:'Playfair Display',serif;font-size:26px;color:#2a2a2a}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    ul{margin:10px 0 0 22px;line-height:1.6}
+    .formula pre{
+      white-space:pre-wrap;background:#f5ece0;padding:14px;border-radius:10px;
+      font-family:monospace;overflow:auto;border:1px solid #e0d4c2;
+      font-size:14px;color:#3a3a3a;
+    }
 
-    footer{padding:24px 0;color:var(--muted);font-size:14px;text-align:center}
+    footer{padding:28px 0;color:#555;font-size:14px;text-align:center;background:#c7b396}
+
     @media(max-width:900px){
-      .hero{grid-template-columns:1fr}
+      .hero{grid-template-columns:1fr;gap:24px}
       .grid{grid-template-columns:1fr}
+      .prod-grid{grid-template-columns:1fr}
       .navlinks{display:none}
+      .hero h2{font-size:28px}
     }
   </style>
 </head>
@@ -65,7 +96,7 @@
           <div class="logo">BA</div>
           <div>
             <h1>BioAura</h1>
-          <p>Aluzia-te — valoriza a luz natural da pele</p>
+            <p>Aluzia-te — valoriza a luz natural da pele</p>
           </div>
         </div>
         <div class="navlinks">
@@ -93,7 +124,7 @@
             <li>Bronzeador corporal — 150 mL</li>
             <li>Creme hidratante e suavizante — 100 mL</li>
           </ul>
-          <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.08)">
+          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.1)">
           <p style="color:var(--muted);font-size:14px">Utilização de ingredientes seguros e naturais aplicando conhecimentos de química verde, biotecnologia e sustentabilidade.</p>
         </div>
       </div>
@@ -187,9 +218,9 @@
         </div>
       </div>
 
-      <div style="margin-top:16px" class="card formula">
+      <div style="margin-top:18px" class="card formula">
         <h4>Notas técnicas</h4>
-        <p class="muted">Condições de preparação, temperatura e segurança:</p>
+        <p style="color:#555">Condições de preparação, temperatura e segurança:</p>
         <pre>
 - Banho-maria: 60–70 °C conforme a fase
 - Adicionar conservantes quando a mistura arrefecer a 35–40 °C
@@ -216,7 +247,6 @@
             <li>Ajuste de fórmulas e preparação de recipientes.</li>
           </ul>
         </div>
-
         <div class="card">
           <h4>3.º Período</h4>
           <ul>
@@ -243,16 +273,15 @@
   </footer>
 
   <script>
-    // Smooth scroll for anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
         const href = a.getAttribute('href');
-        if(href.length>1){
+        if (href.length > 1) {
           e.preventDefault();
-          document.querySelector(href).scrollIntoView({behavior:'smooth'});
+          document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
         }
-      })
-    })
+      });
+    });
   </script>
 </body>
 </html>
