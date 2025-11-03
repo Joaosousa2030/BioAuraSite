@@ -7,23 +7,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f5f1e9;           /* bege claro, quente e natural */
-      --card:#faf7f0;         /* cartão um tom mais claro que o fundo */
+      --bg:#e8dcc9;           /* bege médio-escuro, quente e acolhedor */
+      --card:#f0e6d9;         /* cartão um tom mais claro que o fundo */
       --accent:#5aa973;       /* verde mantido */
-      --muted:#5c5c5c;        /* cinza um pouco mais escuro para contraste */
+      --muted:#555555;        /* cinza escuro para bom contraste */
       --gold:#d9b76a;
-      --glass: rgba(250,247,240,0.75); /* vidro com leve tom bege */
+      --glass: rgba(240,230,217,0.8); /* vidro com tom bege escuro */
       --maxw:1100px;
     }
     *{box-sizing:border-box}
     body{
       font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
       margin:0;
-      background:linear-gradient(180deg, var(--bg), #ede8dc); /* gradiente bege mais quente */
-      color:#333;
+      background:linear-gradient(180deg, var(--bg), #d9ccba); /* gradiente bege escuro */
+      color:#2c2c2c;          /* texto bem escuro para contraste */
     }
     header{
-      background:linear-gradient(90deg, rgba(90,169,115,0.15), rgba(217,183,106,0.1));
+      background:linear-gradient(90deg, rgba(90,169,115,0.18), rgba(217,183,106,0.12));
       backdrop-filter: blur(4px);
     }
     .container{max-width:var(--maxw); margin:0 auto; padding:28px}
@@ -34,20 +34,20 @@
     .brand p{margin:0;font-size:12px;color:var(--muted)}
     .navlinks a{margin-left:16px;text-decoration:none;color:var(--muted);font-weight:600}
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px 0}
-    .hero .lead{background:var(--card);border-radius:14px;padding:26px;box-shadow:0 6px 24px rgba(25,25,25,0.06)}
+    .hero .lead{background:var(--card);border-radius:14px;padding:26px;box-shadow:0 6px 24px rgba(25,25,25,0.08)}
     .hero h2{font-family:'Playfair Display',serif;margin:0 0 8px 0;font-size:30px}
     .hero p{color:var(--muted);line-height:1.5}
     .cta{margin-top:18px}
     .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(30,30,30,0.05)}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(30,30,30,0.07)}
 
     /* sections */
-    section{padding:36px 0;border-top:1px solid rgba(0,0,0,0.03)}
+    section{padding:36px 0;border-top:1px solid rgba(0,0,0,0.05)}
     h3{margin-top:0;font-family:'Playfair Display',serif}
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
     .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     ul{margin:8px 0 0 20px}
-    .formula pre{white-space:pre-wrap;background:#fbfbfb;padding:12px;border-radius:8px;font-family:monospace;overflow:auto}
+    .formula pre{white-space:pre-wrap;background:#f7f2ea;padding:12px;border-radius:8px;font-family:monospace;overflow:auto}
 
     footer{padding:24px 0;color:var(--muted);font-size:14px;text-align:center}
     @media(max-width:900px){
@@ -65,7 +65,7 @@
           <div class="logo">BA</div>
           <div>
             <h1>BioAura</h1>
-            <p>Aluzia-te — valoriza a luz natural da pele</p>
+          <p>Aluzia-te — valoriza a luz natural da pele</p>
           </div>
         </div>
         <div class="navlinks">
@@ -93,7 +93,7 @@
             <li>Bronzeador corporal — 150 mL</li>
             <li>Creme hidratante e suavizante — 100 mL</li>
           </ul>
-          <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.06)">
+          <hr style="margin:12px 0;border:none;border-top:1px solid rgba(0,0,0,0.08)">
           <p style="color:var(--muted);font-size:14px">Utilização de ingredientes seguros e naturais aplicando conhecimentos de química verde, biotecnologia e sustentabilidade.</p>
         </div>
       </div>
