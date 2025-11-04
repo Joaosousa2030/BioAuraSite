@@ -18,11 +18,21 @@
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
+    /* 🌈 Fundo animado */
     body{
       font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
       margin:0;
-      background:linear-gradient(180deg,var(--bg),#a9896b);
+      background:linear-gradient(180deg,#bda48a,#a9896b,#bda48a);
+      background-size:400% 400%;
+      animation:gradientMove 12s ease infinite;
       color:var(--muted);
+      cursor:url('cursor.png'), auto;
+    }
+    @keyframes gradientMove {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
 
     header{
@@ -35,7 +45,20 @@
 
     .container{max-width:var(--maxw);margin:0 auto;padding:28px}
     nav{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
-    .brand{display:flex;align-items:center;gap:14px}
+
+    /* ✨ Fade-in no logótipo e título */
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      opacity:0;
+      transform:translateY(-12px);
+      animation:fadeInTop 1s ease-out forwards;
+    }
+    @keyframes fadeInTop {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .logoimg{height:70px;border-radius:10px}
     .brand h1{margin:0;font-size:22px;color:#f7efe0;font-family:'Playfair Display',serif}
     .brand p{margin:0;font-size:12px;color:#e6d3b8}
@@ -46,15 +69,40 @@
     }
     .navlinks a:hover{color:var(--gold)}
 
-    /* 🔹 MENU HAMBÚRGUER */
+    /* 🔹 MENU HAMBÚRGUER ANIMADO */
     .menu-toggle{
       display:none;
       background:none;
       border:none;
-      color:#f7efe0;
-      font-size:26px;
       cursor:pointer;
+      width:32px;
+      height:24px;
+      position:relative;
     }
+    .menu-toggle span{
+      position:absolute;
+      height:3px;
+      width:100%;
+      background:#f7efe0;
+      left:0;
+      transition:all 0.3s ease;
+      border-radius:2px;
+    }
+    .menu-toggle span:nth-child(1){top:0;}
+    .menu-toggle span:nth-child(2){top:10px;}
+    .menu-toggle span:nth-child(3){top:20px;}
+    .menu-toggle.active span:nth-child(1){
+      transform:rotate(45deg);
+      top:10px;
+    }
+    .menu-toggle.active span:nth-child(2){
+      opacity:0;
+    }
+    .menu-toggle.active span:nth-child(3){
+      transform:rotate(-45deg);
+      top:10px;
+    }
+
     @media(max-width:800px){
       .menu-toggle{display:block;}
       .navlinks{
@@ -67,8 +115,15 @@
         padding:10px 20px;
         border-radius:8px;
         box-shadow:0 4px 12px rgba(0,0,0,0.4);
+        transform:scale(0.95);
+        opacity:0;
+        transition:all 0.3s ease;
       }
-      .navlinks.show{display:flex;}
+      .navlinks.show{
+        display:flex;
+        transform:scale(1);
+        opacity:1;
+      }
       .navlinks a{margin:8px 0;}
     }
 
@@ -87,32 +142,60 @@
     .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px;font-size:32px;color:var(--accent)}
     .hero p{color:#3a2c1f;line-height:1.6}
     .cta{margin-top:20px}
-    .btn{
-      display:inline-block;padding:12px 22px;border-radius:12px;
-      background:linear-gradient(90deg,var(--accent),var(--gold));
-      color:#fff;text-decoration:none;
-      font-weight:700;font-size:15px;transition:transform .3s,box-shadow .3s;
-      box-shadow:0 4px 12px rgba(0,0,0,0.25);
-    }
-    .btn:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.35)}
 
+    /* 💫 Hover dourado no botão */
+    .btn{
+      display:inline-block;
+      padding:12px 22px;
+      border-radius:12px;
+      background:linear-gradient(90deg,var(--accent),var(--gold));
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      font-size:15px;
+      transition:transform .3s,box-shadow .3s;
+      box-shadow:0 4px 12px rgba(0,0,0,0.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .btn::after {
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
+      transition:all 0.6s ease;
+    }
+    .btn:hover::after {
+      left:100%;
+    }
+    .btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    /* 🪞 Cartões com profundidade 3D */
     .card{
-      background:var(--card);border-radius:14px;padding:20px;
+      background:var(--card);
+      border-radius:14px;
+      padding:20px;
       box-shadow:0 6px 22px rgba(0,0,0,0.08);
       border:1px solid rgba(0,0,0,0.06);
-      transition:transform .3s, box-shadow .3s;
+      transition:transform 0.4s ease, box-shadow 0.4s ease;
     }
     .card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 10px 28px rgba(0,0,0,0.15);
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 12px 26px rgba(0,0,0,0.2);
     }
 
     section{
       padding:40px 0;
       border-top:1px solid rgba(0,0,0,0.1);
       opacity:0;
-      transform:translateY(20px);
-      transition:opacity 0.8s ease-out, transform 0.8s ease-out;
+      transform:translateY(30px);
+      transition:all 0.8s ease-out;
     }
     section.visible{
       opacity:1;
@@ -149,6 +232,10 @@
       border:3px solid var(--gold);
       display:block;
       margin:0 auto;
+      transition:transform 0.4s ease;
+    }
+    .produtos-foto img:hover {
+      transform: scale(1.02);
     }
 
     footer{
@@ -233,6 +320,14 @@
       border-radius:6px;
       opacity:0.85;
     }
+
+    /* 📱 Tipografia e espaçamento mobile */
+    @media(max-width:600px){
+      body{font-size:17px;line-height:1.7;}
+      h3{font-size:22px;}
+      .btn{font-size:16px;padding:14px 24px;}
+      .card{padding:18px;}
+    }
   </style>
 </head>
 
@@ -248,7 +343,9 @@
           </div>
         </div>
 
-        <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+        <button class="menu-toggle" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
 
         <div class="navlinks" role="navigation">
           <a href="#sobre">Sobre</a>
@@ -414,10 +511,13 @@
   </button>
 
   <script>
-    // 🔹 Menu hambúrguer
+    // 🔹 Menu hambúrguer com animação
     const menuBtn=document.querySelector('.menu-toggle');
     const nav=document.querySelector('.navlinks');
-    menuBtn.addEventListener('click',()=>nav.classList.toggle('show'));
+    menuBtn.addEventListener('click',()=>{
+      menuBtn.classList.toggle('active');
+      nav.classList.toggle('show');
+    });
 
     // 🔹 Botão "voltar ao topo"
     const topBtn=document.getElementById("topBtn");
@@ -432,7 +532,7 @@
       {duration:2600,iterations:Infinity,easing:'ease-in-out'});
     })();
 
-    // 🔹 Efeito de entrada das secções
+    // 💨 Efeito de deslizar nas secções
     const sections=document.querySelectorAll('section');
     const reveal=()=>{sections.forEach(sec=>{
       if(sec.getBoundingClientRect().top<window.innerHeight-100){
