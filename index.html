@@ -7,11 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#bda48a;
-      --card:#e8d8bd;
-      --accent:#6b4a2b;
-      --muted:#3b2b1a;
-      --gold:#caa45d;
+      --bg:#bda48a;           /* BEGE CHOCOLATE SUAVE */
+      --card:#e8d8bd;         /* CREME CLARO */
+      --accent:#6b4a2b;       /* CASTANHO CHOCOLATE */
+      --muted:#3b2b1a;        /* CASTANHO ESCURO TEXTO */
+      --gold:#caa45d;         /* DOURADO QUENTE */
       --glass: rgba(232,217,193,0.85);
       --maxw:1100px;
     }
@@ -112,6 +112,7 @@
       border-radius:8px;
     }
 
+    /* Botão "voltar ao topo" em forma de bisnaga */
     #topBtn {
       display: none;
       position: fixed;
@@ -166,6 +167,7 @@
       50% { transform: translateY(-6px); }
     }
 
+    /* brilho suave (opcional) */
     .bisnaga .reflexo {
       position: absolute;
       top: 18%;
@@ -179,6 +181,7 @@
       opacity: 0.85;
     }
 
+    /* acessibilidade: foco */
     #topBtn:focus .bisnaga { box-shadow: 0 0 0 3px rgba(202,164,93,0.18); }
 
     @media(max-width:1000px){
@@ -238,6 +241,7 @@
     </div>
   </header>
 
+  <!-- Secção com a imagem dos produtos -->
   <section class="produtos-foto" aria-label="Imagem dos produtos BioAura">
     <img src="produtos-bioaura.png" alt="Produtos BioAura — frascos artesanais">
   </section>
@@ -257,44 +261,45 @@
             <li>Química Verde</li>
             <li>Biotecnologia</li>
             <li>Sustentabilidade</li>
+            <li>Segurança e testes (patch test)</li>
           </ul>
         </div>
       </div>
     </section>
 
     <section id="produtos">
-      <h3>Os Nossos Produtos</h3>
-      <div class="prod-grid">
-        <div class="card">
-          <h4>Bronzeador Natural — 150 mL</h4>
-          <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
-          <h5>Ingredientes</h5>
-          <ul>
-            <li>Óleo de lavanda enriquecido com vitamina E — 120 mL</li>
-            <li>Manteiga de karité — 20 g</li>
-            <li>Café moído fino — 5 g (pigmento castanho)</li>
-            <li>Cacau em pó 100% — 3 g (pigmento chocolate)</li>
-            <li>Urucum em pó — 2 g (pigmento dourado)</li>
-            <li>Vitamina E — 1 g (~20 gotas)</li>
-          </ul>
-        </div>
+  <h3>Os Nossos Produtos</h3>
+  <div class="prod-grid">
+    <div class="card">
+      <h4>Bronzeador Natural — 150 mL</h4>
+      <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
+      <h5>Ingredientes</h5>
+      <ul>
+        <li>Óleo de lavanda enriquecido com vitamina E — 120 mL</li>
+        <li>Manteiga de karité — 20 g</li>
+        <li>Café moído fino — 5 g (pigmento castanho)</li>
+        <li>Cacau em pó 100% — 3 g (pigmento chocolate)</li>
+        <li>Urucum em pó — 2 g (pigmento dourado)</li>
+        <li>Vitamina E — 1 g (~20 gotas)</li>
+      </ul>
+    </div>
 
-        <div class="card">
-          <h4>Creme de Massagem — 100 mL</h4>
-          <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
-          <h5>Ingredientes</h5>
-          <ul>
-            <li>Manteiga de karité — 15 g</li>
-            <li>Óleo de amêndoas doces — 20 mL</li>
-            <li>Óleo de rícino — 5 mL</li>
-            <li>Cera de abelha/vegetal — 5 g</li>
-            <li>Água destilada — 50 mL</li>
-            <li>Gel de aloe vera — 3 mL</li>
-            <li>Óleo essencial de lavanda + conservante natural (opcional)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <div class="card">
+      <h4>Creme de Massagem — 100 mL</h4>
+      <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
+      <h5>Ingredientes</h5>
+      <ul>
+        <li>Manteiga de karité — 15 g</li>
+        <li>Óleo de amêndoas doces — 20 mL</li>
+        <li>Óleo de rícino — 5 mL</li>
+        <li>Cera de abelha/vegetal — 5 g</li>
+        <li>Água destilada — 50 mL</li>
+        <li>Gel de aloe vera — 3 mL</li>
+        <li>Óleo essencial de lavanda + conservante natural (opcional)</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
     <section id="ciencia">
       <h3>Fundamentos Científicos</h3>
@@ -322,6 +327,7 @@
 - Banho-maria: 60–70 °C conforme a fase
 - Adicionar conservantes quando a mistura arrefecer a 35–40 °C
 - Embalagem: frascos escuros para reduzir oxidação
+- Testes: patch test para avaliar alergias locais
         </pre>
       </div>
     </section>
@@ -339,6 +345,7 @@
         <div class="card">
           <h4>2.º Período</h4>
           <ul>
+            <li>Criação de patchs de teste e registo de resultados.</li>
             <li>Ajuste de fórmulas e preparação de recipientes.</li>
           </ul>
         </div>
@@ -365,6 +372,7 @@
     <div>© BioAura — Projeto escolar</div>
   </footer>
 
+  <!-- Botão "voltar ao topo" -->
   <button id="topBtn" title="Voltar ao topo" aria-label="Voltar ao topo">
     <div class="bisnaga" role="img" aria-hidden="true">
       <div class="reflexo" aria-hidden="true"></div>
@@ -372,6 +380,7 @@
   </button>
 
   <script>
+    // Smooth scroll for in-page links
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const href = a.getAttribute('href');
@@ -383,6 +392,7 @@
       });
     });
 
+    // Show/hide top button
     const topBtn = document.getElementById("topBtn");
     const scrollThreshold = 300;
     window.addEventListener("scroll", () => {
@@ -393,10 +403,12 @@
       }
     });
 
+    // Click action
     topBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
+    // Ensure bisnaga reflexo subtle animation (optional small loop)
     (function animateReflexo(){
       const r = document.querySelector('.bisnaga .reflexo');
       if (!r) return;
