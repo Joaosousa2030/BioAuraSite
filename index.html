@@ -256,6 +256,7 @@
             <li>Química Verde</li>
             <li>Biotecnologia</li>
             <li>Sustentabilidade</li>
+            <li>Segurança e testes (patch test)</li>
           </ul>
         </div>
       </div>
@@ -321,6 +322,7 @@
 - Banho-maria: 60–70 °C conforme a fase
 - Adicionar conservantes quando a mistura arrefecer a 35–40 °C
 - Embalagem: frascos escuros para reduzir oxidação
+- Testes: patch test para avaliar alergias locais
         </pre>
       </div>
     </section>
@@ -338,6 +340,7 @@
         <div class="card">
           <h4>2.º Período</h4>
           <ul>
+            <li>Criação de patchs de teste e registo de resultados.</li>
             <li>Ajuste de fórmulas e preparação de recipientes.</li>
           </ul>
         </div>
@@ -371,7 +374,7 @@
   </button>
 
   <script>
-    // Scroll suave para links internos
+    // Scroll suave
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const href = a.getAttribute('href');
@@ -383,20 +386,19 @@
       });
     });
 
-    // Mostrar/ocultar botão de topo
+    // Mostrar/ocultar botão
     const topBtn = document.getElementById("topBtn");
-    const scrollThreshold = 300;
     window.addEventListener("scroll", () => {
-      if (window.scrollY > scrollThreshold) topBtn.style.display = "block";
+      if (window.scrollY > 300) topBtn.style.display = "block";
       else topBtn.style.display = "none";
     });
 
-    // Clicar no botão = voltar ao topo
+    // Voltar ao topo
     topBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Animação de reflexo
+    // Reflexo animado
     (function animateReflexo(){
       const r = document.querySelector('.bisnaga .reflexo');
       if (!r) return;
