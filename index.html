@@ -213,20 +213,22 @@
     .grid,.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
     ul{margin:10px 0 0 22px;line-height:1.6}
 
-    /* 🧩 Corrige overflow de texto no bloco de notas técnicas */
+    /* ✅ Corrige overflow no bloco de notas técnicas */
     .formula pre {
       white-space: pre-wrap;
       word-break: break-word;
-      overflow-wrap: anywhere;
+      overflow-wrap: break-word;
       background:#f4e7d1;
       padding:14px;
       border-radius:10px;
       font-family:monospace;
-      overflow-x:auto;
       border:1px solid #e0d4c2;
       font-size:14px;
       color:#3a3a3a;
+      width:100%;
       max-width:100%;
+      overflow-x:hidden;
+      box-sizing:border-box;
     }
 
     .produtos-foto{
@@ -467,12 +469,14 @@
 
       <div class="card" style="margin-top:18px">
         <h4>Notas Técnicas</h4>
-        <pre>
+        <div class="formula">
+          <pre>
 - Banho-maria: 60–70 °C
 - Adicionar conservantes a 35–40 °C
 - Embalagem: frascos escuros
 - Testes: patch test para avaliar alergias locais
-        </pre>
+          </pre>
+        </div>
       </div>
     </section>
 
