@@ -1,560 +1,657 @@
-<!doctype html>
-<html lang="pt">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="BioAura — projeto escolar de cosmética natural sustentável que une ciência, biotecnologia e cuidado da pele.">
-  <title>BioAura — Cosmética Natural Sustentável</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="BioAura — Bronzeador natural e Creme para Massagem Localizada. Produtos premium para cuidar da sua pele e realçar sua beleza natural." />
+  <meta name="keywords" content="BioAura, bronzeador, creme de massagem, bronze natural, cuidado da pele, estética" />
+  <meta name="author" content="BioAura" />
+  <title>BioAura — Bronzeador & Creme de Massagem | Beleza Natural</title>
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="BioAura — Bronzeador & Creme de Massagem" />
+  <meta property="og:description" content="Produtos premium para um bronzeado radiante e massagens que revitalizam a pele." />
+  <meta property="og:image" content="/b.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon placeholders -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ---------------------------------------------------------------
+       BioAura Marketing Site — Single-file HTML/CSS/JS
+       - Professional, responsive, accessible
+       - Sections: Hero, Products, Features, Ingredients, How to Use,
+         Testimonials, Gallery, Pricing, FAQ, Contact, Footer
+       - Progressive enhancement: form validation, localStorage,
+         simple shopping cart placeholders
+    --------------------------------------------------------------- */
+
     :root{
-      --bg:#bda48a;
-      --card:#e8d8bd;
-      --accent:#6b4a2b;
-      --muted:#3b2b1a;
-      --gold:#caa45d;
-      --maxw:1100px;
+      --bg: #f5efe8;
+      --card: #ffffff;
+      --accent: #7b4f33; /* deep brown */
+      --accent-2: #b68e5a; /* warm gold */
+      --muted: #6b4a38;
+      --glass: rgba(255,255,255,0.6);
+      --radius: 14px;
+      --maxwidth: 1200px;
+      --shadow: 0 8px 30px rgba(17,12,8,0.08);
+      --transition: 300ms cubic-bezier(.22,.9,.35,1);
     }
+
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
-    /* 🌈 Fundo animado */
+    html,body{height:100%}
     body{
-      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
       margin:0;
-      background:linear-gradient(180deg,#bda48a,#a9896b,#bda48a);
-      background-size:400% 400%;
-      animation:gradientMove 12s ease infinite;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:linear-gradient(180deg,var(--bg),#efe7dc);
       color:var(--muted);
-      cursor:url('cursor.png'), auto;
-    }
-    @keyframes gradientMove {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      -webkit-text-size-adjust:100%;
     }
 
-    header{
-      background:linear-gradient(90deg,#4b2f1a,#6b4a2b);
-      border-bottom:2px solid var(--gold);
-      box-shadow:0 4px 16px rgba(0,0,0,0.3);
-      position:relative;
-      z-index:10;
+    /* Utility */
+    .container{max-width:var(--maxwidth);margin:0 auto;padding:0 20px}
+    .row{display:flex;flex-wrap:wrap;gap:24px}
+    .center{text-align:center}
+    h1,h2,h3{font-family:'Playfair Display', serif;color:var(--accent)}
+    h1{font-size:clamp(28px,4vw,44px);line-height:1.05}
+    h2{font-size:22px}
+    p.lead{font-size:1.05rem;color:#4b362b}
+
+    /* Header */
+    header.site-header{
+      padding:28px 0;background:transparent;position:sticky;top:0;z-index:60;backdrop-filter: blur(6px);
+    }
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,var(--accent),#3d2314);display:flex;align-items:center;justify-content:center;color:var(--card);font-weight:700;font-family:'Playfair Display';box-shadow:var(--shadow);
+    }
+    nav.primary{display:flex;gap:14px;align-items:center}
+    nav.primary a{color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600}
+    nav.primary a:hover,nav.primary a:focus{background:var(--glass);outline:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center;padding:48px 0}
+    .hero-card{background:linear-gradient(180deg,#fff, #fbf7f2);border-radius:18px;padding:36px;box-shadow:var(--shadow)}
+    .hero-visual{border-radius:18px;overflow:hidden;max-height:560px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
+    .hero-visual img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .kicker{display:inline-block;background:linear-gradient(90deg,var(--accent-2),#d9b480);color:#fff;padding:8px 12px;border-radius:999px;font-weight:700;letter-spacing:0.6px}
+    .cta-row{display:flex;gap:12px;align-items:center;margin-top:20px}
+    .btn{display:inline-block;padding:12px 22px;border-radius:12px;font-weight:700;text-decoration:none;cursor:pointer;transition:var(--transition)}
+    .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 18px rgba(123,79,51,0.18)}
+    .btn-outline{background:transparent;border:2px solid rgba(123,79,51,0.08);color:var(--accent)}
+
+    /* Products */
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:28px}
+    .product-card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 6px 22px rgba(0,0,0,0.06);transition:transform var(--transition),box-shadow var(--transition)}
+    .product-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,7,6,0.09)}
+    .product-card img{width:100%;height:260px;object-fit:contain;border-radius:10px}
+    .price{font-weight:800;color:var(--accent-2);font-size:1.1rem}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0}
+    .feature{background:linear-gradient(180deg,#fff,#fbfbfb);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+
+    /* Ingredients list */
+    .ingredients{display:flex;flex-wrap:wrap;gap:12px}
+    .chip{background:rgba(182,142,90,0.12);padding:8px 12px;border-radius:24px;font-weight:600;color:var(--accent)}
+
+    /* How to Use */
+    .steps{display:flex;flex-direction:column;gap:12px}
+    .step{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fdf8f2)}
+    .step .num{min-width:44px;height:44px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .testi{background:linear-gradient(180deg,#fff,#fbfbfb);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+    .stars{color:var(--accent-2);font-weight:800}
+
+    /* Gallery slider (simple) */
+    .gallery{display:flex;gap:10px;overflow:hidden;border-radius:12px}
+    .gallery img{height:200px;object-fit:cover;border-radius:10px}
+
+    /* Pricing cards */
+    .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .price-card{padding:20px;border-radius:12px;background:linear-gradient(180deg,#fff,#faf7f3);box-shadow:var(--shadow)}
+
+    /* FAQ */
+    .faq{display:flex;flex-direction:column;gap:10px}
+    .q{padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfbfb);cursor:pointer}
+
+    /* Contact */
+    form.contact{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    form.contact textarea{grid-column:1/3;min-height:120px;padding:12px;border-radius:10px;border:1px solid rgba(11,7,6,0.06)}
+    input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(11,7,6,0.06);font-size:0.95rem}
+
+    /* Footer */
+    footer{margin-top:40px;padding:36px 0;background:linear-gradient(180deg,#3a2412,#341f11);color:#f2e6d7}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+    .socials a{display:inline-block;margin-right:8px;background:rgba(255,255,255,0.06);padding:8px;border-radius:8px;text-decoration:none;color:inherit}
+
+    /* Small screens */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .hero-visual{order:-1}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
     }
 
-    .container{max-width:var(--maxw);margin:0 auto;padding:28px}
-    nav{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
-
-    /* ✨ Fade-in no logótipo e título */
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:14px;
-      opacity:0;
-      transform:translateY(-12px);
-      animation:fadeInTop 1s ease-out forwards;
-    }
-    @keyframes fadeInTop {
-      to { opacity: 1; transform: translateY(0); }
+    @media (max-width:560px){
+      nav.primary{display:none}
+      .features{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      form.contact{grid-template-columns:1fr}
     }
 
-    .logoimg{height:70px;border-radius:10px}
-    .brand h1{margin:0;font-size:22px;color:#f7efe0;font-family:'Playfair Display',serif}
-    .brand p{margin:0;font-size:12px;color:#e6d3b8}
+    /* tiny interactions */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    .navlinks{display:flex;gap:18px;}
-    .navlinks a{
-      text-decoration:none;color:#f7efe0;font-weight:600;transition:color .2s
-    }
-    .navlinks a:hover{color:var(--gold)}
+    /* subtle animation */
+    .appear{opacity:0;transform:translateY(6px);transition:opacity 520ms ease,transform 520ms ease}
+    .appear.visible{opacity:1;transform:none}
 
-    /* 🔹 MENU HAMBÚRGUER ANIMADO */
-    .menu-toggle{
-      display:none;
-      background:none;
-      border:none;
-      cursor:pointer;
-      width:32px;
-      height:24px;
-      position:relative;
-    }
-    .menu-toggle span{
-      position:absolute;
-      height:3px;
-      width:100%;
-      background:#f7efe0;
-      left:0;
-      transition:all 0.3s ease;
-      border-radius:2px;
-    }
-    .menu-toggle span:nth-child(1){top:0;}
-    .menu-toggle span:nth-child(2){top:10px;}
-    .menu-toggle span:nth-child(3){top:20px;}
-    .menu-toggle.active span:nth-child(1){
-      transform:rotate(45deg);
-      top:10px;
-    }
-    .menu-toggle.active span:nth-child(2){
-      opacity:0;
-    }
-    .menu-toggle.active span:nth-child(3){
-      transform:rotate(-45deg);
-      top:10px;
-    }
+    /* Cart drawer */
+    .cart-drawer{position:fixed;right:18px;bottom:18px;background:var(--card);border-radius:12px;padding:12px;box-shadow:0 18px 40px rgba(0,0,0,0.12);z-index:80;width:320px;max-width:calc(100% - 40px);}
+    .cart-drawer h4{margin:0 0 8px}
+    .cart-toggle{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;padding:12px 16px;border-radius:999px;box-shadow:0 12px 30px rgba(123,79,51,0.2);cursor:pointer}
 
-    @media(max-width:800px){
-      .menu-toggle{display:block;}
-      .navlinks{
-        display:none;
-        flex-direction:column;
-        background:#4b2f1a;
-        position:absolute;
-        top:80px;
-        right:20px;
-        padding:10px 20px;
-        border-radius:8px;
-        box-shadow:0 4px 12px rgba(0,0,0,0.4);
-        transform:scale(0.95);
-        opacity:0;
-        transition:all 0.3s ease;
-      }
-      .navlinks.show{
-        display:flex;
-        transform:scale(1);
-        opacity:1;
-      }
-      .navlinks a{margin:8px 0;}
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:32px;
-      align-items:center;
-      padding:40px 0;
-    }
-    .hero .lead{
-      background:var(--card);border-radius:16px;padding:28px;
-      box-shadow:0 8px 28px rgba(0,0,0,0.15);
-      border:1px solid rgba(0,0,0,0.1);
-    }
-    .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px;font-size:32px;color:var(--accent)}
-    .hero p{color:#3a2c1f;line-height:1.6}
-    .cta{margin-top:20px}
-
-    /* 💫 Hover dourado no botão */
-    .btn{
-      display:inline-block;
-      padding:12px 22px;
-      border-radius:12px;
-      background:linear-gradient(90deg,var(--accent),var(--gold));
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      font-size:15px;
-      transition:transform .3s,box-shadow .3s;
-      box-shadow:0 4px 12px rgba(0,0,0,0.25);
-      position:relative;
-      overflow:hidden;
-    }
-    .btn::after {
-      content:"";
-      position:absolute;
-      top:0;
-      left:-100%;
-      width:100%;
-      height:100%;
-      background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
-      transition:all 0.6s ease;
-    }
-    .btn:hover::after {
-      left:100%;
-    }
-    .btn:hover{
-      transform:translateY(-3px);
-      box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    }
-
-    /* 🪞 Cartões com profundidade 3D */
-    .card{
-      background:var(--card);
-      border-radius:14px;
-      padding:20px;
-      box-shadow:0 6px 22px rgba(0,0,0,0.08);
-      border:1px solid rgba(0,0,0,0.06);
-      transition:transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .card:hover{
-      transform:translateY(-8px) scale(1.02);
-      box-shadow:0 12px 26px rgba(0,0,0,0.2);
-    }
-
-    section{
-      padding:40px 0;
-      border-top:1px solid rgba(0,0,0,0.1);
-      opacity:0;
-      transform:translateY(30px);
-      transition:all 0.8s ease-out;
-    }
-    section.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    h3{
-      margin-top:0;
-      font-family:'Playfair Display',serif;
-      font-size:26px;
-      color:var(--accent);
-      text-shadow:0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .grid,.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-    ul{margin:10px 0 0 22px;line-height:1.6}
-
-    /* ✅ Corrige overflow no bloco de notas técnicas */
-    .formula pre {
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow-wrap: break-word;
-      background:#f4e7d1;
-      padding:14px;
-      border-radius:10px;
-      font-family:monospace;
-      border:1px solid #e0d4c2;
-      font-size:14px;
-      color:#3a3a3a;
-      width:100%;
-      max-width:100%;
-      overflow-x:hidden;
-      box-sizing:border-box;
-    }
-
-    .produtos-foto{
-      background:#4b2f1a;
-      padding:60px 0;
-      text-align:center;
-    }
-    .produtos-foto img{
-      max-width:760px;
-      width:92%;
-      border-radius:18px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.5);
-      border:3px solid var(--gold);
-      display:block;
-      margin:0 auto;
-      transition:transform 0.4s ease;
-    }
-    .produtos-foto img:hover {
-      transform: scale(1.02);
-    }
-
-    footer{
-      padding:30px 0;
-      color:#f7efe0;
-      font-size:14px;
-      text-align:center;
-      background:#4b2f1a;
-      border-top:2px solid var(--gold);
-    }
-
-    footer img{
-      height:55px;
-      display:block;
-      margin:0 auto 10px auto;
-      border-radius:8px;
-    }
-
-    #topBtn{
-      display:none;
-      position:fixed;
-      bottom:30px;
-      right:30px;
-      z-index:99;
-      cursor:pointer;
-      background:none;
-      border:none;
-      outline:none;
-      animation:flutuar 3s ease-in-out infinite;
-    }
-
-    .bisnaga{
-      width:45px;
-      height:85px;
-      background:linear-gradient(180deg,var(--accent) 8%,#8b623c 65%,var(--gold) 100%);
-      border-radius:8px 8px 20px 20px;
-      position:relative;
-      box-shadow:0 6px 14px rgba(0,0,0,0.45);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .bisnaga::before{
-      content:"";
-      position:absolute;
-      top:-10px;
-      left:9px;
-      width:27px;
-      height:10px;
-      background:var(--gold);
-      border-radius:3px 3px 0 0;
-      box-shadow:0 1px 3px rgba(0,0,0,0.35);
-    }
-
-    .bisnaga::after{
-      content:"↑";
-      position:absolute;
-      bottom:8px;
-      left:50%;
-      transform:translateX(-50%);
-      color:#fff8e7;
-      font-size:18px;
-      font-weight:800;
-      letter-spacing:1px;
-    }
-
-    @keyframes flutuar{
-      0%,100%{transform:translateY(0);}
-      50%{transform:translateY(-6px);}
-    }
-
-    .bisnaga .reflexo{
-      position:absolute;
-      top:18%;
-      left:-10%;
-      width:18px;
-      height:60%;
-      background:linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.02));
-      transform:rotate(-12deg);
-      filter:blur(1px);
-      border-radius:6px;
-      opacity:0.85;
-    }
-
-    /* 📱 Tipografia e espaçamento mobile */
-    @media(max-width:600px){
-      body{font-size:17px;line-height:1.7;}
-      h3{font-size:22px;}
-      .btn{font-size:16px;padding:14px 24px;}
-      .card{padding:18px;}
-    }
   </style>
 </head>
-
 <body>
-  <header>
+
+  <header class="site-header">
     <div class="container">
-      <nav>
+      <div class="topbar">
         <div class="brand">
-          <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg">
+          <div class="logo" aria-hidden="true">BA</div>
           <div>
-            <h1>BioAura</h1>
-            <p>Aluzia-te — valoriza a luz natural da pele</p>
+            <div style="font-weight:800;color:var(--accent)">BioAura</div>
+            <div style="font-size:12px;color:#7a5a45">Beleza Natural</div>
           </div>
         </div>
 
-        <button class="menu-toggle" aria-label="Abrir menu">
-          <span></span><span></span><span></span>
-        </button>
-
-        <div class="navlinks" role="navigation">
-          <a href="#sobre">Sobre</a>
+        <nav class="primary" aria-label="Menu principal">
           <a href="#produtos">Produtos</a>
-          <a href="#ciencia">Fundamentos</a>
-          <a href="#planeamento">Planeamento</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-      </nav>
+          <a href="#como-usar">Como Usar</a>
+          <a href="#testemunhos">Depoimentos</a>
+          <a href="#contato">Contato</a>
+        </nav>
 
-      <div class="hero">
-        <div class="lead">
-          <h2>Projeto BioAura — Cosmética Natural Sustentável</h2>
-          <p>Projeto desenvolvido por alunos do 12.º ano (Biologia e Química), com o objetivo de integrar ciência e cuidado corporal, criando cosméticos artesanais seguros e sustentáveis.</p>
-          <div class="cta">
-            <a class="btn" href="#produtos">Ver Produtos</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Objetivo Principal</h3>
-          <p>Produção artesanal de dois cosméticos naturais:</p>
-          <ul>
-            <li>Bronzeador corporal — 150 mL</li>
-            <li>Creme hidratante e suavizante — 100 mL</li>
-          </ul>
-          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.1)">
-          <p style="color:var(--muted);font-size:14px">
-            Utilização de ingredientes seguros e naturais aplicando princípios de química verde, biotecnologia e sustentabilidade.
-          </p>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="btn btn-outline" href="#newsletter">Newsletter</a>
+          <button class="cart-toggle" id="openCart" aria-expanded="false" aria-controls="cart">Carrinho</button>
         </div>
       </div>
     </div>
   </header>
 
-  <section class="produtos-foto">
-    <img src="produtos-bioaura.png" alt="Produtos BioAura — frascos artesanais" loading="lazy">
-  </section>
+  <main>
+    <section class="container hero" aria-labelledby="hero-title">
+      <div class="hero-card appear" id="intro">
+        <span class="kicker">Novo Lançamento</span>
+        <h1 id="hero-title">BioAura — Bronze natural e massagens que transformam sua pele</h1>
+        <p class="lead">Produtos selecionados com ingredientes naturais, fragrâncias sutis e fórmulas que cuidam profundamente da pele enquanto realçam sua beleza.</p>
 
-  <main class="container">
-    <section id="sobre">
-      <h3>A Nossa Essência</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>Conceito BioAura</h4>
-          <p>A BioAura nasceu de um projeto escolar com o propósito de unir ciência e sustentabilidade em produtos de cosmética natural que respeitam o corpo e o planeta.</p>
-          <p><strong>Slogan:</strong> "Aluzia-te"</p>
+        <div class="products" style="margin-top:18px">
+          <!-- Product: Bronzeador -->
+          <article class="product-card" aria-labelledby="p-bronze">
+            <img src="/b.png" alt="Embalagem do bronzeador BioAura" />
+            <h3 id="p-bronze">Bronzeador Natural</h3>
+            <p style="font-size:0.95rem;color:#5b4033">Bronzeado uniforme e radiante com agentes hidratantes. FPS suave e acabamento acetinado.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+              <div class="price">R$ 89,90</div>
+              <button class="btn btn-primary" data-sku="bronzeador-50ml" onclick="addToCart(event)">Adicionar</button>
+            </div>
+          </article>
+
+          <!-- Product: Creme de Massagem -->
+          <article class="product-card" aria-labelledby="p-creme">
+            <img src="/k.png" alt="Embalagem do creme para massagem BioAura" />
+            <h3 id="p-creme">Creme para Massagem Localizada</h3>
+            <p style="font-size:0.95rem;color:#5b4033">Textura aveludada para massagens, melhora a circulação local e deixa a pele macia.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+              <div class="price">R$ 79,90</div>
+              <button class="btn btn-primary" data-sku="creme-150ml" onclick="addToCart(event)">Adicionar</button>
+            </div>
+          </article>
         </div>
-        <div class="card">
-          <h4>Pilares Fundamentais</h4>
+
+        <div class="cta-row" style="margin-top:22px">
+          <a class="btn btn-primary" href="#produtos">Ver todos os produtos</a>
+          <a class="btn btn-outline" href="#contato">Fale com a gente</a>
+        </div>
+      </div>
+
+      <aside class="hero-visual">
+        <!-- Visual composed: product stack + texture background -->
+        <picture>
+          <source srcset="/b.png" media="(min-width:800px)">
+          <img src="/k.png" alt="BioAura - visual de embalagens" loading="lazy">
+        </picture>
+      </aside>
+    </section>
+
+    <!-- Features -->
+    <section class="container" id="produtos" aria-labelledby="prod-title" style="padding-top:10px">
+      <h2 id="prod-title">Por que escolher BioAura?</h2>
+      <p class="lead">Fórmulas capazes de dar resultados visíveis com foco em segurança, sensorialidade e responsabilidade ambiental.</p>
+
+      <div class="features" style="margin-top:16px">
+        <div class="feature">
+          <h3>Ingredientes naturais</h3>
+          <p>Selecionamos ativos botânicos e óleos vegetais que cuidam da pele sem agredi-la.</p>
+        </div>
+        <div class="feature">
+          <h3>Textura sensorial</h3>
+          <p>Produtos concebidos para uma aplicação prazerosa, com rápida absorção e acabamento sedoso.</p>
+        </div>
+        <div class="feature">
+          <h3>Responsabilidade</h3>
+          <p>Embalagens recicláveis, formulações sem testes em animais e práticas sustentáveis.</p>
+        </div>
+      </div>
+
+      <!-- Ingredients & benefits -->
+      <div style="margin-top:22px;display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:260px">
+          <h3>Ingredientes-chave</h3>
+          <div class="ingredients" style="margin-top:12px">
+            <span class="chip">Óleo de Monoi</span>
+            <span class="chip">Manteiga de Karité</span>
+            <span class="chip">Vitamina E</span>
+            <span class="chip">Extrato de Aloe Vera</span>
+            <span class="chip">Peptídeos naturais</span>
+          </div>
+
+          <p style="margin-top:12px">Cada ingrediente é escolhido pela sua eficácia e perfil sensorial — combinados para entregar resultados sem comprometer a saúde da pele.</p>
+        </div>
+
+        <div style="flex:1;min-width:260px">
+          <h3>Benefícios</h3>
           <ul>
-            <li>Química Verde</li>
-            <li>Biotecnologia</li>
-            <li>Sustentabilidade</li>
-            <li>Segurança e testes (patch test)</li>
+            <li>Bronzeado uniforme e natural</li>
+            <li>Hidratação intensa</li>
+            <li>Melhora da textura da pele com uso contínuo</li>
+            <li>Suporte à microcirculação local (creme de massagem)</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section id="produtos">
-      <h3>Os Nossos Produtos</h3>
-      <div class="prod-grid">
-        <div class="card">
-          <h4>Bronzeador Natural — 150 mL</h4>
-          <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
-          <ul>
-            <li>Óleo de lavanda — 120 mL</li>
-            <li>Manteiga de karité — 20 g</li>
-            <li>Café moído — 5 g</li>
-            <li>Cacau em pó — 3 g</li>
-            <li>Urucum em pó — 2 g</li>
-          </ul>
+    <!-- How to Use -->
+    <section class="container" id="como-usar" style="margin-top:30px">
+      <h2>Como usar</h2>
+      <div class="steps" style="margin-top:12px">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <strong>Preparar a pele</strong>
+            <p>Limpe a área com sabonete neutro e esfolie suavemente uma vez por semana para retirar células mortas.</p>
+          </div>
         </div>
 
-        <div class="card">
-          <h4>Creme de Massagem — 100 mL</h4>
-          <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
-          <ul>
-            <li>Manteiga de karité — 15 g</li>
-            <li>Óleo de amêndoas doces — 20 mL</li>
-            <li>Óleo de rícino — 5 mL</li>
-            <li>Cera de abelha — 5 g</li>
-            <li>Água destilada — 50 mL</li>
-            <li>Gel de aloe vera — 3 mL</li>
-          </ul>
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <strong>Aplicar o produto</strong>
+            <p>Para o bronzeador: aplique uniformemente e massageie até absorção. Para o creme de massagem: aplique em movimentos circulares no local desejado.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <strong>Finalizar</strong>
+            <p>Repita conforme necessidade. Mantenha a pele hidratada e evite exposição solar excessiva sem proteção.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="ciencia">
-      <h3>Fundamentos Científicos</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>Química</h4>
-          <p><strong>Extração de pigmentos:</strong> pigmentos hidrofóbicos (café, cacau, urucum) são extraídos para o óleo.</p>
-          <p><strong>Emulsificação:</strong> união da fase oleosa e aquosa através de emulsificantes.</p>
-          <p><strong>Oxidação e antioxidantes:</strong> a vitamina E retarda a oxidação dos óleos vegetais.</p>
-        </div>
-        <div class="card">
-          <h4>Biologia da Pele</h4>
-          <ul>
-            <li><strong>Epiderme:</strong> proteção e hidratação.</li>
-            <li><strong>Derme:</strong> vasos, nervos e glândulas.</li>
-            <li><strong>Hipoderme:</strong> reserva energética e proteção térmica.</li>
-          </ul>
-        </div>
-      </div>
+    <!-- Testimonials -->
+    <section class="container" id="testemunhos" style="margin-top:36px">
+      <h2>Depoimentos</h2>
+      <p class="lead">O que clientes reais dizem sobre BioAura</p>
 
-      <div class="card" style="margin-top:18px">
-        <h4>Notas Técnicas</h4>
-        <div class="formula">
-          <pre>
-- Banho-maria: 60–70 °C
-- Adicionar conservantes a 35–40 °C
-- Embalagem: frascos escuros
-- Testes: patch test para avaliar alergias locais
-          </pre>
+      <div class="testimonials" style="margin-top:12px">
+        <article class="testi">
+          <div class="stars">★★★★★</div>
+          <p style="margin-top:8px"><strong>Mariana, RJ</strong> — "Usei o bronzeador nas minhas férias e ficou incrível. A pele ficou hidratada e com um brilho natural."</p>
+        </article>
+
+        <article class="testi">
+          <div class="stars">★★★★★</div>
+          <p style="margin-top:8px"><strong>Paulo, SP</strong> — "O creme para massagem tem uma textura ótima e senti diferença na circulação das pernas."</p>
+        </article>
+
+        <article class="testi">
+          <div class="stars">★★★★☆</div>
+          <p style="margin-top:8px"><strong>Carla, BH</strong> — "Aroma leve e fórmula gentil — adorei o acabamento acetinado do bronzeador."</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="container" style="margin-top:36px">
+      <h2>Galeria</h2>
+      <p class="lead">Inspirações, lifestyle e o processo sensorial BioAura</p>
+
+      <div class="gallery" style="margin-top:12px" aria-hidden="false">
+        <img src="/b.png" alt="Bronzeador BioAura - galeria" loading="lazy">
+        <img src="/k.png" alt="Creme de Massagem BioAura - galeria" loading="lazy">
+        <img src="/b.png" alt="Textura do bronzeador" loading="lazy">
+        <img src="/k.png" alt="Textura do creme" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Pricing & Offers -->
+    <section class="container" style="margin-top:36px;">
+      <h2>Ofertas Especiais</h2>
+      <p class="lead">Combo exclusivo para experimentar toda a linha BioAura</p>
+
+      <div class="pricing" style="margin-top:12px">
+        <div class="price-card">
+          <h3>Combo Bronze & Massagem</h3>
+          <p>Bronzeador 50ml + Creme 150ml</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <div style="font-size:1.2rem;font-weight:800;color:var(--accent-2)">R$ 149,90</div>
+            <button class="btn btn-primary" data-sku="combo-bronze-massage" onclick="addToCart(event)">Comprar Combo</button>
+          </div>
+        </div>
+
+        <div class="price-card">
+          <h3>Kit Experiência</h3>
+          <p>Amostras + guia sensorial</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+            <div style="font-size:1.2rem;font-weight:800;color:var(--accent-2)">R$ 39,90</div>
+            <button class="btn btn-outline" onclick="subscribeSample()">Quero Amostra</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="planeamento">
-      <h3>Planeamento e Execução</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>1.º Período</h4>
-          <ul>
-            <li>Planeamento e criação do logótipo.</li>
-            <li>Pesquisa de ingredientes.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2.º Período</h4>
-          <ul>
-            <li>Criação de patchs de teste e registo de resultados.</li>
-            <li>Ajuste de fórmulas e preparação.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>3.º Período</h4>
-          <ul>
-            <li>Produção final e relatório.</li>
-            <li>Apresentação e divulgação.</li>
-          </ul>
-        </div>
+    <!-- FAQ -->
+    <section class="container" style="margin-top:36px">
+      <h2>FAQ — Perguntas Frequentes</h2>
+      <div class="faq" style="margin-top:12px" id="faq">
+        <div class="q" data-open="false" tabindex="0">O bronzeador mancha roupa? <div class="answer sr-only">Resposta: não, ao secar ele fixa na pele e não transfere com facilidade. Aguarde a absorção completa antes de vestir.</div></div>
+        <div class="q" data-open="false" tabindex="0">Os produtos são testados em animais? <div class="answer sr-only">Resposta: não testamos em animais. Nossas fórmulas são cruelty-free.</div></div>
+        <div class="q" data-open="false" tabindex="0">Posso usar o creme após depilação? <div class="answer sr-only">Resposta: recomendamos aguardar 24 horas após procedimentos que irritem a pele.</div></div>
       </div>
     </section>
 
-    <section id="contacto">
-      <h3>Contacto</h3>
-      <div class="card">
-        <p>Para mais informações, entre em contacto com a equipa responsável.</p>
+    <!-- Contact / Newsletter -->
+    <section class="container" id="contato" style="margin-top:36px;margin-bottom:12px">
+      <h2>Fale com a gente</h2>
+      <p class="lead">Tem dúvidas ou quer parcerias? Preencha o formulário abaixo.</p>
+
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:300px">
+          <form id="contactForm" class="contact" novalidate>
+            <input type="text" id="name" name="name" placeholder="Seu nome" required aria-required="true">
+            <input type="email" id="email" name="email" placeholder="Seu e-mail" required aria-required="true">
+            <input type="tel" id="phone" name="phone" placeholder="Telefone (opcional)">
+            <select id="reason" name="reason">
+              <option value="">Motivo do contato</option>
+              <option value="doubt">Dúvida sobre produto</option>
+              <option value="wholesale">Compra Atacado</option>
+              <option value="press">Assessoria/Imprensa</option>
+            </select>
+            <textarea id="message" name="message" placeholder="Como podemos ajudar?" required aria-required="true"></textarea>
+            <button class="btn btn-primary" type="submit">Enviar Mensagem</button>
+          </form>
+        </div>
+
+        <aside style="flex:1;min-width:260px">
+          <h3>Newsletter</h3>
+          <p>Receba ofertas e conteúdos exclusivos.</p>
+          <form id="newsletter" style="display:flex;gap:8px;margin-top:8px" onsubmit="event.preventDefault();subscribeNewsletter();">
+            <input aria-label="email" type="email" id="newsletterEmail" placeholder="Seu e-mail" required>
+            <button class="btn btn-outline" type="submit">Assinar</button>
+          </form>
+
+          <div style="margin-top:12px">
+            <h4>Atendimento</h4>
+            <p style="margin:0">Seg–Sex: 9h–18h</p>
+            <p style="margin:0">E-mail: contato@bioaura.com</p>
+          </div>
+        </aside>
       </div>
     </section>
+
   </main>
 
+  <!-- Cart drawer (hidden by default) -->
+  <div id="cart" class="cart-drawer" style="display:none" aria-hidden="true">
+    <h4>Seu Carrinho</h4>
+    <div id="cartItems" style="max-height:240px;overflow:auto;margin-top:8px"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+      <div><strong>Total:</strong> <span id="cartTotal">R$ 0,00</span></div>
+      <button class="btn btn-primary" onclick="checkout()">Finalizar</button>
+    </div>
+  </div>
+
   <footer>
-    <img src="logo-bioaura.png" alt="Logo BioAura" loading="lazy">
-    <div>© BioAura — Projeto escolar</div>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>BioAura</h3>
+          <p>Beleza natural com responsabilidade.</p>
+        </div>
+
+        <div>
+          <h4>Links</h4>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#como-usar">Como Usar</a></li>
+            <li><a href="#testemunhos">Depoimentos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Siga-nos</h4>
+          <div class="socials">
+            <a href="#" aria-label="instagram">Instagram</a>
+            <a href="#" aria-label="facebook">Facebook</a>
+            <a href="#" aria-label="youtube">YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.04);padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div style="font-size:13px">&copy; <span id="year"></span> BioAura — Todos os direitos reservados.</div>
+        <div style="font-size:13px">Política de Privacidade | Termos</div>
+      </div>
+    </div>
   </footer>
 
-  <button id="topBtn" title="Voltar ao topo">
-    <div class="bisnaga"><div class="reflexo"></div></div>
-  </button>
-
   <script>
-    // 🔹 Menu hambúrguer com animação
-    const menuBtn=document.querySelector('.menu-toggle');
-    const nav=document.querySelector('.navlinks');
-    menuBtn.addEventListener('click',()=>{
-      menuBtn.classList.toggle('active');
-      nav.classList.toggle('show');
+    // Progressive reveal
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelectorAll('.appear').forEach((el,i)=>{
+        setTimeout(()=>el.classList.add('visible'), 120*i);
+      });
+
+      // set year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // FAQ toggle
+      document.querySelectorAll('.faq .q').forEach(q=>{
+        q.addEventListener('click', ()=>toggleFaq(q));
+        q.addEventListener('keypress', (e)=>{ if(e.key==='Enter'||e.key===' ') toggleFaq(q); });
+      });
+
+      // Cart toggle
+      document.getElementById('openCart').addEventListener('click', toggleCart);
+
+      // Load cart from localStorage
+      loadCartFromStorage();
+
+      // contact form
+      document.getElementById('contactForm').addEventListener('submit', handleContactForm);
     });
 
-    // 🔹 Botão "voltar ao topo"
-    const topBtn=document.getElementById("topBtn");
-    window.addEventListener("scroll",()=>{topBtn.style.display=(window.scrollY>300)?"block":"none";});
-    topBtn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"});});
+    function toggleFaq(q){
+      const open = q.getAttribute('data-open') === 'true';
+      q.setAttribute('data-open', (!open).toString());
+      const ans = q.querySelector('.answer');
+      if(!ans) return;
+      if(open){
+        ans.classList.add('sr-only');
+      } else {
+        ans.classList.remove('sr-only');
+      }
+    }
 
-    // 🔹 Reflexo animado
-    (function animateReflexo(){
-      const r=document.querySelector('.bisnaga .reflexo');
-      if(!r)return;
-      r.animate([{left:'-14%',opacity:0.6},{left:'60%',opacity:0.08},{left:'140%',opacity:0}],
-      {duration:2600,iterations:Infinity,easing:'ease-in-out'});
+    // Simple cart implementation (not production-ready)
+    const CART_KEY = 'bioaura_cart_v1';
+    let CART = {items:[]};
+
+    function addToCart(e){
+      const sku = e.currentTarget.getAttribute('data-sku');
+      let item;
+      if(sku.includes('bronzeador')){
+        item = {sku:'bronzeador-50ml',name:'Bronzeador 50ml',price:89.90,qty:1};
+      } else if(sku.includes('creme')){
+        item = {sku:'creme-150ml',name:'Creme para Massagem 150ml',price:79.90,qty:1};
+      } else if(sku.includes('combo')){
+        item = {sku:'combo-bronze-massage',name:'Combo Bronze + Massagem',price:149.90,qty:1};
+      } else {
+        item = {sku:sku||'produto-desconhecido',name:'Produto',price:0,qty:1};
+      }
+      const existing = CART.items.find(i=>i.sku===item.sku);
+      if(existing){ existing.qty += 1; } else { CART.items.push(item); }
+      saveCart();
+      openCart();
+      renderCartItems();
+    }
+
+    function saveCart(){
+      localStorage.setItem(CART_KEY,JSON.stringify(CART));
+    }
+    function loadCartFromStorage(){
+      try{
+        const raw = localStorage.getItem(CART_KEY);
+        if(raw){ CART = JSON.parse(raw); }
+      }catch(e){ CART={items:[]}; }
+      renderCartItems();
+    }
+    function renderCartItems(){
+      const el = document.getElementById('cartItems');
+      if(!el) return;
+      el.innerHTML = '';
+      let total = 0;
+      CART.items.forEach(it => {
+        total += it.price * it.qty;
+        const row = document.createElement('div');
+        row.style.display='flex';row.style.justifyContent='space-between';row.style.alignItems='center';row.style.marginBottom='8px';
+        row.innerHTML = `<div style="flex:1"><strong>${escapeHtml(it.name)}</strong><div style='font-size:12px;color:#7a5a45'>R$ ${it.price.toFixed(2)} x ${it.qty}</div></div><div style='display:flex;gap:6px'><button onclick="qtyChange('${it.sku}',-1)'>-</button><button onclick="qtyChange('${it.sku}',1)">+</button></div>`;
+        el.appendChild(row);
+      });
+      document.getElementById('cartTotal').textContent = 'R$ ' + total.toFixed(2);
+    }
+
+    function qtyChange(sku,delta){
+      const it = CART.items.find(i=>i.sku===sku);
+      if(!it) return;
+      it.qty += delta;
+      if(it.qty <= 0) CART.items = CART.items.filter(i=>i.sku!==sku);
+      saveCart();
+      renderCartItems();
+    }
+
+    function toggleCart(){
+      const cart = document.getElementById('cart');
+      const btn = document.getElementById('openCart');
+      if(cart.style.display === 'none' || cart.style.display === ''){
+        openCart();
+      } else {
+        closeCart();
+      }
+    }
+    function openCart(){
+      const cart = document.getElementById('cart');
+      const btn = document.getElementById('openCart');
+      cart.style.display = 'block';
+      cart.setAttribute('aria-hidden','false');
+      btn.setAttribute('aria-expanded','true');
+      renderCartItems();
+    }
+    function closeCart(){
+      const cart = document.getElementById('cart');
+      const btn = document.getElementById('openCart');
+      cart.style.display = 'none';
+      cart.setAttribute('aria-hidden','true');
+      btn.setAttribute('aria-expanded','false');
+    }
+
+    function checkout(){
+      if(CART.items.length===0){ alert('Seu carrinho está vazio.'); return; }
+      // Here you would integrate with a payment gateway or redirect to checkout page
+      alert('Obrigado! Redirecionando para checkout simulado...');
+      // Clear cart for demo
+      CART.items = [];
+      saveCart();
+      renderCartItems();
+      closeCart();
+    }
+
+    // Simple newsletter & sample handlers
+    function subscribeNewsletter(){
+      const email = document.getElementById('newsletterEmail').value;
+      if(!email) return alert('Informe um e-mail válido.');
+      // Simulate API request
+      localStorage.setItem('bioaura_news_'+email, new Date().toISOString());
+      alert('Obrigado! E-mail cadastrado.');
+      document.getElementById('newsletterEmail').value = '';
+    }
+
+    function subscribeSample(){
+      alert('Amostra solicitada! Entraremos em contato para confirmações.');
+    }
+
+    // Contact form handler (basic validation & fake send)
+    function handleContactForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name || !email || !message){ alert('Por favor, preencha os campos obrigatórios.'); return; }
+      // store message in localStorage as demo
+      const store = JSON.parse(localStorage.getItem('bioaura_messages')||'[]');
+      store.push({name,email,message,at:new Date().toISOString()});
+      localStorage.setItem('bioaura_messages',JSON.stringify(store));
+      alert('Mensagem enviada! Responderemos em breve.');
+      e.target.reset();
+    }
+
+    // tiny helper
+    function escapeHtml(str){ return String(str).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m]; }); }
+
+    // Accessibility: focus trap for cart if opened (simple)
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeCart();
+    });
+
+    // Tiny analytics demo (local)
+    (function(){
+      const key = 'bioaura_analytics';
+      const raw = JSON.parse(localStorage.getItem(key)||'{}');
+      raw.views = (raw.views||0)+1;
+      raw.last = new Date().toISOString();
+      localStorage.setItem(key, JSON.stringify(raw));
     })();
 
-    // 💨 Efeito de deslizar nas secções
-    const sections=document.querySelectorAll('section');
-    const reveal=()=>{sections.forEach(sec=>{
-      if(sec.getBoundingClientRect().top<window.innerHeight-100){
-        sec.classList.add('visible');
-      }
-    });};
-    window.addEventListener('scroll',reveal);
-    reveal();
   </script>
+
 </body>
 </html>
