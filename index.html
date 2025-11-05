@@ -555,7 +555,7 @@
     });};
     window.addEventListener('scroll',reveal);
     reveal();
-    
+
   </script>
 
   <!-- 🌙 Botão modo claro/escuro -->
@@ -602,6 +602,29 @@
     color:var(--muted);
     transition:background 0.5s,color 0.5s;
   }
+  
+  /* 🌙 Ajuste de cores no modo escuro */
+body.dark .lead,
+body.dark .card,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark p,
+body.dark li {
+  color: #f4e7d1 !important;
+}
+
+body.dark .lead {
+  background: #3b2b1a;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+body.dark .card {
+  background: #2d2015;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
   </style>
 
 </body>
