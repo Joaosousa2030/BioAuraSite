@@ -1,12 +1,8 @@
 <!doctype html>
 <!--
   BioAura — Versão Profissional (single-file)
-  Objetivo: manter o conteúdo original, mas modernizar layout, acessibilidade,
-  desempenho e estética. Estilos e scripts incorporados para fácil preview.
-  Observações:
-  - Substitua as imagens placeholder (logo, produtos, textura) por ficheiros reais
-    otimizados (webp/avif) antes da publicação.
-  - Existem comentários explicativos ao longo do ficheiro para facilitar manutenção.
+  Atualizado: caminhos de imagem relativos e imagens de produto (b.png, k.png, logo-bioaura.png, produtos-bioaura.png)
+  Estrutura: index.html e imagens estão na mesma pasta.
 -->
 <html lang="pt-PT">
 <head>
@@ -20,7 +16,7 @@
   <meta property="og:title" content="BioAura — Cosmética Natural Sustentável">
   <meta property="og:description" content="Projeto escolar que une química, biotecnologia e sustentabilidade para cosmética artesanal.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/assets/og-bioaura.webp">
+  <meta property="og:image" content="produtos-bioaura.png">
 
   <title>BioAura — Cosmética Natural Sustentável</title>
 
@@ -28,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon (gerar em diferentes resoluções no build) -->
-  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <!-- Favicon (substituir por logo-bioaura.png se necessário) -->
+  <link rel="icon" href="logo-bioaura.png" sizes="any">
 
   <style>
     /* =========================================================
@@ -37,7 +33,7 @@
        ========================================================= */
     :root{
       --bg-1: #f4ece1; /* papel */
-      --bg-2: #bda48a; /* base */
+      --bg-2: #bda48a; /* base (mantido: castanho/dourado) */
       --card: #fff7ed; /* cards */
       --accent: #6b4a2b; /* marrom principal */
       --muted: #3b2b1a; /* texto */
@@ -85,7 +81,7 @@
     nav{display:flex;align-items:center;justify-content:space-between;gap:18px}
     .brand{display:flex;align-items:center;gap:14px}
     .logo{display:inline-flex;align-items:center;gap:12px}
-    .logo svg{height:52px;width:52px}
+    .logo img{height:52px;width:52px;object-fit:contain}
     .brand h1{font-family:'Playfair Display',serif;margin:0;font-weight:700;font-size:20px;color:#fff}
     .brand p{margin:0;font-size:12px;color:rgba(255,255,255,0.85)}
 
@@ -130,6 +126,10 @@
     /* Produtos foto grande */
     .produtos-foto{padding:48px 0;text-align:center;background:linear-gradient(180deg,rgba(75,47,26,0.06),rgba(75,47,26,0.02));border-radius:12px}
     .produtos-foto img{max-width:920px;width:92%;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.18);border:4px solid rgba(202,164,93,0.18)}
+
+    /* Product card image */
+    .product-thumb{display:flex;gap:12px;align-items:center}
+    .product-thumb img{width:96px;height:96px;object-fit:cover;border-radius:12px;border:2px solid rgba(0,0,0,0.06);box-shadow:0 8px 18px rgba(0,0,0,0.08)}
 
     /* Notas técnicas e código */
     .formula pre{white-space:pre-wrap;word-break:break-word;background:#f7efe3;padding:14px;border-radius:10px;border:1px solid #e9dcc6;font-family:monospace}
@@ -182,20 +182,8 @@
       <nav aria-label="Navegação principal">
         <div class="brand">
           <a href="#" class="logo" aria-label="BioAura — Home">
-            <!-- SVG logo inline (melhor que PNG para performance e styling) -->
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-              <defs>
-                <linearGradient id="g1" x1="0" x2="1">
-                  <stop offset="0" stop-color="#caa45d" />
-                  <stop offset="1" stop-color="#6b4a2b" />
-                </linearGradient>
-              </defs>
-              <rect width="100" height="100" rx="18" fill="url(#g1)" />
-              <g transform="translate(18,18) scale(0.64)" fill="#fff">
-                <path d="M40 8c-9 0-16 7-16 16s7 16 16 16 16-7 16-16S49 8 40 8z" opacity="0.95"></path>
-                <path d="M8 72c10-12 30-20 32-20s22 8 32 20H8z" opacity="0.06"></path>
-              </g>
-            </svg>
+            <!-- PNG logo local -->
+            <img src="logo-bioaura.png" alt="Logo BioAura" loading="lazy">
           </a>
           <div>
             <h1>BioAura</h1>
@@ -252,8 +240,8 @@
 
       <div class="hero-visual">
         <div class="product-frame" aria-hidden="true">
-          <!-- Use srcset e formatos modernos; aqui placeholders -->
-          <img src="/assets/produtos-bioaura.webp" alt="Frascos artesanais BioAura" loading="lazy" width="420" height="360">
+          <!-- imagem principal da pasta (produtos-bioaura.png) -->
+          <img src="produtos-bioaura.png" alt="Frascos artesanais BioAura" loading="lazy" width="420" height="360">
         </div>
       </div>
     </section>
@@ -261,11 +249,7 @@
     <!-- Produtos showcase grande -->
     <section class="produtos-foto" aria-labelledby="produtos-title" style="margin-top:22px">
       <h3 id="produtos-title" style="display:none">Produtos BioAura</h3>
-      <picture>
-        <source srcset="/assets/produtos-hero.avif" type="image/avif">
-        <source srcset="/assets/produtos-hero.webp" type="image/webp">
-        <img src="/assets/produtos-hero.jpg" alt="Linha de produtos BioAura em frascos artesanais" loading="lazy">
-      </picture>
+      <img src="produtos-bioaura.png" alt="Linha de produtos BioAura em frascos artesanais" loading="lazy">
     </section>
 
     <!-- Sobre -->
@@ -290,34 +274,46 @@
       </div>
     </section>
 
-    <!-- Produtos detalhados -->
+    <!-- Produtos detalhados (com thumbnails b.png e k.png) -->
     <section id="produtos" aria-labelledby="produtos-section" style="padding-top:44px">
       <h3 id="produtos-section">Os Nossos Produtos</h3>
       <div class="grid" style="margin-top:10px">
+
         <article class="card" aria-labelledby="bronzeador-title">
-          <h4 id="bronzeador-title">Bronzeador Natural — 150 mL</h4>
-          <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
-          <ul>
-            <li>Óleo de lavanda — 120 mL</li>
-            <li>Manteiga de karité — 20 g</li>
-            <li>Café moído — 5 g</li>
-            <li>Cacau em pó — 3 g</li>
-            <li>Urucum em pó — 2 g</li>
-          </ul>
+          <div class="product-thumb">
+            <img src="b.png" alt="Bronzeador BioAura — frasco" loading="lazy">
+            <div>
+              <h4 id="bronzeador-title">Bronzeador Natural — 150 mL</h4>
+              <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
+              <ul>
+                <li>Óleo de lavanda — 120 mL</li>
+                <li>Manteiga de karité — 20 g</li>
+                <li>Café moído — 5 g</li>
+                <li>Cacau em pó — 3 g</li>
+                <li>Urucum em pó — 2 g</li>
+              </ul>
+            </div>
+          </div>
         </article>
 
         <article class="card" aria-labelledby="creme-title">
-          <h4 id="creme-title">Creme de Massagem — 100 mL</h4>
-          <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
-          <ul>
-            <li>Manteiga de karité — 15 g</li>
-            <li>Óleo de amêndoas doces — 20 mL</li>
-            <li>Óleo de rícino — 5 mL</li>
-            <li>Cera de abelha — 5 g</li>
-            <li>Água destilada — 50 mL</li>
-            <li>Gel de aloe vera — 3 mL</li>
-          </ul>
+          <div class="product-thumb">
+            <img src="k.png" alt="Creme BioAura — frasco" loading="lazy">
+            <div>
+              <h4 id="creme-title">Creme de Massagem — 100 mL</h4>
+              <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
+              <ul>
+                <li>Manteiga de karité — 15 g</li>
+                <li>Óleo de amêndoas doces — 20 mL</li>
+                <li>Óleo de rícino — 5 mL</li>
+                <li>Cera de abelha — 5 g</li>
+                <li>Água destilada — 50 mL</li>
+                <li>Gel de aloe vera — 3 mL</li>
+              </ul>
+            </div>
+          </div>
         </article>
+
       </div>
     </section>
 
@@ -397,7 +393,7 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <img src="/assets/logo-bioaura-white.svg" alt="Logo BioAura" loading="lazy">
+      <img src="logo-bioaura.png" alt="Logo BioAura" loading="lazy">
       <div>© BioAura — Projeto escolar</div>
       <div style="margin-top:8px;font-size:13px;color:rgba(255,255,255,0.85)">Feito com ♥ por alunos — matéria experimental. Não substitui aconselhamento profissional.</div>
     </div>
