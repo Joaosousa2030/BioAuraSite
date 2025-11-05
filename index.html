@@ -17,7 +17,10 @@
       --maxw:1100px;
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 
     /* 🌈 Fundo animado */
     body{
@@ -379,7 +382,7 @@ section.visible {
     <div class="container">
       <nav>
         <div class="brand">
-          <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg">
+          <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg" loading="lazy" decoding="async">
           <div>
             <h1>BioAura</h1>
             <p id="slogan"></p>
