@@ -341,11 +341,11 @@
       .card{padding:18px;}
     }
 
-    /* 💫 Brilho animado no título principal */
+/* 💫 Brilho animado no título principal */
 .hero h2 {
-  background: linear-gradient(90deg, #caa45d, #fff, #caa45d);
+  background: linear-gradient(90deg, #5b3a1a, #caa45d, #5b3a1a);
   background-clip: text;
-  -webkit-background-clip: text; /* para Chrome e Safari */
+  -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
   animation: shine 4s linear infinite;
@@ -353,6 +353,15 @@
 }
 @keyframes shine {
   to { background-position: 200%; }
+}
+
+/* 🌙 Versão do brilho no modo escuro */
+body.dark .hero h2 {
+  background: linear-gradient(90deg, #e6c177, #fff5cc, #e6c177);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 </style>
 </head>
