@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="BioAura — Bronzeador natural e Creme para Massagem Localizada. Produtos premium para cuidar da sua pele e realçar sua beleza natural." />
+  <meta name="description" content="BioAura — Bronzeador natural e Creme para Massagem Localizada. Produtos premium para cuidar da sua pele e realçar a sua beleza natural." />
   <meta name="keywords" content="BioAura, bronzeador, creme de massagem, bronze natural, cuidado da pele, estética" />
   <meta name="author" content="BioAura" />
   <title>BioAura — Bronzeador & Creme de Massagem | Beleza Natural</title>
@@ -11,30 +11,21 @@
   <!-- Open Graph / Social -->
   <meta property="og:title" content="BioAura — Bronzeador & Creme de Massagem" />
   <meta property="og:description" content="Produtos premium para um bronzeado radiante e massagens que revitalizam a pele." />
-  <meta property="og:image" content="/b.png" />
+  <meta property="og:image" content="b.png" />
   <meta property="og:type" content="website" />
 
-  <!-- Favicon placeholders -->
-  <link rel="icon" href="/favicon.ico" />
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="favicon.ico" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ---------------------------------------------------------------
-       BioAura Marketing Site — Single-file HTML/CSS/JS
-       - Professional, responsive, accessible
-       - Sections: Hero, Products, Features, Ingredients, How to Use,
-         Testimonials, Gallery, Pricing, FAQ, Contact, Footer
-       - Progressive enhancement: form validation, localStorage,
-         simple shopping cart placeholders
-    --------------------------------------------------------------- */
-
     :root{
       --bg: #f5efe8;
       --card: #ffffff;
-      --accent: #7b4f33; /* deep brown */
-      --accent-2: #b68e5a; /* warm gold */
+      --accent: #7b4f33;
+      --accent-2: #b68e5a;
       --muted: #6b4a38;
       --glass: rgba(255,255,255,0.6);
       --radius: 14px;
@@ -56,7 +47,6 @@
       -webkit-text-size-adjust:100%;
     }
 
-    /* Utility */
     .container{max-width:var(--maxwidth);margin:0 auto;padding:0 20px}
     .row{display:flex;flex-wrap:wrap;gap:24px}
     .center{text-align:center}
@@ -65,20 +55,19 @@
     h2{font-size:22px}
     p.lead{font-size:1.05rem;color:#4b362b}
 
-    /* Header */
     header.site-header{
       padding:28px 0;background:transparent;position:sticky;top:0;z-index:60;backdrop-filter: blur(6px);
     }
     .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{
-      width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,var(--accent),#3d2314);display:flex;align-items:center;justify-content:center;color:var(--card);font-weight:700;font-family:'Playfair Display';box-shadow:var(--shadow);
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,var(--accent),#3d2314);
+      display:flex;align-items:center;justify-content:center;color:var(--card);font-weight:700;font-family:'Playfair Display';box-shadow:var(--shadow);
     }
     nav.primary{display:flex;gap:14px;align-items:center}
     nav.primary a{color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600}
     nav.primary a:hover,nav.primary a:focus{background:var(--glass);outline:none}
 
-    /* Hero */
     .hero{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center;padding:48px 0}
     .hero-card{background:linear-gradient(180deg,#fff, #fbf7f2);border-radius:18px;padding:36px;box-shadow:var(--shadow)}
     .hero-visual{border-radius:18px;overflow:hidden;max-height:560px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
@@ -90,54 +79,43 @@
     .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 18px rgba(123,79,51,0.18)}
     .btn-outline{background:transparent;border:2px solid rgba(123,79,51,0.08);color:var(--accent)}
 
-    /* Products */
     .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:28px}
     .product-card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 6px 22px rgba(0,0,0,0.06);transition:transform var(--transition),box-shadow var(--transition)}
     .product-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,7,6,0.09)}
     .product-card img{width:100%;height:260px;object-fit:contain;border-radius:10px}
     .price{font-weight:800;color:var(--accent-2);font-size:1.1rem}
 
-    /* Features */
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0}
     .feature{background:linear-gradient(180deg,#fff,#fbfbfb);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
 
-    /* Ingredients list */
     .ingredients{display:flex;flex-wrap:wrap;gap:12px}
     .chip{background:rgba(182,142,90,0.12);padding:8px 12px;border-radius:24px;font-weight:600;color:var(--accent)}
 
-    /* How to Use */
     .steps{display:flex;flex-direction:column;gap:12px}
     .step{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fdf8f2)}
     .step .num{min-width:44px;height:44px;border-radius:10px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
 
-    /* Testimonials */
     .testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
     .testi{background:linear-gradient(180deg,#fff,#fbfbfb);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
     .stars{color:var(--accent-2);font-weight:800}
 
-    /* Gallery slider (simple) */
     .gallery{display:flex;gap:10px;overflow:hidden;border-radius:12px}
     .gallery img{height:200px;object-fit:cover;border-radius:10px}
 
-    /* Pricing cards */
     .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
     .price-card{padding:20px;border-radius:12px;background:linear-gradient(180deg,#fff,#faf7f3);box-shadow:var(--shadow)}
 
-    /* FAQ */
     .faq{display:flex;flex-direction:column;gap:10px}
     .q{padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfbfb);cursor:pointer}
 
-    /* Contact */
     form.contact{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     form.contact textarea{grid-column:1/3;min-height:120px;padding:12px;border-radius:10px;border:1px solid rgba(11,7,6,0.06)}
     input,textarea,select{padding:12px;border-radius:10px;border:1px solid rgba(11,7,6,0.06);font-size:0.95rem}
 
-    /* Footer */
     footer{margin-top:40px;padding:36px 0;background:linear-gradient(180deg,#3a2412,#341f11);color:#f2e6d7}
     .footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
     .socials a{display:inline-block;margin-right:8px;background:rgba(255,255,255,0.06);padding:8px;border-radius:8px;text-decoration:none;color:inherit}
 
-    /* Small screens */
     @media (max-width:980px){
       .hero{grid-template-columns:1fr;}
       .hero-visual{order:-1}
@@ -152,18 +130,13 @@
       form.contact{grid-template-columns:1fr}
     }
 
-    /* tiny interactions */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-    /* subtle animation */
     .appear{opacity:0;transform:translateY(6px);transition:opacity 520ms ease,transform 520ms ease}
     .appear.visible{opacity:1;transform:none}
 
-    /* Cart drawer */
     .cart-drawer{position:fixed;right:18px;bottom:18px;background:var(--card);border-radius:12px;padding:12px;box-shadow:0 18px 40px rgba(0,0,0,0.12);z-index:80;width:320px;max-width:calc(100% - 40px);}
     .cart-drawer h4{margin:0 0 8px}
     .cart-toggle{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;padding:12px 16px;border-radius:999px;box-shadow:0 12px 30px rgba(123,79,51,0.2);cursor:pointer}
-
   </style>
 </head>
 <body>
@@ -182,12 +155,12 @@
         <nav class="primary" aria-label="Menu principal">
           <a href="#produtos">Produtos</a>
           <a href="#como-usar">Como Usar</a>
-          <a href="#testemunhos">Depoimentos</a>
-          <a href="#contato">Contato</a>
+          <a href="#testemunhos">Testemunhos</a>
+          <a href="#contacto">Contacto</a>
         </nav>
 
         <div style="display:flex;gap:10px;align-items:center">
-          <a class="btn btn-outline" href="#newsletter">Newsletter</a>
+          <a class="btn btn-outline" href="#newsletter">Subscrever Newsletter</a>
           <button class="cart-toggle" id="openCart" aria-expanded="false" aria-controls="cart">Carrinho</button>
         </div>
       </div>
@@ -198,28 +171,28 @@
     <section class="container hero" aria-labelledby="hero-title">
       <div class="hero-card appear" id="intro">
         <span class="kicker">Novo Lançamento</span>
-        <h1 id="hero-title">BioAura — Bronze natural e massagens que transformam sua pele</h1>
-        <p class="lead">Produtos selecionados com ingredientes naturais, fragrâncias sutis e fórmulas que cuidam profundamente da pele enquanto realçam sua beleza.</p>
+        <h1 id="hero-title">BioAura — Bronze natural e massagens que transformam a sua pele</h1>
+        <p class="lead">Produtos selecionados com ingredientes naturais, fragrâncias subtis e fórmulas que cuidam profundamente da pele enquanto realçam a sua beleza.</p>
 
         <div class="products" style="margin-top:18px">
-          <!-- Product: Bronzeador -->
+          <!-- Bronzeador -->
           <article class="product-card" aria-labelledby="p-bronze">
-            <img src="/b.png" alt="Embalagem do bronzeador BioAura" />
+            <img src="b.png" alt="Embalagem do bronzeador BioAura" />
             <h3 id="p-bronze">Bronzeador Natural</h3>
             <p style="font-size:0.95rem;color:#5b4033">Bronzeado uniforme e radiante com agentes hidratantes. FPS suave e acabamento acetinado.</p>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
-              <div class="price">R$ 89,90</div>
+              <div class="price">€ 5,00</div>
               <button class="btn btn-primary" data-sku="bronzeador-50ml" onclick="addToCart(event)">Adicionar</button>
             </div>
           </article>
 
-          <!-- Product: Creme de Massagem -->
+          <!-- Creme -->
           <article class="product-card" aria-labelledby="p-creme">
-            <img src="/k.png" alt="Embalagem do creme para massagem BioAura" />
+            <img src="k.png" alt="Embalagem do creme para massagem BioAura" />
             <h3 id="p-creme">Creme para Massagem Localizada</h3>
             <p style="font-size:0.95rem;color:#5b4033">Textura aveludada para massagens, melhora a circulação local e deixa a pele macia.</p>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
-              <div class="price">R$ 79,90</div>
+              <div class="price">€ 3,00</div>
               <button class="btn btn-primary" data-sku="creme-150ml" onclick="addToCart(event)">Adicionar</button>
             </div>
           </article>
@@ -227,20 +200,18 @@
 
         <div class="cta-row" style="margin-top:22px">
           <a class="btn btn-primary" href="#produtos">Ver todos os produtos</a>
-          <a class="btn btn-outline" href="#contato">Fale com a gente</a>
+          <a class="btn btn-outline" href="#contacto">Fale connosco</a>
         </div>
       </div>
 
       <aside class="hero-visual">
-        <!-- Visual composed: product stack + texture background -->
         <picture>
-          <source srcset="/b.png" media="(min-width:800px)">
-          <img src="/k.png" alt="BioAura - visual de embalagens" loading="lazy">
+          <source srcset="b.png" media="(min-width:800px)">
+          <img src="k.png" alt="BioAura - visual de embalagens" loading="lazy">
         </picture>
       </aside>
     </section>
 
-    <!-- Features -->
     <section class="container" id="produtos" aria-labelledby="prod-title" style="padding-top:10px">
       <h2 id="prod-title">Por que escolher BioAura?</h2>
       <p class="lead">Fórmulas capazes de dar resultados visíveis com foco em segurança, sensorialidade e responsabilidade ambiental.</p>
@@ -248,7 +219,7 @@
       <div class="features" style="margin-top:16px">
         <div class="feature">
           <h3>Ingredientes naturais</h3>
-          <p>Selecionamos ativos botânicos e óleos vegetais que cuidam da pele sem agredi-la.</p>
+          <p>Selecionamos activos botânicos e óleos vegetais que cuidam da pele sem agredi-la.</p>
         </div>
         <div class="feature">
           <h3>Textura sensorial</h3>
@@ -260,7 +231,6 @@
         </div>
       </div>
 
-      <!-- Ingredients & benefits -->
       <div style="margin-top:22px;display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
         <div style="flex:1;min-width:260px">
           <h3>Ingredientes-chave</h3>
@@ -287,7 +257,6 @@
       </div>
     </section>
 
-    <!-- How to Use -->
     <section class="container" id="como-usar" style="margin-top:30px">
       <h2>Como usar</h2>
       <div class="steps" style="margin-top:12px">
@@ -311,15 +280,14 @@
           <div class="num">3</div>
           <div>
             <strong>Finalizar</strong>
-            <p>Repita conforme necessidade. Mantenha a pele hidratada e evite exposição solar excessiva sem proteção.</p>
+            <p>Repita conforme necessidade. Mantenha a pele hidratada e evite exposição solar excessiva sem protecção.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="container" id="testemunhos" style="margin-top:36px">
-      <h2>Depoimentos</h2>
+      <h2>Testemunhos</h2>
       <p class="lead">O que clientes reais dizem sobre BioAura</p>
 
       <div class="testimonials" style="margin-top:12px">
@@ -340,20 +308,18 @@
       </div>
     </section>
 
-    <!-- Gallery -->
     <section class="container" style="margin-top:36px">
       <h2>Galeria</h2>
       <p class="lead">Inspirações, lifestyle e o processo sensorial BioAura</p>
 
       <div class="gallery" style="margin-top:12px" aria-hidden="false">
-        <img src="/b.png" alt="Bronzeador BioAura - galeria" loading="lazy">
-        <img src="/k.png" alt="Creme de Massagem BioAura - galeria" loading="lazy">
-        <img src="/b.png" alt="Textura do bronzeador" loading="lazy">
-        <img src="/k.png" alt="Textura do creme" loading="lazy">
+        <img src="b.png" alt="Bronzeador BioAura - galeria" loading="lazy">
+        <img src="k.png" alt="Creme de Massagem BioAura - galeria" loading="lazy">
+        <img src="b.png" alt="Textura do bronzeador" loading="lazy">
+        <img src="k.png" alt="Textura do creme" loading="lazy">
       </div>
     </section>
 
-    <!-- Pricing & Offers -->
     <section class="container" style="margin-top:36px;">
       <h2>Ofertas Especiais</h2>
       <p class="lead">Combo exclusivo para experimentar toda a linha BioAura</p>
@@ -363,7 +329,7 @@
           <h3>Combo Bronze & Massagem</h3>
           <p>Bronzeador 50ml + Creme 150ml</p>
           <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
-            <div style="font-size:1.2rem;font-weight:800;color:var(--accent-2)">R$ 149,90</div>
+            <div style="font-size:1.2rem;font-weight:800;color:var(--accent-2)">€ 7,50</div>
             <button class="btn btn-primary" data-sku="combo-bronze-massage" onclick="addToCart(event)">Comprar Combo</button>
           </div>
         </div>
@@ -372,36 +338,34 @@
           <h3>Kit Experiência</h3>
           <p>Amostras + guia sensorial</p>
           <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
-            <div style="font-size:1.2rem;font-weight:800;color:var(--accent-2)">R$ 39,90</div>
+            <div style="font-size:1.2rem;font-weight:800;color:var(--accent-2)">€ 1,50</div>
             <button class="btn btn-outline" onclick="subscribeSample()">Quero Amostra</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
     <section class="container" style="margin-top:36px">
       <h2>FAQ — Perguntas Frequentes</h2>
       <div class="faq" style="margin-top:12px" id="faq">
-        <div class="q" data-open="false" tabindex="0">O bronzeador mancha roupa? <div class="answer sr-only">Resposta: não, ao secar ele fixa na pele e não transfere com facilidade. Aguarde a absorção completa antes de vestir.</div></div>
-        <div class="q" data-open="false" tabindex="0">Os produtos são testados em animais? <div class="answer sr-only">Resposta: não testamos em animais. Nossas fórmulas são cruelty-free.</div></div>
-        <div class="q" data-open="false" tabindex="0">Posso usar o creme após depilação? <div class="answer sr-only">Resposta: recomendamos aguardar 24 horas após procedimentos que irritem a pele.</div></div>
+        <div class="q" data-open="false" tabindex="0">O bronzeador mancha roupa? <div class="answer sr-only">Resposta: não, ao secar fixa na pele e não transfere com facilidade. Aguarde a absorção completa antes de vestir.</div></div>
+        <div class="q" data-open="false" tabindex="0">Os produtos são testados em animais? <div class="answer sr-only">Resposta: não testamos em animais. As nossas fórmulas são cruelty-free.</div></div>
+        <div class="q" data-open="false" tabindex="0">Posso usar o creme após depilação? <div class="answer sr-only">Resposta: recomendamos aguardar 24 horas após procedimentos que possam irritar a pele.</div></div>
       </div>
     </section>
 
-    <!-- Contact / Newsletter -->
-    <section class="container" id="contato" style="margin-top:36px;margin-bottom:12px">
-      <h2>Fale com a gente</h2>
+    <section class="container" id="contacto" style="margin-top:36px;margin-bottom:12px">
+      <h2>Fale connosco</h2>
       <p class="lead">Tem dúvidas ou quer parcerias? Preencha o formulário abaixo.</p>
 
       <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:12px">
         <div style="flex:1;min-width:300px">
           <form id="contactForm" class="contact" novalidate>
-            <input type="text" id="name" name="name" placeholder="Seu nome" required aria-required="true">
-            <input type="email" id="email" name="email" placeholder="Seu e-mail" required aria-required="true">
+            <input type="text" id="name" name="name" placeholder="O seu nome" required aria-required="true">
+            <input type="email" id="email" name="email" placeholder="O seu e-mail" required aria-required="true">
             <input type="tel" id="phone" name="phone" placeholder="Telefone (opcional)">
             <select id="reason" name="reason">
-              <option value="">Motivo do contato</option>
+              <option value="">Motivo do contacto</option>
               <option value="doubt">Dúvida sobre produto</option>
               <option value="wholesale">Compra Atacado</option>
               <option value="press">Assessoria/Imprensa</option>
@@ -415,14 +379,14 @@
           <h3>Newsletter</h3>
           <p>Receba ofertas e conteúdos exclusivos.</p>
           <form id="newsletter" style="display:flex;gap:8px;margin-top:8px" onsubmit="event.preventDefault();subscribeNewsletter();">
-            <input aria-label="email" type="email" id="newsletterEmail" placeholder="Seu e-mail" required>
-            <button class="btn btn-outline" type="submit">Assinar</button>
+            <input aria-label="email" type="email" id="newsletterEmail" placeholder="O seu e-mail" required>
+            <button class="btn btn-outline" type="submit">Subscrever</button>
           </form>
 
           <div style="margin-top:12px">
             <h4>Atendimento</h4>
             <p style="margin:0">Seg–Sex: 9h–18h</p>
-            <p style="margin:0">E-mail: contato@bioaura.com</p>
+            <p style="margin:0">E-mail: contacto@bioaura.com</p>
           </div>
         </aside>
       </div>
@@ -430,12 +394,11 @@
 
   </main>
 
-  <!-- Cart drawer (hidden by default) -->
   <div id="cart" class="cart-drawer" style="display:none" aria-hidden="true">
-    <h4>Seu Carrinho</h4>
+    <h4>O seu Carrinho</h4>
     <div id="cartItems" style="max-height:240px;overflow:auto;margin-top:8px"></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-      <div><strong>Total:</strong> <span id="cartTotal">R$ 0,00</span></div>
+      <div><strong>Total:</strong> <span id="cartTotal">€ 0.00</span></div>
       <button class="btn btn-primary" onclick="checkout()">Finalizar</button>
     </div>
   </div>
@@ -453,7 +416,7 @@
           <ul style="list-style:none;padding:0;margin:0">
             <li><a href="#produtos">Produtos</a></li>
             <li><a href="#como-usar">Como Usar</a></li>
-            <li><a href="#testemunhos">Depoimentos</a></li>
+            <li><a href="#testemunhos">Testemunhos</a></li>
           </ul>
         </div>
 
@@ -475,29 +438,25 @@
   </footer>
 
   <script>
-    // Progressive reveal
     document.addEventListener('DOMContentLoaded', function(){
       document.querySelectorAll('.appear').forEach((el,i)=>{
         setTimeout(()=>el.classList.add('visible'), 120*i);
       });
 
-      // set year
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // FAQ toggle
       document.querySelectorAll('.faq .q').forEach(q=>{
         q.addEventListener('click', ()=>toggleFaq(q));
         q.addEventListener('keypress', (e)=>{ if(e.key==='Enter'||e.key===' ') toggleFaq(q); });
       });
 
-      // Cart toggle
-      document.getElementById('openCart').addEventListener('click', toggleCart);
+      const openBtn = document.getElementById('openCart');
+      if(openBtn) openBtn.addEventListener('click', toggleCart);
 
-      // Load cart from localStorage
       loadCartFromStorage();
 
-      // contact form
-      document.getElementById('contactForm').addEventListener('submit', handleContactForm);
+      const contactForm = document.getElementById('contactForm');
+      if(contactForm) contactForm.addEventListener('submit', handleContactForm);
     });
 
     function toggleFaq(q){
@@ -505,29 +464,32 @@
       q.setAttribute('data-open', (!open).toString());
       const ans = q.querySelector('.answer');
       if(!ans) return;
-      if(open){
-        ans.classList.add('sr-only');
-      } else {
-        ans.classList.remove('sr-only');
-      }
+      if(open){ ans.classList.add('sr-only'); } else { ans.classList.remove('sr-only'); }
     }
 
-    // Simple cart implementation (not production-ready)
     const CART_KEY = 'bioaura_cart_v1';
     let CART = {items:[]};
 
     function addToCart(e){
-      const sku = e.currentTarget.getAttribute('data-sku');
+      let sku = '';
+      if(!e) sku = 'produto-desconhecido';
+      else if(typeof e === 'string') sku = e;
+      else if(e.currentTarget) sku = e.currentTarget.getAttribute('data-sku') || '';
+      else sku = (e.getAttribute && e.getAttribute('data-sku')) || '';
+
       let item;
-      if(sku.includes('bronzeador')){
-        item = {sku:'bronzeador-50ml',name:'Bronzeador 50ml',price:89.90,qty:1};
-      } else if(sku.includes('creme')){
-        item = {sku:'creme-150ml',name:'Creme para Massagem 150ml',price:79.90,qty:1};
-      } else if(sku.includes('combo')){
-        item = {sku:'combo-bronze-massage',name:'Combo Bronze + Massagem',price:149.90,qty:1};
+      if(sku.includes('bronzeador')) {
+        item = {sku:'bronzeador-50ml',name:'Bronzeador 50ml',price:5.00,qty:1};
+      } else if(sku.includes('creme')) {
+        item = {sku:'creme-150ml',name:'Creme para Massagem 150ml',price:3.00,qty:1};
+      } else if(sku.includes('combo')) {
+        item = {sku:'combo-bronze-massage',name:'Combo Bronze + Massagem',price:7.50,qty:1};
+      } else if(sku.includes('kit')) {
+        item = {sku:'kit-experiencia',name:'Kit Experiência',price:1.50,qty:1};
       } else {
         item = {sku:sku||'produto-desconhecido',name:'Produto',price:0,qty:1};
       }
+
       const existing = CART.items.find(i=>i.sku===item.sku);
       if(existing){ existing.qty += 1; } else { CART.items.push(item); }
       saveCart();
@@ -535,9 +497,7 @@
       renderCartItems();
     }
 
-    function saveCart(){
-      localStorage.setItem(CART_KEY,JSON.stringify(CART));
-    }
+    function saveCart(){ localStorage.setItem(CART_KEY,JSON.stringify(CART)); }
     function loadCartFromStorage(){
       try{
         const raw = localStorage.getItem(CART_KEY);
@@ -554,10 +514,11 @@
         total += it.price * it.qty;
         const row = document.createElement('div');
         row.style.display='flex';row.style.justifyContent='space-between';row.style.alignItems='center';row.style.marginBottom='8px';
-        row.innerHTML = `<div style="flex:1"><strong>${escapeHtml(it.name)}</strong><div style='font-size:12px;color:#7a5a45'>R$ ${it.price.toFixed(2)} x ${it.qty}</div></div><div style='display:flex;gap:6px'><button onclick="qtyChange('${it.sku}',-1)'>-</button><button onclick="qtyChange('${it.sku}',1)">+</button></div>`;
+        const safeName = escapeHtml(it.name);
+        row.innerHTML = "<div style=\"flex:1\"><strong>"+safeName+"</strong><div style='font-size:12px;color:#7a5a45'>€ "+it.price.toFixed(2)+" x "+it.qty+"</div></div><div style='display:flex;gap:6px'><button onclick=\"qtyChange('"+it.sku+"',-1)\">-</button><button onclick=\"qtyChange('"+it.sku+"',1)\">+</button></div>";
         el.appendChild(row);
       });
-      document.getElementById('cartTotal').textContent = 'R$ ' + total.toFixed(2);
+      document.getElementById('cartTotal').textContent = '€ ' + total.toFixed(2);
     }
 
     function qtyChange(sku,delta){
@@ -572,18 +533,14 @@
     function toggleCart(){
       const cart = document.getElementById('cart');
       const btn = document.getElementById('openCart');
-      if(cart.style.display === 'none' || cart.style.display === ''){
-        openCart();
-      } else {
-        closeCart();
-      }
+      if(cart.style.display === 'none' || cart.style.display === ''){ openCart(); } else { closeCart(); }
     }
     function openCart(){
       const cart = document.getElementById('cart');
       const btn = document.getElementById('openCart');
       cart.style.display = 'block';
       cart.setAttribute('aria-hidden','false');
-      btn.setAttribute('aria-expanded','true');
+      if(btn) btn.setAttribute('aria-expanded','true');
       renderCartItems();
     }
     function closeCart(){
@@ -591,58 +548,53 @@
       const btn = document.getElementById('openCart');
       cart.style.display = 'none';
       cart.setAttribute('aria-hidden','true');
-      btn.setAttribute('aria-expanded','false');
+      if(btn) btn.setAttribute('aria-expanded','false');
     }
 
     function checkout(){
-      if(CART.items.length===0){ alert('Seu carrinho está vazio.'); return; }
-      // Here you would integrate with a payment gateway or redirect to checkout page
-      alert('Obrigado! Redirecionando para checkout simulado...');
-      // Clear cart for demo
+      if(CART.items.length===0){ alert('O seu carrinho está vazio.'); return; }
+      alert('Obrigado(a)! A funcionar com checkout simulado.');
       CART.items = [];
       saveCart();
       renderCartItems();
       closeCart();
     }
 
-    // Simple newsletter & sample handlers
     function subscribeNewsletter(){
       const email = document.getElementById('newsletterEmail').value;
-      if(!email) return alert('Informe um e-mail válido.');
-      // Simulate API request
+      if(!email) return alert('Indique um e-mail válido.');
       localStorage.setItem('bioaura_news_'+email, new Date().toISOString());
-      alert('Obrigado! E-mail cadastrado.');
+      alert('Obrigado(a)! E-mail registado.');
       document.getElementById('newsletterEmail').value = '';
     }
 
     function subscribeSample(){
-      alert('Amostra solicitada! Entraremos em contato para confirmações.');
+      alert('Amostra solicitada! Entraremos em contacto para confirmações.');
     }
 
-    // Contact form handler (basic validation & fake send)
     function handleContactForm(e){
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const message = document.getElementById('message').value.trim();
       if(!name || !email || !message){ alert('Por favor, preencha os campos obrigatórios.'); return; }
-      // store message in localStorage as demo
       const store = JSON.parse(localStorage.getItem('bioaura_messages')||'[]');
       store.push({name,email,message,at:new Date().toISOString()});
       localStorage.setItem('bioaura_messages',JSON.stringify(store));
-      alert('Mensagem enviada! Responderemos em breve.');
+      alert('Mensagem enviada! Respondemos em breve.');
       e.target.reset();
     }
 
-    // tiny helper
-    function escapeHtml(str){ return String(str).replace(/[&<>"']/g, function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m]; }); }
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, function(m){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m];
+      });
+    }
 
-    // Accessibility: focus trap for cart if opened (simple)
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape') closeCart();
     });
 
-    // Tiny analytics demo (local)
     (function(){
       const key = 'bioaura_analytics';
       const raw = JSON.parse(localStorage.getItem(key)||'{}');
@@ -650,7 +602,6 @@
       raw.last = new Date().toISOString();
       localStorage.setItem(key, JSON.stringify(raw));
     })();
-
   </script>
 
 </body>
