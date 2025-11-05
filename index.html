@@ -363,6 +363,14 @@ body.dark .hero h2 {
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
+
+/* ⚙️ Melhora desempenho das animações */
+.hero h2,
+.btn,
+.card:hover,
+section.visible {
+  will-change: transform, opacity;
+}
 </style>
 </head>
 
