@@ -340,6 +340,21 @@
       .btn{font-size:16px;padding:14px 24px;}
       .card{padding:18px;}
     }
+
+    /* 💫 Brilho animado no título principal */
+.hero h2 {
+  background: linear-gradient(90deg, #caa45d, #fff, #caa45d);
+  background-clip: text;
+  -webkit-background-clip: text; /* para Chrome e Safari */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
+  background-size: 200%;
+}
+@keyframes shine {
+  to { background-position: 200%; }
+}
+
   </style>
 </head>
 
@@ -602,7 +617,7 @@
     color:var(--muted);
     transition:background 0.5s,color 0.5s;
   }
-  
+
   /* 🌙 Ajuste de cores no modo escuro */
 body.dark .lead,
 body.dark .card,
