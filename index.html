@@ -1,558 +1,542 @@
-<!doctype html>
-<!--
-  BioAura — Versão Premium Completa (single-file)
-  - Project: BioAura (site profissional para projecto escolar de cosmética)
-  - Imagens esperadas na MESMA PASTA do ficheiro:
-      logo-bioaura.png
-      produtos-bioaura.png
-      b.png
-      k.png
-  - Este ficheiro é auto-contido: HTML + CSS + JS
-  - Mantém estilo luxo-natural; responsivo; acessível.
-  - Copia e cola diretamente como index.html no repositório.
--->
-<html lang="pt-PT">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="description" content="BioAura — Cosmética natural sustentável. Projeto escolar que une ciência e cuidado da pele." />
-  <meta name="author" content="Equipa BioAura" />
-  <meta name="theme-color" content="#bda48a" />
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
 
-  <!-- Social preview -->
-  <meta property="og:title" content="BioAura — Cosmética Natural Sustentável" />
-  <meta property="og:description" content="Projeto escolar que une química, biotecnologia e sustentabilidade para cosmética artesanal." />
-  <meta property="og:image" content="produtos-bioaura.png" />
-  <meta property="og:type" content="website" />
-
-  <title>BioAura — Cosmética Natural Sustentável</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Favicon -->
-  <link rel="icon" href="logo-bioaura.png" type="image/png">
-
-  <style>
-    /*
-      BIOAURA - STYLES
-      Estrutura: variáveis, resets, header, hero, produtos, secções, footer, utilitários.
-    */
-
-    /* ==========================
-       Variáveis principais
-       ========================== */
-    :root{
-      --bg: #f6efe6;
-      --card: #fffaf4;
-      --accent: #6b4a2b;
-      --muted: #332515;
-      --gold: #caa45d;
-      --glass: rgba(255,255,255,0.75);
-      --radius: 18px;
-      --maxw: 1180px;
-      --ease: cubic-bezier(.2,.9,.2,1);
-      --shadow-1: 0 12px 34px rgba(24,20,16,0.06);
-      --shadow-2: 0 28px 60px rgba(24,20,16,0.12);
-      --gutter: 28px;
-      --text-regular: 16px;
+    /* 🌈 Fundo animado */
+    body{
+      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
+      margin:0;
+      background:linear-gradient(180deg,#bda48a,#a9896b,#bda48a);
+      background-size:400% 400%;
+      animation:gradientMove 12s ease infinite;
+      color:var(--muted);
+      cursor:url('cursor.png'), auto;
+    }
+    @keyframes gradientMove {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
 
-    /* ==========================
-       Reset base e tipografia
-       ========================== */
-    * { box-sizing: border-box; }
-    html { font-family: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; scroll-behavior: smooth; }
-    body { margin: 0; color: var(--muted); background: linear-gradient(180deg,#fbf5ee 0%,#f6efe6 40%,#efe6db 100%); line-height: 1.6; -webkit-text-size-adjust: 100%; }
-    img { display: block; max-width: 100%; height: auto; }
-    a { color: inherit; text-decoration: none; }
-    h1,h2,h3,h4 { margin: 0; font-family: 'Playfair Display', serif; color: var(--accent); line-height: 1.12; }
-    p { margin: 0 0 10px 0; color: #4a3628; font-size: var(--text-regular); }
-
-    /* Accessibility: reduce motion */
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 1ms !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+    header{
+      background:linear-gradient(90deg,#4b2f1a,#6b4a2b);
+      border-bottom:2px solid var(--gold);
+      box-shadow:0 4px 16px rgba(0,0,0,0.3);
+      position:relative;
+      z-index:10;
     }
 
-    /* ==========================
-       Layout container
-       ========================== */
-    .container { max-width: var(--maxw); margin: 0 auto; padding: var(--gutter); }
+    .container{max-width:var(--maxw);margin:0 auto;padding:28px}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
 
-    /* ==========================
-       Header
-       ========================== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 80;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-      backdrop-filter: blur(6px);
+    /* ✨ Fade-in no logótipo e título */
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      opacity:0;
+      transform:translateY(-12px);
+      animation:fadeInTop 1s ease-out forwards;
     }
-    .nav { display:flex; align-items:center; justify-content:space-between; gap: 16px; }
-    .brand { display:flex; gap:12px; align-items:center; }
-    .brand img { width:56px; height:56px; border-radius:10px; object-fit:contain; }
-    .brand h1 { font-size:18px; color: var(--accent); }
-    .brand p { font-size:12px; color: rgba(51,33,21,0.6); margin-top:2px; }
+    @keyframes fadeInTop {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    .navlinks { display:flex; gap:12px; align-items:center; }
-    .navlinks a { padding:8px 12px; font-weight:600; color: var(--muted); border-radius:10px; transition: transform 220ms var(--ease), background 220ms var(--ease); }
-    .navlinks a:hover, .navlinks a:focus { transform: translateY(-3px); background: rgba(202,164,93,0.07); }
+    .logoimg{height:70px;border-radius:10px}
+    .brand h1{margin:0;font-size:22px;color:#f7efe0;font-family:'Playfair Display',serif}
+    .brand p{margin:0;font-size:12px;color:#e6d3b8}
 
-    .primary-cta {
-      background: linear-gradient(90deg, var(--gold), #e6c57d);
-      color: #2b1a0f;
-      padding:10px 16px;
-      font-weight:800;
+    .navlinks{display:flex;gap:18px;}
+    .navlinks a{
+      text-decoration:none;color:#f7efe0;font-weight:600;transition:color .2s
+    }
+    .navlinks a:hover{color:var(--gold)}
+
+    /* 🔹 MENU HAMBÚRGUER ANIMADO */
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:none;
+      cursor:pointer;
+      width:32px;
+      height:24px;
+      position:relative;
+    }
+    .menu-toggle span{
+      position:absolute;
+      height:3px;
+      width:100%;
+      background:#f7efe0;
+      left:0;
+      transition:all 0.3s ease;
+      border-radius:2px;
+    }
+    .menu-toggle span:nth-child(1){top:0;}
+    .menu-toggle span:nth-child(2){top:10px;}
+    .menu-toggle span:nth-child(3){top:20px;}
+    .menu-toggle.active span:nth-child(1){
+      transform:rotate(45deg);
+      top:10px;
+    }
+    .menu-toggle.active span:nth-child(2){
+      opacity:0;
+    }
+    .menu-toggle.active span:nth-child(3){
+      transform:rotate(-45deg);
+      top:10px;
+    }
+
+    @media(max-width:800px){
+      .menu-toggle{display:block;}
+      .navlinks{
+        display:none;
+        flex-direction:column;
+        background:#4b2f1a;
+        position:absolute;
+        top:80px;
+        right:20px;
+        padding:10px 20px;
+        border-radius:8px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.4);
+        transform:scale(0.95);
+        opacity:0;
+        transition:all 0.3s ease;
+      }
+      .navlinks.show{
+        display:flex;
+        transform:scale(1);
+        opacity:1;
+      }
+      .navlinks a{margin:8px 0;}
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:32px;
+      align-items:center;
+      padding:40px 0;
+    }
+    .hero .lead{
+      background:var(--card);border-radius:16px;padding:28px;
+      box-shadow:0 8px 28px rgba(0,0,0,0.15);
+      border:1px solid rgba(0,0,0,0.1);
+    }
+    .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px;font-size:32px;color:var(--accent)}
+    .hero p{color:#3a2c1f;line-height:1.6}
+    .cta{margin-top:20px}
+
+    /* 💫 Hover dourado no botão */
+    .btn{
+      display:inline-block;
+      padding:12px 22px;
       border-radius:12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease);
+      background:linear-gradient(90deg,var(--accent),var(--gold));
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      font-size:15px;
+      transition:transform .3s,box-shadow .3s;
+      box-shadow:0 4px 12px rgba(0,0,0,0.25);
+      position:relative;
+      overflow:hidden;
     }
-    .primary-cta:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
-
-    /* Small screen: hamburger (JS toggles) */
-    .menu-toggle { display:none; background:transparent; border:0; cursor:pointer; padding:8px; }
-    .menu-toggle svg { display:block; }
-
-    /* ==========================
-       Hero
-       ========================== */
-    .hero { display:grid; grid-template-columns: 1fr 440px; gap: 30px; align-items:center; padding: 48px 0; }
-    .hero-card {
-      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(255,250,244,0.98));
-      padding: 36px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-1);
-      border: 1px solid rgba(0,0,0,0.03);
+    .btn::after {
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
+      transition:all 0.6s ease;
     }
-    .hero h2 { font-size: clamp(28px, 4.6vw, 44px); color: var(--accent); margin-bottom:12px; }
-    .hero p.lead { font-size: 1.05rem; color: #4a3628; margin-bottom:18px; }
-    .kpis { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
-    .kpi { background: rgba(107,74,43,0.06); color: var(--accent); padding:8px 12px; border-radius:10px; font-weight:700; }
-
-    .visual-wrap { display:flex; align-items:center; justify-content:center; }
-    .visual { width:100%; max-width:420px; border-radius:16px; padding:18px; background: linear-gradient(180deg,#4b2f1a,#6b4a2b); box-shadow: 0 18px 56px rgba(0,0,0,0.18); }
-    .visual img { border-radius:12px; border:3px solid var(--gold); display:block; width:100%; height:auto; }
-
-    /* ==========================
-       Products (premium cards)
-       ========================== */
-    .products { padding: 28px 0; }
-    .products h3 { font-size: 28px; margin-bottom: 12px; color: var(--accent); }
-    .products-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
-
-    .prod-card { background: var(--card); border-radius: 18px; padding: 20px; border: 1px solid rgba(0,0,0,0.04); box-shadow: var(--shadow-1); transition: transform 320ms var(--ease), box-shadow 320ms var(--ease); display:flex; flex-direction:column; }
-    .prod-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-2); }
-
-    .prod-media { display:flex; align-items:center; justify-content:center; padding:12px; background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7)); border-radius:12px; }
-    .prod-media img { width: 220px; max-width: 80%; height: auto; border-radius: 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.12); border:2px solid rgba(0,0,0,0.04); }
-
-    .prod-body { padding-top:14px; flex:1; display:flex; flex-direction:column; }
-    .prod-title { font-size:20px; margin-bottom:6px; color: var(--accent); }
-    .prod-desc { color:#4a3628; margin-bottom:10px; }
-    .prod-list { padding-left:18px; margin:6px 0 10px 0; color:#3a2c1f; }
-    .prod-cta { display:flex; justify-content:space-between; align-items:center; margin-top:auto; }
-    .badge { background: rgba(202,164,93,0.10); padding:6px 10px; border-radius:999px; font-weight:700; color: var(--accent); }
-
-    /* ==========================
-       Science / Plan / Notes
-       ========================== */
-    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; }
-    .card { background: var(--card); padding:16px; border-radius:12px; border:1px solid rgba(0,0,0,0.04); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
-    .formula pre { white-space: pre-wrap; word-break: break-word; background: transparent; padding:12px; font-family: monospace; border-radius:8px; color:#3a2c1f; }
-
-    /* ==========================
-       Contact & Footer
-       ========================== */
-    .contact-card { background: var(--card); padding:14px; border-radius:12px; display:flex; gap:14px; align-items:center; justify-content:space-between; border: 1px solid rgba(0,0,0,0.04); }
-    footer { margin-top: 34px; padding: 36px 0; background: linear-gradient(180deg,#4b2f1a,#3a2312); color:#fff; }
-    .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:18px; }
-    .footer-inner img { height:56px; }
-
-    /* ==========================
-       Responsive adjustments
-       ========================== */
-    @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; gap: 22px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .visual { max-width: 360px; }
-      .brand img { height:48px; width:48px; }
-      .navlinks { display:none; }
-      .menu-toggle { display:inline-flex; }
+    .btn:hover::after {
+      left:100%;
     }
-    @media (max-width: 600px) {
-      .container { padding: 18px; }
-      .brand h1 { font-size: 16px; }
-      .hero h2 { font-size: 22px; }
-      .prod-media img { width: 64%; }
+    .btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 6px 18px rgba(0,0,0,0.35);
     }
 
-    /* ==========================
-       Utilities & accessibility
-       ========================== */
-    .sr-only { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
-    :focus { outline: 3px solid rgba(202,164,93,0.25); outline-offset:3px; }
+    /* 🪞 Cartões com profundidade 3D */
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 6px 22px rgba(0,0,0,0.08);
+      border:1px solid rgba(0,0,0,0.06);
+      transition:transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card:hover{
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 12px 26px rgba(0,0,0,0.2);
+    }
+
+    section{
+      padding:40px 0;
+      border-top:1px solid rgba(0,0,0,0.1);
+      opacity:0;
+      transform:translateY(30px);
+      transition:all 0.8s ease-out;
+    }
+    section.visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    h3{
+      margin-top:0;
+      font-family:'Playfair Display',serif;
+      font-size:26px;
+      color:var(--accent);
+      text-shadow:0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .grid,.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    ul{margin:10px 0 0 22px;line-height:1.6}
+
+    /* ✅ Corrige overflow no bloco de notas técnicas */
+    .formula pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      background:#f4e7d1;
+      padding:14px;
+      border-radius:10px;
+      font-family:monospace;
+      border:1px solid #e0d4c2;
+      font-size:14px;
+      color:#3a3a3a;
+      width:100%;
+      max-width:100%;
+      overflow-x:hidden;
+      box-sizing:border-box;
+    }
+
+    .produtos-foto{
+      background:#4b2f1a;
+      padding:60px 0;
+      text-align:center;
+    }
+    .produtos-foto img{
+      max-width:760px;
+      width:92%;
+      border-radius:18px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.5);
+      border:3px solid var(--gold);
+      display:block;
+      margin:0 auto;
+      transition:transform 0.4s ease;
+    }
+    .produtos-foto img:hover {
+      transform: scale(1.02);
+    }
+
+    footer{
+      padding:30px 0;
+      color:#f7efe0;
+      font-size:14px;
+      text-align:center;
+      background:#4b2f1a;
+      border-top:2px solid var(--gold);
+    }
+
+    footer img{
+      height:55px;
+      display:block;
+      margin:0 auto 10px auto;
+      border-radius:8px;
+    }
+
+    #topBtn{
+      display:none;
+      position:fixed;
+      bottom:30px;
+      right:30px;
+      z-index:99;
+      cursor:pointer;
+      background:none;
+      border:none;
+      outline:none;
+      animation:flutuar 3s ease-in-out infinite;
+    }
+
+    .bisnaga{
+      width:45px;
+      height:85px;
+      background:linear-gradient(180deg,var(--accent) 8%,#8b623c 65%,var(--gold) 100%);
+      border-radius:8px 8px 20px 20px;
+      position:relative;
+      box-shadow:0 6px 14px rgba(0,0,0,0.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .bisnaga::before{
+      content:"";
+      position:absolute;
+      top:-10px;
+      left:9px;
+      width:27px;
+      height:10px;
+      background:var(--gold);
+      border-radius:3px 3px 0 0;
+      box-shadow:0 1px 3px rgba(0,0,0,0.35);
+    }
+
+    .bisnaga::after{
+      content:"↑";
+      position:absolute;
+      bottom:8px;
+      left:50%;
+      transform:translateX(-50%);
+      color:#fff8e7;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:1px;
+    }
+
+    @keyframes flutuar{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-6px);}
+    }
+
+    .bisnaga .reflexo{
+      position:absolute;
+      top:18%;
+      left:-10%;
+      width:18px;
+      height:60%;
+      background:linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.02));
+      transform:rotate(-12deg);
+      filter:blur(1px);
+      border-radius:6px;
+      opacity:0.85;
+    }
+
+    /* 📱 Tipografia e espaçamento mobile */
+    @media(max-width:600px){
+      body{font-size:17px;line-height:1.7;}
+      h3{font-size:22px;}
+      .btn{font-size:16px;padding:14px 24px;}
+      .card{padding:18px;}
+    }
   </style>
-
 </head>
-<body>
-  <!-- Skip link for keyboard users -->
-  <a class="sr-only" href="#main">Saltar para o conteúdo</a>
 
-  <!-- Header -->
+<body>
   <header>
     <div class="container">
-      <nav class="nav" role="navigation" aria-label="Navegação principal">
-        <div class="brand" role="banner">
-          <img src="logo-bioaura.png" alt="Logo BioAura">
+      <nav>
+        <div class="brand">
+          <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg">
           <div>
             <h1>BioAura</h1>
             <p>Aluzia-te — valoriza a luz natural da pele</p>
           </div>
         </div>
 
-        <!-- Desktop links -->
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="navlinks" aria-hidden="false">
-            <a href="#sobre">Sobre</a>
-            <a href="#produtos">Produtos</a>
-            <a href="#ciencia">Fundamentos</a>
-            <a href="#planeamento">Planeamento</a>
-            <a href="#contacto">Contacto</a>
-          </div>
+        <button class="menu-toggle" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
 
-          <button class="primary-cta" id="open-contact">Contactar</button>
-
-          <!-- Mobile toggle (hidden on desktop) -->
-          <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu" style="display:none">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#332515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-          </button>
+        <div class="navlinks" role="navigation">
+          <a href="#sobre">Sobre</a>
+          <a href="#produtos">Produtos</a>
+          <a href="#ciencia">Fundamentos</a>
+          <a href="#planeamento">Planeamento</a>
+          <a href="#contacto">Contacto</a>
         </div>
       </nav>
 
-      <!-- Simple mobile menu (JS toggles) -->
-      <div id="mobileMenu" style="display:none; margin-top:10px; position:relative;">
-        <div style="position:absolute; right:var(--gutter); background:rgba(75,47,26,0.95); padding:12px; border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,0.3)">
-          <a style="display:block; color:#fff; padding:8px 6px" href="#sobre">Sobre</a>
-          <a style="display:block; color:#fff; padding:8px 6px" href="#produtos">Produtos</a>
-          <a style="display:block; color:#fff; padding:8px 6px" href="#ciencia">Fundamentos</a>
-          <a style="display:block; color:#fff; padding:8px 6px" href="#planeamento">Planeamento</a>
-          <a style="display:block; color:#fff; padding:8px 6px" href="#contacto">Contacto</a>
+      <div class="hero">
+        <div class="lead">
+          <h2>Projeto BioAura — Cosmética Natural Sustentável</h2>
+          <p>Projeto desenvolvido por alunos do 12.º ano (Biologia e Química), com o objetivo de integrar ciência e cuidado corporal, criando cosméticos artesanais seguros e sustentáveis.</p>
+          <div class="cta">
+            <a class="btn" href="#produtos">Ver Produtos</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Objetivo Principal</h3>
+          <p>Produção artesanal de dois cosméticos naturais:</p>
+          <ul>
+            <li>Bronzeador corporal — 150 mL</li>
+            <li>Creme hidratante e suavizante — 100 mL</li>
+          </ul>
+          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.1)">
+          <p style="color:var(--muted);font-size:14px">
+            Utilização de ingredientes seguros e naturais aplicando princípios de química verde, biotecnologia e sustentabilidade.
+          </p>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main content -->
-  <main id="main" class="container" role="main" aria-live="polite">
+  <section class="produtos-foto">
+    <img src="produtos-bioaura.png" alt="Produtos BioAura — frascos artesanais" loading="lazy">
+  </section>
 
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-card" role="region" aria-labelledby="hero-title">
-        <h2 id="hero-title">BioAura — Cosmética Natural Sustentável</h2>
-        <p class="lead">Projeto desenvolvido por alunos do 12.º ano que une química, biotecnologia e práticas sustentáveis para criar cosméticos artesanais seguros e sofisticados.</p>
-
-        <div class="kpis" aria-hidden="false">
-          <div class="kpi">Ingredientes naturais</div>
-          <div class="kpi">Química verde</div>
-          <div class="kpi">Produção artesanal</div>
+  <main class="container">
+    <section id="sobre">
+      <h3>A Nossa Essência</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Conceito BioAura</h4>
+          <p>A BioAura nasceu de um projeto escolar com o propósito de unir ciência e sustentabilidade em produtos de cosmética natural que respeitam o corpo e o planeta.</p>
+          <p><strong>Slogan:</strong> "Aluzia-te"</p>
         </div>
-
-        <div style="margin-top:20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-          <a class="primary-cta" href="#produtos">Ver Produtos</a>
-          <button class="primary-cta" id="open-contact-2">Solicitar Informação</button>
-        </div>
-
-        <div style="margin-top:18px; color:#6b4a2b; font-size:13px;">
-          Produção limitada — pack escolar • Respeito pelo ambiente e pele.
-        </div>
-      </div>
-
-      <div class="visual-wrap" aria-hidden="true">
-        <div class="visual" role="img" aria-label="Linha de produtos BioAura">
-          <img src="produtos-bioaura.png" alt="Linha de produtos BioAura em frascos artesanais">
+        <div class="card">
+          <h4>Pilares Fundamentais</h4>
+          <ul>
+            <li>Química Verde</li>
+            <li>Biotecnologia</li>
+            <li>Sustentabilidade</li>
+            <li>Segurança e testes (patch test)</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- PRODUCTS -->
-    <section id="produtos" class="products" aria-labelledby="produtos-title">
-      <h3 id="produtos-title">Os Nossos Produtos</h3>
+    <section id="produtos">
+      <h3>Os Nossos Produtos</h3>
+      <div class="prod-grid">
+        <div class="card">
+          <h4>Bronzeador Natural — 150 mL</h4>
+          <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
+          <ul>
+            <li>Óleo de lavanda — 120 mL</li>
+            <li>Manteiga de karité — 20 g</li>
+            <li>Café moído — 5 g</li>
+            <li>Cacau em pó — 3 g</li>
+            <li>Urucum em pó — 2 g</li>
+          </ul>
+        </div>
 
-      <div class="products-grid" role="list">
-        <!-- Bronzeador -->
-        <article class="prod-card" role="listitem" aria-labelledby="bronzeador-title">
-          <div class="prod-media">
-            <img src="b.png" alt="Bronzeador BioAura — frasco" loading="lazy" width="520" height="520">
-          </div>
-
-          <div class="prod-body">
-            <div class="prod-title" id="bronzeador-title">Bronzeador Natural — 150 mL</div>
-            <div class="prod-desc">Realça o tom da pele com acabamento natural e efeito hidratante. Formulado para realçar sem alterar.</div>
-
-            <ul class="prod-list" aria-label="Ingredientes do Bronzeador">
-              <li>Óleo de lavanda — 120 mL</li>
-              <li>Manteiga de karité — 20 g</li>
-              <li>Café moído — 5 g</li>
-              <li>Cacau em pó — 3 g</li>
-              <li>Urucum em pó — 2 g</li>
-            </ul>
-
-            <div class="prod-cta">
-              <div class="badge">150 mL</div>
-              <a class="primary-cta" href="#contacto">Encomendar</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Creme -->
-        <article class="prod-card" role="listitem" aria-labelledby="creme-title">
-          <div class="prod-media">
-            <img src="k.png" alt="Creme de Massagem BioAura — frasco" loading="lazy" width="520" height="520">
-          </div>
-
-          <div class="prod-body">
-            <div class="prod-title" id="creme-title">Creme de Massagem — 100 mL</div>
-            <div class="prod-desc">Fórmula nutritiva que fortalece a barreira cutânea, ideal para massagem e hidratação diária.</div>
-
-            <ul class="prod-list" aria-label="Ingredientes do Creme de Massagem">
-              <li>Manteiga de karité — 15 g</li>
-              <li>Óleo de amêndoas doces — 20 mL</li>
-              <li>Óleo de rícino — 5 mL</li>
-              <li>Cera de abelha — 5 g</li>
-              <li>Água destilada — 50 mL</li>
-              <li>Gel de aloe vera — 3 mL</li>
-            </ul>
-
-            <div class="prod-cta">
-              <div class="badge">100 mL</div>
-              <a class="primary-cta" href="#contacto">Encomendar</a>
-            </div>
-          </div>
-        </article>
+        <div class="card">
+          <h4>Creme de Massagem — 100 mL</h4>
+          <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
+          <ul>
+            <li>Manteiga de karité — 15 g</li>
+            <li>Óleo de amêndoas doces — 20 mL</li>
+            <li>Óleo de rícino — 5 mL</li>
+            <li>Cera de abelha — 5 g</li>
+            <li>Água destilada — 50 mL</li>
+            <li>Gel de aloe vera — 3 mL</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- SCIENCE -->
-    <section id="ciencia" aria-labelledby="ciencia-title" style="padding-top:18px;">
-      <h3 id="ciencia-title">Fundamentos Científicos</h3>
-
-      <div class="grid" style="margin-top:12px;">
-        <div class="card" role="article">
+    <section id="ciencia">
+      <h3>Fundamentos Científicos</h3>
+      <div class="grid">
+        <div class="card">
           <h4>Química</h4>
-          <p><strong>Extração de pigmentos:</strong> pigmentos hidrofóbicos (café, cacau, urucum) são integrados na fase oleosa para melhor dispersão.</p>
-          <p><strong>Emulsificação:</strong> união controlada da fase oleosa e aquosa com emulsificantes naturais. Processos realizados em banho-maria a temperaturas controladas.</p>
-          <p><strong>Oxidação:</strong> utilização de tocoferol (vitamina E) para retardar a oxidação dos óleos.</p>
+          <p><strong>Extração de pigmentos:</strong> pigmentos hidrofóbicos (café, cacau, urucum) são extraídos para o óleo.</p>
+          <p><strong>Emulsificação:</strong> união da fase oleosa e aquosa através de emulsificantes.</p>
+          <p><strong>Oxidação e antioxidantes:</strong> a vitamina E retarda a oxidação dos óleos vegetais.</p>
         </div>
-
-        <div class="card" role="article">
+        <div class="card">
           <h4>Biologia da Pele</h4>
-          <p>A epiderme atua como barreira — nossas fórmulas focam em reforço lipídico e hidratação. Recomendamos sempre patch test antes do uso.</p>
+          <ul>
+            <li><strong>Epiderme:</strong> proteção e hidratação.</li>
+            <li><strong>Derme:</strong> vasos, nervos e glândulas.</li>
+            <li><strong>Hipoderme:</strong> reserva energética e proteção térmica.</li>
+          </ul>
         </div>
       </div>
 
-      <div style="margin-top:14px;" class="card">
+      <div class="card" style="margin-top:18px">
         <h4>Notas Técnicas</h4>
         <div class="formula">
-          <pre>- Banho-maria: 60–70 °C
+          <pre>
+- Banho-maria: 60–70 °C
 - Adicionar conservantes a 35–40 °C
-- Embalagem: frascos escuros (proteção à luz)
-- Testes: patch test para avaliar reações locais e estabilidade físico-química</pre>
+- Embalagem: frascos escuros
+- Testes: patch test para avaliar alergias locais
+          </pre>
         </div>
       </div>
     </section>
 
-    <!-- PLANNING -->
-    <section id="planeamento" aria-labelledby="planeamento-title" style="padding-top:18px;">
-      <h3 id="planeamento-title">Planeamento e Execução</h3>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px;">
+    <section id="planeamento">
+      <h3>Planeamento e Execução</h3>
+      <div class="grid">
         <div class="card">
           <h4>1.º Período</h4>
           <ul>
-            <li>Planeamento e criação do logótipo</li>
-            <li>Pesquisa de ingredientes — segurança e fornecedores</li>
+            <li>Planeamento e criação do logótipo.</li>
+            <li>Pesquisa de ingredientes.</li>
           </ul>
         </div>
-
         <div class="card">
           <h4>2.º Período</h4>
           <ul>
-            <li>Criação de patch tests e registo</li>
-            <li>Ajuste de formulações e validações</li>
+            <li>Criação de patchs de teste e registo de resultados.</li>
+            <li>Ajuste de fórmulas e preparação.</li>
           </ul>
         </div>
-
         <div class="card">
           <h4>3.º Período</h4>
           <ul>
-            <li>Produção final e relatório</li>
-            <li>Apresentação e divulgação</li>
+            <li>Produção final e relatório.</li>
+            <li>Apresentação e divulgação.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contacto" aria-labelledby="contacto-title" style="padding-top:18px;margin-bottom:18px;">
-      <h3 id="contacto-title">Contacto</h3>
-
-      <div class="contact-card" role="region" aria-labelledby="contacto-title">
-        <div>
-          <p style="margin-bottom:6px;">Para mais informações e encomendas, contacte a equipa BioAura.</p>
-          <small style="color:#4a3628">Email: equipa@bioaura.example (substituir por email real)</small>
-        </div>
-
-        <div>
-          <a class="primary-cta" href="#" id="contact-action">Enviar Mensagem</a>
-        </div>
+    <section id="contacto">
+      <h3>Contacto</h3>
+      <div class="card">
+        <p>Para mais informações, entre em contacto com a equipa responsável.</p>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
   <footer>
-    <div class="container footer-inner" role="contentinfo">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <img src="logo-bioaura.png" alt="Logo BioAura">
-        <div style="color:#fff;">© BioAura — Projeto escolar</div>
-      </div>
-
-      <div style="color:rgba(255,255,255,0.9)">Feito com ♥ por alunos — matéria experimental</div>
-    </div>
+    <img src="logo-bioaura.png" alt="Logo BioAura" loading="lazy">
+    <div>© BioAura — Projeto escolar</div>
   </footer>
 
-  <!-- Lightweight JS: interações e melhorias -->
+  <button id="topBtn" title="Voltar ao topo">
+    <div class="bisnaga"><div class="reflexo"></div></div>
+  </button>
+
   <script>
-    (function () {
-      'use strict';
+    // 🔹 Menu hambúrguer com animação
+    const menuBtn=document.querySelector('.menu-toggle');
+    const nav=document.querySelector('.navlinks');
+    menuBtn.addEventListener('click',()=>{
+      menuBtn.classList.toggle('active');
+      nav.classList.toggle('show');
+    });
 
-      /* Simple helpers */
-      const $ = sel => document.querySelector(sel);
-      const $$ = sel => Array.from(document.querySelectorAll(sel));
+    // 🔹 Botão "voltar ao topo"
+    const topBtn=document.getElementById("topBtn");
+    window.addEventListener("scroll",()=>{topBtn.style.display=(window.scrollY>300)?"block":"none";});
+    topBtn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"});});
 
-      // Mobile menu toggle
-      const menuToggle = document.getElementById('menuToggle');
-      const mobileMenu = document.getElementById('mobileMenu');
-      if (menuToggle) {
-        // Show button only on small screens via JS check in case CSS doesn't
-        const updateMenuDisplay = () => {
-          if (window.innerWidth <= 980) {
-            menuToggle.style.display = 'inline-flex';
-          } else {
-            menuToggle.style.display = 'none';
-            // Ensure mobile menu hidden on desktop
-            if (mobileMenu) mobileMenu.style.display = 'none';
-            if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-          }
-        };
-        updateMenuDisplay();
-        window.addEventListener('resize', updateMenuDisplay);
-
-        menuToggle.addEventListener('click', function () {
-          const expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', String(!expanded));
-          if (!mobileMenu) return;
-          mobileMenu.style.display = (!expanded) ? 'block' : 'none';
-        });
-      }
-
-      // Smooth reveal for sections using IntersectionObserver
-      const sections = document.querySelectorAll('main section');
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.style.opacity = 1;
-              entry.target.style.transform = 'translateY(0px)';
-              entry.target.style.transition = 'opacity 650ms ease, transform 650ms ease';
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12 });
-
-        sections.forEach(sec => {
-          sec.style.opacity = 0;
-          sec.style.transform = 'translateY(22px)';
-          io.observe(sec);
-        });
-      } else {
-        // Fallback: just make them visible
-        sections.forEach(s => { s.style.opacity = 1; s.style.transform = 'none'; });
-      }
-
-      // Contact buttons demo action (replace with actual integration)
-      const contactButtons = Array.from(document.querySelectorAll('#open-contact, #open-contact-2, #contact-action, #contact-form-button'));
-      contactButtons.forEach(btn => {
-        if (!btn) return;
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          // small modal-less demo prompt
-          const msg = 'Funcionalidade de contacto em demonstração. Substituir por integração Formspree/Netlify/API.';
-          if (confirm(msg + '\\n\\nQuer copiar o email de contacto para a área de transferência?')) {
-            try {
-              navigator.clipboard.writeText('equipa@bioaura.example');
-              alert('Email copiado para a área de transferência: equipa@bioaura.example');
-            } catch (err) {
-              alert('Não foi possível copiar automaticamente. O email é: equipa@bioaura.example');
-            }
-          }
-        });
-      });
-
-      // Simple scrollspy: highlight nav links based on section in view
-      const navLinks = document.querySelectorAll('.navlinks a');
-      const sectionMap = Array.from(navLinks).map(a => {
-        const sel = a.getAttribute('href');
-        return document.querySelector(sel);
-      }).filter(Boolean);
-
-      function onScrollSpy() {
-        let current = -1;
-        for (let i = 0; i < sectionMap.length; i++) {
-          const rect = sectionMap[i].getBoundingClientRect();
-          if (rect.top <= window.innerHeight * 0.35) {
-            current = i;
-          }
-        }
-        navLinks.forEach((a, i) => {
-          a.style.opacity = (i <= current ? '1' : '0.7');
-          a.style.fontWeight = (i === current ? '700' : '600');
-        });
-      }
-      window.addEventListener('scroll', onScrollSpy, { passive: true });
-      onScrollSpy();
-
-      // Accessibility: close mobile menu if focus moves away and width > threshold
-      document.addEventListener('click', (e) => {
-        if (!menuToggle || !mobileMenu) return;
-        if (window.innerWidth > 980) return;
-        if (e.target !== menuToggle && !mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-          mobileMenu.style.display = 'none';
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // Keyboard: ESC closes mobile menu (if open)
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          if (mobileMenu && mobileMenu.style.display === 'block') {
-            mobileMenu.style.display = 'none';
-            menuToggle && menuToggle.setAttribute('aria-expanded', 'false');
-          }
-        }
-      });
-
-      // Image performance hint: if browser supports 'loading' attr already used.
-      // Local dev note: ensure images are optimized (png -> webp if possible) for production.
-
-      // END
+    // 🔹 Reflexo animado
+    (function animateReflexo(){
+      const r=document.querySelector('.bisnaga .reflexo');
+      if(!r)return;
+      r.animate([{left:'-14%',opacity:0.6},{left:'60%',opacity:0.08},{left:'140%',opacity:0}],
+      {duration:2600,iterations:Infinity,easing:'ease-in-out'});
     })();
+
+    // 💨 Efeito de deslizar nas secções
+    const sections=document.querySelectorAll('section');
+    const reveal=()=>{sections.forEach(sec=>{
+      if(sec.getBoundingClientRect().top<window.innerHeight-100){
+        sec.classList.add('visible');
+      }
+    });};
+    window.addEventListener('scroll',reveal);
+    reveal();
   </script>
 </body>
 </html>
