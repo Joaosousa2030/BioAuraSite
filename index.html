@@ -591,20 +591,39 @@ body.dark .hero h2 {
     toggle.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
   });
   </script>
-  
-  <!-- ✍️ Efeito máquina de escrever no slogan -->
+
+  <!-- ✍️ Efeito máquina de escrever com cursor -->
   <script>
   const texto = "Aluzia-te — valoriza a luz natural da pele.";
+  const slogan = document.getElementById("slogan");
   let i = 0;
-  function escrever(){
-    if(i < texto.length){
-      document.getElementById("slogan").textContent += texto.charAt(i);
+
+  function escrever() {
+    if (i < texto.length) {
+      slogan.textContent += texto.charAt(i);
       i++;
-      setTimeout(escrever, 70); // velocidade da digitação
+      setTimeout(escrever, 70);
+    } else {
+      piscarCursor();
     }
   }
+
+  function piscarCursor() {
+    const cursor = document.createElement("span");
+    cursor.textContent = "│"; // símbolo de cursor
+    cursor.style.marginLeft = "3px";
+    cursor.style.animation = "piscar 0.8s steps(2, start) infinite";
+    slogan.appendChild(cursor);
+  }
+
   escrever();
   </script>
+
+  <style>
+  @keyframes piscar {
+    to { visibility: hidden; }
+  }
+  </style>
 
   <style>
   #themeToggle {
