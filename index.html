@@ -374,7 +374,7 @@ body.dark .hero h2 {
           <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg">
           <div>
             <h1>BioAura</h1>
-            <p>Aluzia-te — valoriza a luz natural da pele</p>
+            <p id="slogan"></p>
           </div>
         </div>
 
@@ -590,6 +590,20 @@ body.dark .hero h2 {
     document.body.classList.toggle('dark');
     toggle.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
   });
+  </script>
+  
+  <!-- ✍️ Efeito máquina de escrever no slogan -->
+  <script>
+  const texto = "Aluzia-te — valoriza a luz natural da pele.";
+  let i = 0;
+  function escrever(){
+    if(i < texto.length){
+      document.getElementById("slogan").textContent += texto.charAt(i);
+      i++;
+      setTimeout(escrever, 70); // velocidade da digitação
+    }
+  }
+  escrever();
   </script>
 
   <style>
