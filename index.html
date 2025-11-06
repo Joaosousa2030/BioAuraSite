@@ -24,14 +24,17 @@ html {
 
     /* 🌈 Fundo animado */
     body{
-      font-family:Montserrat,system-ui,Segoe UI,Roboto,Arial;
-      margin:0;
-      background:linear-gradient(180deg,#bda48a,#a9896b,#bda48a);
-      background-size:400% 400%;
-      animation:gradientMove 12s ease infinite;
-      color:var(--muted);
-      cursor:url('cursor.png'), auto;
-    }
+  font-family: Montserrat, system-ui, "Segoe UI", Roboto, Arial;
+  margin: 0;
+  background: linear-gradient(180deg,#bda48a,#a9896b,#bda48a);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color: var(--muted);
+  cursor: url('cursor.png'), auto;
+
+  /* ✨ Transições suaves ao alternar tema */
+  transition: background 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.4s ease;
+}
     @keyframes gradientMove {
       0%{background-position:0% 50%}
       50%{background-position:100% 50%}
