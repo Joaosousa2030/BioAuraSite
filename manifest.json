@@ -1,0 +1,21 @@
+{
+  "name": "BioAura",
+  "short_name": "BioAura",
+  "description": "Cosmética natural e sustentável — Aluzia-te à luz da tua pele.",
+  "start_url": "/BioAuraSite/index.html",
+  "display": "standalone",
+  "background_color": "#caa45d",
+  "theme_color": "#caa45d",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
