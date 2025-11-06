@@ -15,12 +15,14 @@
   <meta name="description" content="BioAura — projeto escolar de cosmética natural sustentável que une ciência, biotecnologia e cuidado da pele.">
   <title>BioAura — Cosmética Natural Sustentável</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  
+
 <!-- 📱 Manifesto e Service Worker -->
 <link rel="manifest" href="manifest.json">
 <script>
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("serviceWorker.js");
+    navigator.serviceWorker.register("./serviceWorker.js")
+      .then(() => console.log("✅ Service Worker registado com sucesso"))
+      .catch(err => console.log("❌ Erro no Service Worker:", err));
   }
 </script>
 
