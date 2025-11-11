@@ -704,6 +704,7 @@ const texto = "Aluzia-te — valoriza a luz natural da pele.";
     box-shadow: 0 6px 18px rgba(0,0,0,0.4);
   }
   body.dark {
+    --gold: #f9e9b5; /* tom dourado mais claro e visível */
     --bg:#2b1f15;
     --card:#3b2b1a;
     --accent:#caa45d;
@@ -898,6 +899,22 @@ body.dark .card {
   font-size: 16px;
 }
 
+/* 💳 Botão "Finalizar Compra" */
+#checkout-btn {
+  background: var(--gold);
+  color: var(--muted);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  margin-top: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+#checkout-btn:hover {
+  background: #f9e9b5;
+  transform: scale(1.05);
+}
 </style>
 
 <!-- 🛍️ Painel do carrinho -->
@@ -908,9 +925,10 @@ body.dark .card {
   </div>
   <ul id="cart-items"></ul>
   <div class="cart-footer">
-    <p>Total: <span id="cart-total">0.00 €</span></p>
-    <button id="clear-cart">🧹 Limpar Carrinho</button>
-  </div>
+  <p>Total: <span id="cart-total">0.00 €</span></p>
+  <button id="clear-cart">🧹 Limpar Carrinho</button>
+  <button id="checkout-btn">💳 Finalizar Compra</button>
+</div>
 </div>
 
 <script>
@@ -959,6 +977,20 @@ clearCart.addEventListener('click', () => {
   updateCart();
 });
 
+// ✅ Botão de checkout (página fictícia)
+document.getElementById('checkout-btn').addEventListener('click', () => {
+  cartPanel.classList.remove('open');
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="text-align:center;padding:80px;font-family:Montserrat;color:var(--accent)">
+        <h2>💚 Obrigado pela tua compra!</h2>
+        <p>A equipa <strong>BioAura</strong> agradece a tua preferência.</p>
+        <a href="index.html" class="btn" style="margin-top:20px;display:inline-block;">Voltar à Página Inicial</a>
+      </div>
+    `;
+  }, 400);
+});
+
 // Abrir/fechar carrinho
 cartIcon.addEventListener('click', () => cartPanel.classList.add('open'));
 closeCart.addEventListener('click', () => cartPanel.classList.remove('open'));
@@ -979,6 +1011,7 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
     }
 
     updateCart();
+    showToast(); // 💫 Mostra notificação
 
     // ✨ Animação do produto a saltar para o carrinho
     const img = card.querySelector('img');
@@ -1013,6 +1046,61 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
 
 // Inicializar
 updateCart();
+</script>
+
+<!-- ✅ Toast de notificação -->
+<div id="toast">Produto adicionado ao carrinho 🛍️</div>
+
+<style>
+#toast {
+  visibility: hidden;
+  min-width: 240px;
+  background: var(--accent);
+  color: #fff8e7;
+  text-align: center;
+  border-radius: 10px;
+  padding: 14px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(20px);
+}
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+// ✅ Função para mostrar toast
+function showToast() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+</script>
+
+<script>
+// ✨ Fade suave ao navegar entre secções
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.style.opacity = 0;
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => { target.style.transition = 'opacity 0.8s'; target.style.opacity = 1; }, 200);
+      }, 100);
+    }
+  });
+});
 </script>
 
 </body>
