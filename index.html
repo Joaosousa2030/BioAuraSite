@@ -881,6 +881,12 @@ body.dark .card {
   background: #b88e4d;
 }
 
+/* ✨ Brilho rápido no ícone do carrinho */
+#cart-icon.flash {
+  box-shadow: 0 0 20px 6px gold;
+  transform: scale(1.2);
+  transition: all 0.4s ease;
+}
 </style>
 
 <!-- 🛍️ Painel do carrinho -->
@@ -938,14 +944,44 @@ clearCart.addEventListener('click', () => {
 cartIcon.addEventListener('click', () => cartPanel.classList.add('open'));
 closeCart.addEventListener('click', () => cartPanel.classList.remove('open'));
 
-// Adicionar ao carrinho
+// Adicionar ao carrinho + animação
 document.querySelectorAll('.btn-carrinho').forEach(btn => {
   btn.addEventListener('click', e => {
     const card = e.target.closest('.produto-card');
     const name = card.querySelector('h3').textContent;
-    const price = name.includes('Bronzeador') ? 14.99 : 11.99;
+    const price = name.includes('Bronzeador') ? 9.99 : 7.99; // 💰 preços ajustados
     cart.push({ name, price });
     updateCart();
+
+    // ✨ Animação do produto a saltar para o carrinho
+    const img = card.querySelector('img');
+    const clone = img.cloneNode(true);
+    const rect = img.getBoundingClientRect();
+    clone.style.position = 'fixed';
+    clone.style.left = rect.left + 'px';
+    clone.style.top = rect.top + 'px';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+    clone.style.borderRadius = '10px';
+    clone.style.zIndex = '9999';
+    clone.style.transition = 'all 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
+    document.body.appendChild(clone);
+
+    const cartIcon = document.getElementById('cart-icon').getBoundingClientRect();
+    setTimeout(() => {
+      clone.style.left = cartIcon.left + 'px';
+      clone.style.top = cartIcon.top + 'px';
+      clone.style.width = '20px';
+      clone.style.height = '20px';
+      clone.style.opacity = '0.2';
+    }, 50);
+
+    setTimeout(() => clone.remove(), 900);
+
+    // 💫 Brilho rápido no ícone do carrinho
+    const cartIconEl = document.getElementById('cart-icon');
+    cartIconEl.classList.add('flash');
+    setTimeout(() => cartIconEl.classList.remove('flash'), 600);
   });
 });
 
