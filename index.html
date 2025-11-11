@@ -520,6 +520,7 @@ section.visible {
         <li>Cacau em pó — 3 g</li>
         <li>Urucum em pó — 2 g</li>
       </ul>
+      <p class="preco">Preço: 9.99 €</p>
       <button class="btn-carrinho">🛒 Adicionar ao carrinho</button>
     </div>
 
@@ -536,6 +537,7 @@ section.visible {
         <li>Água destilada — 50 mL</li>
         <li>Gel de aloe vera — 3 mL</li>
       </ul>
+      <p class="preco">Preço: 7.99 €</p>
       <button class="btn-carrinho">🛒 Adicionar ao carrinho</button>
     </div>
 
@@ -887,6 +889,15 @@ body.dark .card {
   transform: scale(1.2);
   transition: all 0.4s ease;
 }
+
+/* 💰 Preço dos produtos */
+.preco {
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
 </style>
 
 <!-- 🛍️ Painel do carrinho -->
@@ -919,14 +930,22 @@ const clearCart = document.getElementById('clear-cart');
 function updateCart() {
   cartItems.innerHTML = '';
   let total = 0;
+  let totalItens = 0;
+
   cart.forEach((item, index) => {
-    total += item.price;
+    const subtotal = item.price * item.qty;
+    total += subtotal;
+    totalItens += item.qty;
+
     const li = document.createElement('li');
-    li.innerHTML = `${item.name} — ${item.price.toFixed(2)} € <button onclick="removeItem(${index})">🗑️</button>`;
+    li.innerHTML = `${item.name} — ${item.qty} x ${item.price.toFixed(2)} € 
+      = ${subtotal.toFixed(2)} € 
+      <button onclick="removeItem(${index})">🗑️</button>`;
     cartItems.appendChild(li);
   });
+
   cartTotal.textContent = `${total.toFixed(2)} €`;
-  cartCount.textContent = cart.length;
+  cartCount.textContent = totalItens;
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
@@ -944,13 +963,21 @@ clearCart.addEventListener('click', () => {
 cartIcon.addEventListener('click', () => cartPanel.classList.add('open'));
 closeCart.addEventListener('click', () => cartPanel.classList.remove('open'));
 
-// Adicionar ao carrinho + animação
+// 🛒 Adicionar ao carrinho + animação + quantidades
 document.querySelectorAll('.btn-carrinho').forEach(btn => {
   btn.addEventListener('click', e => {
     const card = e.target.closest('.produto-card');
     const name = card.querySelector('h3').textContent;
-    const price = name.includes('Bronzeador') ? 9.99 : 7.99; // 💰 preços ajustados
-    cart.push({ name, price });
+    const price = name.includes('Bronzeador') ? 9.99 : 7.99;
+
+    // 🔢 Se o produto já estiver no carrinho, aumenta a quantidade
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ name, price, qty: 1 });
+    }
+
     updateCart();
 
     // ✨ Animação do produto a saltar para o carrinho
@@ -975,8 +1002,7 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
       clone.style.height = '20px';
       clone.style.opacity = '0.2';
     }, 50);
-
-    setTimeout(() => clone.remove(), 900);
+   setTimeout(() => clone.remove(), 900);
 
     // 💫 Brilho rápido no ícone do carrinho
     const cartIconEl = document.getElementById('cart-icon');
