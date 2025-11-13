@@ -430,6 +430,13 @@ section.visible {
 <div id="cart-icon">
   🛒<span id="cart-count">0</span>
 </div>
+
+<!-- 🌿 Intro animada do logótipo -->
+<div id="intro">
+  <div class="intro-content">
+    <img src="logo-bioaura.png" alt="BioAura Logo" class="intro-logo">
+  </div>
+</div>
  <header>
     <div class="container">
       <nav>
@@ -1075,6 +1082,55 @@ updateCart();
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ✨ Intro animada do logótipo */
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #caa45d, #f4e7d1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: introFadeOut 2.2s ease forwards;
+}
+
+.intro-content {
+  text-align: center;
+}
+
+.intro-logo {
+  width: 180px;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: logoFadeIn 1.2s ease forwards;
+}
+
+/* 💅 Brilho sutil no logótipo */
+.intro-logo {
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+}
+
+@keyframes logoFadeIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  60% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes introFadeOut {
+  0%, 75% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* Escuro no modo dark */
+body.dark #intro {
+  background: linear-gradient(180deg, #2b1f15, #3b2b1a);
+}
+
 </style>
 
 <script>
@@ -1101,6 +1157,17 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
+</script>
+
+<script>
+  // ⏳ Espera o load completo da página antes de esconder o intro
+  window.addEventListener('load', () => {
+    const intro = document.getElementById('intro');
+    setTimeout(() => {
+      intro.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 2200); // 2.2 segundos
+  });
 </script>
 
 </body>
