@@ -953,7 +953,7 @@ body.dark .card {
 </div>
 
 <script>
-// 🛒 Carrinho funcional com + / – (2025 edition)
+// 🛒 Carrinho funcional com + / – (versão corrigida 100%)
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 const cartCount = document.getElementById('cart-count');
@@ -970,18 +970,22 @@ function updateCart() {
     total += subtotal;
     totalQty += item.qty;
 
+    // Nomes curtos (sem os mL)
+    const nomeCurto = item.name.includes('Bronzeador') ? 'Bronzeador Natural' : 'Creme Hidratante';
+
     const li = document.createElement('li');
     li.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0;">
-        <span>${item.name} — ${item.price.toFixed(2)} €</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0;">
+        <span style="max-width:140px;">${nomeCurto}<br><small>${item.price.toFixed(2)} € c/u</small></span>
         <div style="display:flex;align-items:center;gap:8px;">
-          <button onclick="changeQty(${index}, -1)" style="width:28px;height:28px;">–</button>
-          <strong>${item.qty}</strong>
-          <button onclick="changeQty(${index}, 1)" style="width:28px;height:28px;">+</button>
-          <button onclick="removeItem(${index})" style="margin-left:8px;">🗑️</button>
+          <button onclick="changeQty(${index}, -1)" style="width:32px;height:32px;font-size:18px;">–</button>
+          <strong style="min-width:30px;text-align:center;">${item.qty}</strong>
+          <button onclick="changeQty(${index}, 1)" style="width:32px;height:32px;font-size:18px;">+</button>
+          <button onclick="removeItem(${index})" style="margin-left:6px;font-size:18px;">🗑️</button>
         </div>
       </div>
-      <small style="display:block;text-align:right;">${subtotal.toFixed(2)} €</small>
+      <div style="text-align:right;font-weight:600;">${subtotal.toFixed(2)} €</div>
+      <hr style="margin:8px 0;border:none;border-top:1px solid rgba(0,0,0,0.1);">
     `;
     cartItems.appendChild(li);
   });
@@ -1004,7 +1008,7 @@ function removeItem(index) {
   showToast();
 }
 
-// O resto do código (adicionar ao carrinho) continua exatamente o mesmo:
+// Adicionar ao carrinho
 document.querySelectorAll('.btn-carrinho').forEach(btn => {
   btn.addEventListener('click', e => {
     const card = e.target.closest('.produto-card');
@@ -1012,16 +1016,13 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
     const price = name.includes('Bronzeador') ? 9.99 : 7.99;
 
     const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({ name, price, qty: 1 });
-    }
+    if (existing) existing.qty += 1;
+    else cart.push({ name, price, qty: 1 });
 
     updateCart();
     showToast();
 
-    // animação do produto a voar para o carrinho (mantém-se igual)
+    // animação voar (mantida)
     const img = card.querySelector('img');
     const clone = img.cloneNode(true);
     const rect = img.getBoundingClientRect();
@@ -1029,10 +1030,10 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
     document.body.appendChild(clone);
     const cartRect = document.getElementById('cart-icon').getBoundingClientRect();
     setTimeout(() => {
-      clone.style.left = cartRect.left + 'px';
+      clone.style.left = cartRect.left + '80px';
       clone.style.top = cartRect.top + 'px';
-      clone.style.width = '30px';
-      clone.style.height = '30px';
+      clone.style.width = '40px';
+      clone.style.height = '40px';
       clone.style.opacity = '0';
     }, 50);
     setTimeout(() => clone.remove(), 1000);
@@ -1042,15 +1043,30 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
   });
 });
 
-// inicia
-updateCart();
-// Abrir e fechar o painel do carrinho (IMPORTANTE!)
+// Abrir / fechar carrinho
 document.getElementById('cart-icon').addEventListener('click', () => {
   document.getElementById('cart-panel').classList.add('open');
 });
 document.getElementById('close-cart').addEventListener('click', () => {
   document.getElementById('cart-panel').classList.remove('open');
 });
+
+// Botão Finalizar Compra (volta a funcionar!)
+document.getElementById('checkout-btn').addEventListener('click', () => {
+  document.getElementById('cart-panel').classList.remove('open');
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="text-align:center;padding:100px 20px;font-family:Montserrat;background:var(--card);margin:40px auto;max-width:600px;border-radius:20px;">
+        <h2 style="color:var(--accent);">💚 Obrigado pela tua compra!</h2>
+        <p style="font-size:18px;">A equipa <strong>BioAura</strong> agradece a preferência.</p>
+        <a href="index.html" class="btn" style="margin-top:30px;display:inline-block;padding:14px 30px;">← Voltar à loja</a>
+      </div>
+    `;
+  }, 400);
+});
+
+// inicia
+updateCart();
 </script>
 
 <!-- ✅ Toast de notificação -->
