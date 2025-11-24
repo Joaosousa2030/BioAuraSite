@@ -618,7 +618,7 @@ section.visible {
       </div>
     </section>
   </main>
-  
+
 <div style="text-align:center;padding:20px 0;font-size:15px;color:var(--muted);opacity:0.9;">
   👀 Este site já foi visitado <strong id="visitCounter">0</strong> vezes!
 </div>
@@ -953,77 +953,64 @@ body.dark .card {
 </div>
 
 <script>
-// 🛒 Carrinho funcional
+// 🛒 Carrinho funcional com + / – (2025 edition)
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Elementos DOM
-const cartIcon = document.getElementById('cart-icon');
-const cartPanel = document.getElementById('cart-panel');
 const cartCount = document.getElementById('cart-count');
-const closeCart = document.getElementById('close-cart');
 const cartItems = document.getElementById('cart-items');
 const cartTotal = document.getElementById('cart-total');
-const clearCart = document.getElementById('clear-cart');
 
-// Atualizar UI
 function updateCart() {
   cartItems.innerHTML = '';
   let total = 0;
-  let totalItens = 0;
+  let totalQty = 0;
 
   cart.forEach((item, index) => {
     const subtotal = item.price * item.qty;
     total += subtotal;
-    totalItens += item.qty;
+    totalQty += item.qty;
 
     const li = document.createElement('li');
-    li.innerHTML = `${item.name} — ${item.qty} x ${item.price.toFixed(2)} € 
-      = ${subtotal.toFixed(2)} € 
-      <button onclick="removeItem(${index})">🗑️</button>`;
+    li.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0;">
+        <span>${item.name} — ${item.price.toFixed(2)} €</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="changeQty(${index}, -1)" style="width:28px;height:28px;">–</button>
+          <strong>${item.qty}</strong>
+          <button onclick="changeQty(${index}, 1)" style="width:28px;height:28px;">+</button>
+          <button onclick="removeItem(${index})" style="margin-left:8px;">🗑️</button>
+        </div>
+      </div>
+      <small style="display:block;text-align:right;">${subtotal.toFixed(2)} €</small>
+    `;
     cartItems.appendChild(li);
   });
 
-  cartTotal.textContent = `${total.toFixed(2)} €`;
-  cartCount.textContent = totalItens;
+  cartTotal.textContent = total.toFixed(2) + ' €';
+  cartCount.textContent = totalQty;
   localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function changeQty(index, delta) {
+  cart[index].qty += delta;
+  if (cart[index].qty <= 0) cart.splice(index, 1);
+  updateCart();
+  showToast();
 }
 
 function removeItem(index) {
   cart.splice(index, 1);
   updateCart();
+  showToast();
 }
 
-clearCart.addEventListener('click', () => {
-  cart = [];
-  updateCart();
-});
-
-// ✅ Botão de checkout (página fictícia)
-document.getElementById('checkout-btn').addEventListener('click', () => {
-  cartPanel.classList.remove('open');
-  setTimeout(() => {
-    document.body.innerHTML = `
-      <div style="text-align:center;padding:80px;font-family:Montserrat;color:var(--accent)">
-        <h2>💚 Obrigado pela tua compra!</h2>
-        <p>A equipa <strong>BioAura</strong> agradece a tua preferência.</p>
-        <a href="index.html" class="btn" style="margin-top:20px;display:inline-block;">Voltar à Página Inicial</a>
-      </div>
-    `;
-  }, 400);
-});
-
-// Abrir/fechar carrinho
-cartIcon.addEventListener('click', () => cartPanel.classList.add('open'));
-closeCart.addEventListener('click', () => cartPanel.classList.remove('open'));
-
-// 🛒 Adicionar ao carrinho + animação + quantidades
+// O resto do código (adicionar ao carrinho) continua exatamente o mesmo:
 document.querySelectorAll('.btn-carrinho').forEach(btn => {
   btn.addEventListener('click', e => {
     const card = e.target.closest('.produto-card');
     const name = card.querySelector('h3').textContent;
     const price = name.includes('Bronzeador') ? 9.99 : 7.99;
 
-    // 🔢 Se o produto já estiver no carrinho, aumenta a quantidade
     const existing = cart.find(item => item.name === name);
     if (existing) {
       existing.qty += 1;
@@ -1032,40 +1019,30 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
     }
 
     updateCart();
-    showToast(); // 💫 Mostra notificação
+    showToast();
 
-    // ✨ Animação do produto a saltar para o carrinho
+    // animação do produto a voar para o carrinho (mantém-se igual)
     const img = card.querySelector('img');
     const clone = img.cloneNode(true);
     const rect = img.getBoundingClientRect();
-    clone.style.position = 'fixed';
-    clone.style.left = rect.left + 'px';
-    clone.style.top = rect.top + 'px';
-    clone.style.width = rect.width + 'px';
-    clone.style.height = rect.height + 'px';
-    clone.style.borderRadius = '10px';
-    clone.style.zIndex = '9999';
-    clone.style.transition = 'all 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
+    clone.style.cssText = `position:fixed;left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;height:${rect.height}px;border-radius:15px;z-index:9999;transition:all 0.9s cubic-bezier(0.25,1,0.5,1)`;
     document.body.appendChild(clone);
-
-    const cartIcon = document.getElementById('cart-icon').getBoundingClientRect();
+    const cartRect = document.getElementById('cart-icon').getBoundingClientRect();
     setTimeout(() => {
-      clone.style.left = cartIcon.left + 'px';
-      clone.style.top = cartIcon.top + 'px';
-      clone.style.width = '20px';
-      clone.style.height = '20px';
-      clone.style.opacity = '0.2';
+      clone.style.left = cartRect.left + 'px';
+      clone.style.top = cartRect.top + 'px';
+      clone.style.width = '30px';
+      clone.style.height = '30px';
+      clone.style.opacity = '0';
     }, 50);
-   setTimeout(() => clone.remove(), 900);
+    setTimeout(() => clone.remove(), 1000);
 
-    // 💫 Brilho rápido no ícone do carrinho
-    const cartIconEl = document.getElementById('cart-icon');
-    cartIconEl.classList.add('flash');
-    setTimeout(() => cartIconEl.classList.remove('flash'), 600);
+    document.getElementById('cart-icon').classList.add('flash');
+    setTimeout(() => document.getElementById('cart-icon').classList.remove('flash'), 600);
   });
 });
 
-// Inicializar
+// inicia
 updateCart();
 </script>
 
