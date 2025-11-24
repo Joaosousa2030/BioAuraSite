@@ -1260,20 +1260,6 @@ body:has(#cart-panel.open) #themeToggle {
 #musicToggle, #themeToggle { transition: opacity 0.4s ease; }
 </style>
 
-<!-- ←←← AQUI SUBSTITUI PELOS NOVOS ←←← -->
-<style>
-/* Quando o carrinho está aberto, esconde os dois botões flutuantes */
-#cart-panel.open ~ #musicToggle,
-#cart-panel.open ~ #themeToggle,
-body:has(#cart-panel.open) #musicToggle,
-body:has(#cart-panel.open) #themeToggle {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-#musicToggle, #themeToggle { transition: opacity 0.4s ease; }
-</style>
-
 <!-- A PARTIR DAQUI É O NOVO (substitui tudo até </style>) -->
 <style>
 /* Volta a cor original dos botões que tu gostavas */
