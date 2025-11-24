@@ -426,6 +426,7 @@ section.visible {
 </head>
 
 <body>
+
   <!-- 🛒 Ícone do carrinho -->
 <div id="cart-icon">
   🛒<span id="cart-count">0</span>
@@ -617,6 +618,19 @@ section.visible {
       </div>
     </section>
   </main>
+  
+<div style="text-align:center;padding:20px 0;font-size:15px;color:var(--muted);opacity:0.9;">
+  👀 Este site já foi visitado <strong id="visitCounter">0</strong> vezes!
+</div>
+
+<script>
+// Contador de visitas (funciona offline)
+let visitas = localStorage.getItem('bioaura_visitas');
+if (!visitas) visitas = 0;
+visitas = Number(visitas) + 1;
+localStorage.setItem('bioaura_visitas', visitas);
+document.getElementById('visitCounter').textContent = visitas.toLocaleString('pt-PT');
+</script>
 
   <footer>
     <img src="logo-bioaura.png" alt="Logo BioAura" loading="lazy">
