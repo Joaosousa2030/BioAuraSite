@@ -953,13 +953,15 @@ body.dark .card {
 </div>
 
 <script>
-// 🛒 CARRINHO FINAL — tudo corrigido e funcionando (última versão)
+// 🛒 CARRINHO FINAL – 100% corrigido (Limpar + Brilho + Sem scroll feio)
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-const cartCount = document.getElementById('cart-count');
-const cartItems = document.getElementById('cart-items');
-const cartTotal = document.getElementById('cart-total');
-const cartPanel = document.getElementById('cart-panel');   // ← linha que faltava!
+const cartCount   = document.getElementById('cart-count');
+const cartItems   = document.getElementById('cart-items');
+const cartTotal   = document.getElementById('cart-total');
+const cartPanel   = document.getElementById('cart-panel');
+const clearBtn    = document.getElementById('clear-cart');      // ← botão limpar
+const checkoutBtn = document.getElementById('checkout-btn');
 
 function updateCart() {
   cartItems.innerHTML = '';
@@ -967,35 +969,35 @@ function updateCart() {
   let totalQty = 0;
 
   if (cart.length === 0) {
-    cartItems.innerHTML = '<li style="text-align:center;padding:30px;color:#777;">O carrinho está vazio</li>';
+    cartItems.innerHTML = '<li style="text-align:center;padding:40px 20px;color:#888;">O carrinho está vazio</li>';
   }
 
-  cart.forEach((item, index) => {
+  cart.forEach((item, i) => {
     const subtotal = item.price * item.qty;
     total += subtotal;
     totalQty += item.qty;
 
-    const nomeCurto = item.name.includes('Bronzeador') ? 'Bronzeador Natural' : 'Creme Hidratante';
+    const nome = item.name.includes('Bronzeador') ? 'Bronzeador Natural' : 'Creme Hidratante';
 
     const li = document.createElement('li');
-    li.style.margin = '14px 0';
+    li.style.margin = '16px 0';
     li.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div>
-          <strong>${nomeCurto}</strong><br>
+          <strong style="font-size:16px;">${nome}</strong><br>
           <small style="color:#777;">${item.price.toFixed(2)} € cada</small>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <button onclick="changeQty(${index},-1)" style="width:36px;height:36px;border:none;border-radius:50%;background:#8b623c;color:#fff;font-weight:bold;">–</button>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button onclick="changeQty(${i},-1)" style="width:38px;height:38px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">–</button>
           <strong style="min-width:40px;text-align:center;font-size:18px;">${item.qty}</strong>
-          <button onclick="changeQty(${index},1)" style="width:36px;height:36px;border:none;border-radius:50%;background:#8b623c;color:#fff;font-weight:bold;">+</button>
-          <button onclick="removeItem(${index})" style="width:36px;height:36px;border:none;border-radius:50%;background:#c44;color:#fff;">🗑</button>
+          <button onclick="changeQty(${i},1)" style="width:38px;height:38px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">+</button>
+          <button onclick="removeItem(${i})" style="width:38px;height:38px;border-radius:50%;border:none;background:#c44;color:#fff;">🗑</button>
         </div>
       </div>
-      <div style="text-align:right;margin-top:8px;font-weight:600;color:var(--accent);">
+      <div style="text-align:right;margin-top:8px;font-weight:700;color:var(--accent);font-size:17px;">
         ${subtotal.toFixed(2)} €
       </div>
-      <hr style="border:none;border-top:1px solid #ddd;margin:12px 0;">
+      <hr style="border:none;border-top:1px solid #ddd;margin:14px 0;">
     `;
     cartItems.appendChild(li);
   });
@@ -1005,10 +1007,32 @@ function updateCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-function changeQty(i, d) { cart[i].qty += d; if (cart[i].qty <= 0) cart.splice(i,1); updateCart(); showToast(); }
+function changeQty(i, d) {
+  cart[i].qty += d;
+  if (cart[i].qty <= 0) cart.splice(i, 1);
+  updateCart();
+  showToast();
+}
 function removeItem(i) { cart.splice(i,1); updateCart(); showToast(); }
 
-// Adicionar ao carrinho + animação voa para a esquerda
+// Limpar carrinho (agora funciona!)
+clearBtn.onclick = () => {
+  cart = [];
+  updateCart();
+  showToast();
+  document.getElementById('toast').textContent = 'Carrinho limpo!';
+  document.getElementById('toast').classList.add('show');
+  setTimeout(() => document.getElementById('toast').classList.remove('show'), 2000);
+};
+
+// Brilho no ícone ao adicionar
+function flashCartIcon() {
+  const icon = document.getElementById('cart-icon');
+  icon.classList.add('flash');
+  setTimeout(() => icon.classList.remove('flash'), 600);
+}
+
+// Adicionar ao carrinho + animação + brilho
 document.querySelectorAll('.btn-carrinho').forEach(btn => {
   btn.onclick = e => {
     const card = e.target.closest('.produto-card');
@@ -1018,35 +1042,40 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
     const existing = cart.find(x => x.name === name);
     if (existing) existing.qty++; else cart.push({name, price, qty:1});
 
-    updateCart(); showToast();
+    updateCart();
+    showToast();
+    flashCartIcon();   // ← brilho volta!
 
+    // animação voar
     const img = card.querySelector('img');
     const clone = img.cloneNode();
-    const rect = img.getBoundingClientRect();
-    const cartRect = document.getElementById('cart-icon').getBoundingClientRect();
-    Object.assign(clone.style, {position:'fixed', zIndex:9999, borderRadius:'16px', pointerEvents:'none',
-      left:rect.left+'px', top:rect.top+'px', width:rect.width+'px', height:rect.height+'px',
-      transition:'all 0.9s cubic-bezier(0.2,0.8,0.4,1)'});
+    const r1 = img.getBoundingClientRect();
+    const r2 = document.getElementById('cart-icon').getBoundingClientRect();
+    Object.assign(clone.style, {
+      position:'fixed', zIndex:9999, borderRadius:'16px', pointerEvents:'none',
+      left:r1.left+'px', top:r1.top+'px', width:r1.width+'px', height:r1.height+'px',
+      transition:'all 0.9s cubic-bezier(0.2,0.8,0.4,1)'
+    });
     document.body.appendChild(clone);
     setTimeout(() => {
-      clone.style.left = (cartRect.left + 15)+'px';
-      clone.style.top = (cartRect.top + 15)+'px';
+      clone.style.left = (r2.left + 15)+'px';
+      clone.style.top  = (r2.top + 15)+'px';
       clone.style.width = '40px'; clone.style.height = '40px'; clone.style.opacity = '0';
     }, 50);
     setTimeout(() => clone.remove(), 1000);
   };
 });
 
-// Abrir / fechar carrinho (agora funciona!)
+// Abrir / fechar
 document.getElementById('cart-icon').onclick = () => cartPanel.classList.add('open');
 document.getElementById('close-cart').onclick = () => cartPanel.classList.remove('open');
 
 // Checkout
-document.getElementById('checkout-btn').onclick = () => {
+checkoutBtn.onclick = () => {
   cartPanel.classList.remove('open');
   setTimeout(() => {
     document.body.innerHTML = `<div style="text-align:center;padding:100px 20px;background:var(--card);margin:40px auto;max-width:600px;border-radius:20px;">
-      <h2 style="color:var(--accent);">💚 Obrigado pela compra!</h2>
+      <h2 style="color:var(--accent);">Obrigado pela compra!</h2>
       <p style="font-size:18px;">A equipa <strong>BioAura</strong> agradece!</p>
       <a href="." class="btn" style="margin-top:30px;display:inline-block;">← Voltar à loja</a>
     </div>`;
