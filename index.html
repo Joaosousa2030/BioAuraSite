@@ -757,7 +757,7 @@ body.dark .card {
   box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
 
-/* 🧴 Produtos */
+ /* 🧴 Produtos */
 .produtos-container {
   display: flex;
   flex-wrap: wrap;
@@ -905,7 +905,7 @@ body.dark .card {
   background: #b88e4d;
 }
 
-/* ✨ Brilho rápido no ícone do carrinho */
+ /* ✨ Brilho rápido no ícone do carrinho */
 #cart-icon.flash {
   box-shadow: 0 0 20px 6px gold;
   transform: scale(1.2);
@@ -1011,18 +1011,19 @@ function changeQty(i, d) {
   cart[i].qty += d;
   if (cart[i].qty <= 0) cart.splice(i, 1);
   updateCart();
-  showToast();
+  showToast(); // mostra "Adicionado ao carrinho ✓"
 }
-function removeItem(i) { cart.splice(i,1); updateCart(); showToast(); }
+function removeItem(i) {
+  cart.splice(i, 1);
+  updateCart();
+  showToast('Item removido');
+}
 
 // Limpar carrinho (agora funciona!)
 clearBtn.onclick = () => {
   cart = [];
   updateCart();
-  showToast();
-  document.getElementById('toast').textContent = 'Carrinho limpo!';
-  document.getElementById('toast').classList.add('show');
-  setTimeout(() => document.getElementById('toast').classList.remove('show'), 2000);
+  showToast('Carrinho limpo!');
 };
 
 // Brilho no ícone ao adicionar
@@ -1165,10 +1166,22 @@ body.dark #intro {
 
 <script>
 // ✅ Função para mostrar toast
-function showToast() {
-  const toast = document.getElementById('toast');
+function showToast(msg = 'Adicionado ao carrinho ✓') {
+  let toast = document.getElementById('toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background: var(--accent);color: #fff8e7;padding:14px 32px;border-radius:10px;z-index:9999;font-size:16px;opacity:0;transition:opacity 0.6s ease, transform 0.6s ease;transform:translateY(20px);font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.3);';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
+  toast.style.opacity = '1';
+  clearTimeout(toast.hideTimer);
+  toast.hideTimer = setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.classList.remove('show');
+  }, 2000);
 }
 </script>
 
