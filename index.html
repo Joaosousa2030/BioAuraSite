@@ -1044,6 +1044,13 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
 
 // inicia
 updateCart();
+// Abrir e fechar o painel do carrinho (IMPORTANTE!)
+document.getElementById('cart-icon').addEventListener('click', () => {
+  document.getElementById('cart-panel').classList.add('open');
+});
+document.getElementById('close-cart').addEventListener('click', () => {
+  document.getElementById('cart-panel').classList.remove('open');
+});
 </script>
 
 <!-- ✅ Toast de notificação -->
