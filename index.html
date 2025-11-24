@@ -1262,34 +1262,35 @@ body:has(#cart-panel.open) #themeToggle {
 
 <!-- ←←← AQUI SUBSTITUI PELOS NOVOS ←←← -->
 <style>
-/* Aba do carrinho mais larga e na altura perfeita (até à tua linha vermelha) */
-#cart-panel.open {
-  width: 440px !important;
-  max-width: 92vw;
-  height: calc(100vh - 100px) !important;
-  top: 50px !important;
+/* Quando o carrinho está aberto, esconde os dois botões flutuantes */
+#cart-panel.open ~ #musicToggle,
+#cart-panel.open ~ #themeToggle,
+body:has(#cart-panel.open) #musicToggle,
+body:has(#cart-panel.open) #themeToggle {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
+#musicToggle, #themeToggle { transition: opacity 0.4s ease; }
+</style>
 
-/* Elimina a barra de scroll de vez + espaço confortável */
-#cart-items {
-  max-height: calc(100vh - 300px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 16px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+<!-- A PARTIR DAQUI É O NOVO (substitui tudo até </style>) -->
+<style>
+/* Volta a cor original dos botões que tu gostavas */
+#cart-items button {
+  width: 36px;height: 36px;border-radius: 50%;border: none;font: bold 18px Arial;color: #fff;
 }
-#cart-items::-webkit-scrollbar { display: none; }
+#cart-items button:nth-of-type(1),#cart-items button:nth-of-type(3){background:#8b623c}
+#cart-items button:last-of-type{background:#b34747}
 
-/* Total e botões sempre no fundo */
-#cart-total, #clear-cart, #checkout-btn {
-  position: sticky;
-  bottom: 0;
-  background: var(--card);
-  padding: 12px 20px;
-  margin: 0;
-  border-top: 1px solid #ddd;
-}
+/* Aba do carrinho do topo ao fundo + mais larga */
+#cart-panel.open{
+  width:440px!important;max-width:92vw;height:100vh!important;top:0!important;
+  border-radius:24px 0 0 24px!important}
+
+/* Sem scroll lateral no site e sem scroll no carrinho */
+body{overflow-x:hidden}
+#cart-items{max-height:calc(100vh - 260px);overflow:hidden;padding-right:20px}
 </style>
 
 </body>
