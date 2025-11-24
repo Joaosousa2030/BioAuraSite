@@ -1228,5 +1228,23 @@ document.getElementById('musicToggle').addEventListener('click', function(e) {
 });
 </script>
 
+<style>
+/* Quando o carrinho está aberto, esconde os dois botões flutuantes */
+#cart-panel.open ~ #musicToggle,
+#cart-panel.open ~ #themeToggle,
+body:has(#cart-panel.open) #musicToggle,
+body:has(#cart-panel.open) #themeToggle {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Volta a aparecer quando fecha */
+#musicToggle,
+#themeToggle {
+  transition: opacity 0.4s ease;
+}
+</style>
+
 </body>
 </html>
