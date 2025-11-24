@@ -1181,5 +1181,41 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   }, { once: true });
 </script>
 
+// Mutar musica
+<button id="musicToggle" title="Silenciar música">🔊</button>
+
+<style>
+#musicToggle {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: var(--card);
+  color: var(--accent);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+#musicToggle:hover { transform: scale(1.12); }
+</style>
+
+<script>
+document.getElementById('musicToggle').addEventListener('click', function(e) {
+  const audio = document.getElementById('bg-music');
+  if (audio.muted) {
+    audio.muted = false;
+    e.target.textContent = '🔊';
+  } else {
+    audio.muted = true;
+    e.target.textContent = '🔇';
+  }
+});
+</script>
+
 </body>
 </html>
