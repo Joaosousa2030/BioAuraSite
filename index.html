@@ -1257,11 +1257,38 @@ body:has(#cart-panel.open) #themeToggle {
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
+#musicToggle, #themeToggle { transition: opacity 0.4s ease; }
+</style>
 
-/* Volta a aparecer quando fecha */
-#musicToggle,
-#themeToggle {
-  transition: opacity 0.4s ease;
+<!-- ←←← AQUI SUBSTITUI PELOS NOVOS ←←← -->
+<style>
+/* Aba do carrinho mais larga e na altura perfeita (até à tua linha vermelha) */
+#cart-panel.open {
+  width: 440px !important;
+  max-width: 92vw;
+  height: calc(100vh - 100px) !important;
+  top: 50px !important;
+}
+
+/* Elimina a barra de scroll de vez + espaço confortável */
+#cart-items {
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 16px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#cart-items::-webkit-scrollbar { display: none; }
+
+/* Total e botões sempre no fundo */
+#cart-total, #clear-cart, #checkout-btn {
+  position: sticky;
+  bottom: 0;
+  background: var(--card);
+  padding: 12px 20px;
+  margin: 0;
+  border-top: 1px solid #ddd;
 }
 </style>
 
