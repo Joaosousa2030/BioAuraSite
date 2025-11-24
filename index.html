@@ -1009,9 +1009,13 @@ function updateCart() {
 
 function changeQty(i, d) {
   cart[i].qty += d;
-  if (cart[i].qty <= 0) cart.splice(i, 1);
+  if (cart[i].qty <= 0) {
+    cart.splice(i, 1);
+    showToast('Item removido');
+  } else if (d > 0) {
+    showToast(); // só mostra mensagem quando clicas no +
+  }
   updateCart();
-  showToast(); // mostra "Adicionado ao carrinho ✓"
 }
 function removeItem(i) {
   cart.splice(i, 1);
