@@ -953,12 +953,13 @@ body.dark .card {
 </div>
 
 <script>
-// 🛒 Carrinho FINAL – tudo corrigido (2025 luxury edition)
+// 🛒 CARRINHO FINAL — tudo corrigido e funcionando (última versão)
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 const cartCount = document.getElementById('cart-count');
 const cartItems = document.getElementById('cart-items');
 const cartTotal = document.getElementById('cart-total');
+const cartPanel = document.getElementById('cart-panel');   // ← linha que faltava!
 
 function updateCart() {
   cartItems.innerHTML = '';
@@ -966,7 +967,7 @@ function updateCart() {
   let totalQty = 0;
 
   if (cart.length === 0) {
-    cartItems.innerHTML = '<li style="text-align:center;color:#777;padding:20px;">O carrinho está vazio</li>';
+    cartItems.innerHTML = '<li style="text-align:center;padding:30px;color:#777;">O carrinho está vazio</li>';
   }
 
   cart.forEach((item, index) => {
@@ -977,24 +978,24 @@ function updateCart() {
     const nomeCurto = item.name.includes('Bronzeador') ? 'Bronzeador Natural' : 'Creme Hidratante';
 
     const li = document.createElement('li');
-    li.style.margin = '12px 0';
+    li.style.margin = '14px 0';
     li.innerHTML = `
       <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div style="flex:1;">
+        <div>
           <strong>${nomeCurto}</strong><br>
-          <small style="color:var(--muted);">${item.price.toFixed(2)} € cada</small>
+          <small style="color:#777;">${item.price.toFixed(2)} € cada</small>
         </div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <button onclick="changeQty(${index},-1)" style="width:34px;height:34px;border:none;border-radius:8px;background:#8b623c;color:white;font-weight:bold;">–</button>
-          <strong style="min-width:36px;text-align:center;font-size:16px;">${item.qty}</strong>
-          <button onclick="changeQty(${index},1)" style="width:34px;height:34px;border:none;border-radius:8px;background:#8b623c;color:white;font-weight:bold;">+</button>
-          <button onclick="removeItem(${index})" style="width:34px;height:34px;border:none;background:#a04444;color:white;border-radius:8px;margin-left:4px;">🗑</button>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button onclick="changeQty(${index},-1)" style="width:36px;height:36px;border:none;border-radius:50%;background:#8b623c;color:#fff;font-weight:bold;">–</button>
+          <strong style="min-width:40px;text-align:center;font-size:18px;">${item.qty}</strong>
+          <button onclick="changeQty(${index},1)" style="width:36px;height:36px;border:none;border-radius:50%;background:#8b623c;color:#fff;font-weight:bold;">+</button>
+          <button onclick="removeItem(${index})" style="width:36px;height:36px;border:none;border-radius:50%;background:#c44;color:#fff;">🗑</button>
         </div>
       </div>
-      <div style="text-align:right;margin-top:6px;font-weight:600;color:var(--accent);">
-        ${(item.price * item.qty).toFixed(2)} €
+      <div style="text-align:right;margin-top:8px;font-weight:600;color:var(--accent);">
+        ${subtotal.toFixed(2)} €
       </div>
-      <hr style="border:none;border-top:1px solid #ddd;margin:10px 0;">
+      <hr style="border:none;border-top:1px solid #ddd;margin:12px 0;">
     `;
     cartItems.appendChild(li);
   });
@@ -1007,7 +1008,7 @@ function updateCart() {
 function changeQty(i, d) { cart[i].qty += d; if (cart[i].qty <= 0) cart.splice(i,1); updateCart(); showToast(); }
 function removeItem(i) { cart.splice(i,1); updateCart(); showToast(); }
 
-// Adicionar ao carrinho + animação CORRIGIDA (agora voa para a esquerda!)
+// Adicionar ao carrinho + animação voa para a esquerda
 document.querySelectorAll('.btn-carrinho').forEach(btn => {
   btn.onclick = e => {
     const card = e.target.closest('.produto-card');
@@ -1015,54 +1016,43 @@ document.querySelectorAll('.btn-carrinho').forEach(btn => {
     const price = name.includes('Bronzeador') ? 9.99 : 7.99;
 
     const existing = cart.find(x => x.name === name);
-    if (existing) existing.qty++; else cart.push({name, price, qty: 1});
+    if (existing) existing.qty++; else cart.push({name, price, qty:1});
 
     updateCart(); showToast();
 
-    // animação voar para o ícone do carrinho (esquerda superior)
     const img = card.querySelector('img');
     const clone = img.cloneNode();
     const rect = img.getBoundingClientRect();
     const cartRect = document.getElementById('cart-icon').getBoundingClientRect();
-
-    Object.assign(clone.style, {
-      position:'fixed', zIndex:9999, borderRadius:'16px',
-      left: rect.left + 'px', top: rect.top + 'px',
-      width: rect.width + 'px', height: rect.height + 'px',
-      transition:'all 0.9s cubic-bezier(0.2,0.8,0.4,1)',
-      pointerEvents:'none'
-    });
+    Object.assign(clone.style, {position:'fixed', zIndex:9999, borderRadius:'16px', pointerEvents:'none',
+      left:rect.left+'px', top:rect.top+'px', width:rect.width+'px', height:rect.height+'px',
+      transition:'all 0.9s cubic-bezier(0.2,0.8,0.4,1)'});
     document.body.appendChild(clone);
-
     setTimeout(() => {
-      clone.style.left = (cartRect.left + 15) + 'px';
-      clone.style.top = (cartRect.top + 15) + 'px';
-      clone.style.width = '40px';
-      clone.style.height = '40px';
-      clone.style.opacity = '0';
+      clone.style.left = (cartRect.left + 15)+'px';
+      clone.style.top = (cartRect.top + 15)+'px';
+      clone.style.width = '40px'; clone.style.height = '40px'; clone.style.opacity = '0';
     }, 50);
     setTimeout(() => clone.remove(), 1000);
   };
 });
 
-// Abrir/fechar carrinho
+// Abrir / fechar carrinho (agora funciona!)
 document.getElementById('cart-icon').onclick = () => cartPanel.classList.add('open');
 document.getElementById('close-cart').onclick = () => cartPanel.classList.remove('open');
 
-// Checkout (volta a funcionar)
+// Checkout
 document.getElementById('checkout-btn').onclick = () => {
   cartPanel.classList.remove('open');
   setTimeout(() => {
-    document.body.innerHTML = `
-      <div style="text-align:center;padding:100px 20px;background:var(--card);margin:40px auto;max-width:600px;border-radius:20px;">
-        <h2 style="color:var(--accent);">Obrigado pela tua compra!</h2>
-        <p style="font-size:18px;">A equipa <strong>BioAura</strong> agradece!</p>
-        <a href="." class="btn" style="margin-top:30px;display:inline-block;">Voltar à loja</a>
-      </div>`;
+    document.body.innerHTML = `<div style="text-align:center;padding:100px 20px;background:var(--card);margin:40px auto;max-width:600px;border-radius:20px;">
+      <h2 style="color:var(--accent);">💚 Obrigado pela compra!</h2>
+      <p style="font-size:18px;">A equipa <strong>BioAura</strong> agradece!</p>
+      <a href="." class="btn" style="margin-top:30px;display:inline-block;">← Voltar à loja</a>
+    </div>`;
   }, 400);
 };
 
-// Inicia
 updateCart();
 </script>
 
