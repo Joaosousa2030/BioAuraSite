@@ -528,7 +528,7 @@ section.visible {
         <li>Cacau em pó — 3 g</li>
         <li>Urucum em pó — 2 g</li>
       </ul>
-      <p class="preco">Preço: 9.99 €</p>
+      <p class="preco">Preço: 9.99 🥔</p>
       <button class="btn-carrinho">🛒 Adicionar ao carrinho</button>
     </div>
 
@@ -545,7 +545,7 @@ section.visible {
         <li>Água destilada — 50 mL</li>
         <li>Gel de aloe vera — 3 mL</li>
       </ul>
-      <p class="preco">Preço: 7.99 €</p>
+      <p class="preco">Preço: 7.99 🥔</p>
       <button class="btn-carrinho">🛒 Adicionar ao carrinho</button>
     </div>
 
@@ -946,7 +946,7 @@ body.dark .card {
   </div>
   <ul id="cart-items"></ul>
   <div class="cart-footer">
-  <p>Total: <span id="cart-total">0.00 €</span></p>
+  <p>Total: <span id="cart-total">0.00 🥔</span></p>
   <button id="clear-cart">🧹 Limpar Carrinho</button>
   <button id="checkout-btn">💳 Finalizar Compra</button>
 </div>
@@ -985,7 +985,7 @@ function updateCart() {
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div>
           <strong style="font-size:16px;">${nome}</strong><br>
-          <small style="color:#777;">${item.price.toFixed(2)} € cada</small>
+          <small style="color:#777;">${item.price.toFixed(2)} 🥔 cada</small>
         </div>
         <div style="display:flex;gap:8px;align-items:center;">
           <button onclick="changeQty(${i},-1)" style="width:38px;height:38px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">–</button>
@@ -995,14 +995,14 @@ function updateCart() {
         </div>
       </div>
       <div style="text-align:right;margin-top:8px;font-weight:700;color:var(--accent);font-size:17px;">
-        ${subtotal.toFixed(2)} €
+        ${subtotal.toFixed(2)} 🥔
       </div>
       <hr style="border:none;border-top:1px solid #ddd;margin:14px 0;">
     `;
     cartItems.appendChild(li);
   });
 
-  cartTotal.textContent = total.toFixed(2) + ' €';
+  cartTotal.textContent = total.toFixed(2) + '🥔';
   cartCount.textContent = totalQty || '0';
   localStorage.setItem('cart', JSON.stringify(cart));
 }
