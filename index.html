@@ -17,10 +17,10 @@
 <meta name="theme-color" content="#caa45d">
 <!-- 🌿 Ícone do site -->
 <link rel="icon" type="image/png" href="favicon.png">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="BioAura — projeto escolar de cosmética natural sustentável que une ciência, biotecnologia e cuidado da pele.">
-  <title>BioAura — Cosmética Natural Sustentável</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="BioAura — projeto escolar de cosmética natural sustentável que une ciência, biotecnologia e cuidado da pele.">
+<title>BioAura — Cosmética Natural Sustentável</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- 📱 Manifesto e Service Worker -->
 <link rel="manifest" href="manifest.json">
@@ -53,7 +53,7 @@ html {
   margin: 0;
   background: linear-gradient(180deg,#bda48a,#a9896b,#bda48a);
   background-size: 400% 400%;
-  animation: gradientMove 12s ease infinite;
+  animation: gradientMove 20s ease infinite; /* mais lento para mobile */
   color: var(--muted);
   cursor: url('cursor.png'), auto;
 
@@ -64,6 +64,14 @@ html {
       0%{background-position:0% 50%}
       50%{background-position:100% 50%}
       100%{background-position:0% 50%}
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body, * { animation: none !important; transition: none !important; }
+    }
+
+    @media(max-width:768px){
+      body { animation: none; background: #bda48a; }
     }
 
     header{
@@ -164,7 +172,7 @@ html {
       grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
       gap:32px;
       align-items:center;
-      padding:40px 0;
+      padding:60px 0 40px; /* mais espaço vertical em mobile */
     }
     .hero .lead{
       background:var(--card);border-radius:16px;padding:28px;
@@ -178,7 +186,7 @@ html {
     /* 💫 Hover dourado no botão */
     .btn{
       display:inline-block;
-      padding:12px 22px;
+      padding:14px 24px; /* maior para touch */
       border-radius:12px;
       background:linear-gradient(90deg,var(--accent),var(--gold));
       color:#fff;
@@ -189,6 +197,11 @@ html {
       box-shadow:0 4px 12px rgba(0,0,0,0.25);
       position:relative;
       overflow:hidden;
+      min-height:48px;
+      min-width:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
     .btn::after {
       content:"";
@@ -223,7 +236,7 @@ html {
     }
 
     section{
-      padding:40px 0;
+      padding:50px 0; /* mais espaço em mobile */
       border-top:1px solid rgba(0,0,0,0.1);
       opacity:0;
       transform:translateY(30px);
@@ -237,12 +250,16 @@ html {
     h3{
       margin-top:0;
       font-family:'Playfair Display',serif;
-      font-size:26px;
+      font-size:clamp(22px,5vw,26px);
       color:var(--accent);
       text-shadow:0 2px 6px rgba(0,0,0,0.2);
     }
 
     .grid,.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+    @media(max-width:500px){
+      .grid,.prod-grid{grid-template-columns:1fr;gap:32px}
+      .produto-card{max-width:380px;margin:0 auto}
+    }
     ul{margin:10px 0 0 22px;line-height:1.6}
 
     /* ✅ Corrige overflow no bloco de notas técnicas */
@@ -301,7 +318,7 @@ html {
     #topBtn{
       display:none;
       position:fixed;
-      bottom:30px;
+      bottom:80px;
       right:30px;
       z-index:99;
       cursor:pointer;
@@ -709,8 +726,8 @@ const texto = "Aluzia-te — valoriza a luz natural da pele.";
     color: var(--accent);
     border: 2px solid var(--gold);
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -807,9 +824,10 @@ body.dark .card {
   color: white;
   border: none;
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 12px 20px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
+  min-height: 48px;
 }
 
 .btn-carrinho:hover {
@@ -827,8 +845,8 @@ body.dark .card {
   background: var(--accent);
   color: white;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -900,6 +918,7 @@ body.dark .card {
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
+  min-height: 44px;
 }
 #clear-cart:hover {
   background: #b88e4d;
@@ -930,7 +949,7 @@ body.dark .card {
   cursor: pointer;
   font-weight: 700;
   margin-top: 8px;
-  transition: background 0.3s ease, transform 0.2s ease;
+  min-height: 44px;
 }
 #checkout-btn:hover {
   background: #b88e4d;
@@ -988,10 +1007,10 @@ function updateCart() {
           <small style="color:#777;">${item.price.toFixed(2)} 🥔 cada</small>
         </div>
         <div style="display:flex;gap:8px;align-items:center;">
-          <button onclick="changeQty(${i},-1)" style="width:38px;height:38px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">–</button>
+          <button onclick="changeQty(${i},-1)" style="width:44px;height:44px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">–</button>
           <strong style="min-width:40px;text-align:center;font-size:18px;">${item.qty}</strong>
-          <button onclick="changeQty(${i},1)" style="width:38px;height:38px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">+</button>
-          <button onclick="removeItem(${i})" style="width:38px;height:38px;border-radius:50%;border:none;background:#c44;color:#fff;">🗑</button>
+          <button onclick="changeQty(${i},1)" style="width:44px;height:44px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">+</button>
+          <button onclick="removeItem(${i})" style="width:44px;height:44px;border-radius:50%;border:none;background:#c44;color:#fff;">🗑</button>
         </div>
       </div>
       <div style="text-align:right;margin-top:8px;font-weight:700;color:var(--accent);font-size:17px;">
@@ -1103,7 +1122,7 @@ updateCart();
   border-radius: 10px;
   padding: 14px;
   position: fixed;
-  bottom: 30px;
+  bottom: 80px;
   right: 30px;
   z-index: 9999;
   font-weight: 600;
@@ -1175,7 +1194,7 @@ function showToast(msg = 'Adicionado ao carrinho ✓') {
   if (!toast) {
     toast = document.createElement('div');
     toast.id = 'toast';
-    toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background: var(--accent);color: #fff8e7;padding:14px 32px;border-radius:10px;z-index:9999;font-size:16px;opacity:0;transition:opacity 0.6s ease, transform 0.6s ease;transform:translateY(20px);font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.3);';
+    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background: var(--accent);color: #fff8e7;padding:14px 32px;border-radius:10px;z-index:9999;font-size:16px;opacity:0;transition:opacity 0.6s ease, transform 0.6s ease;transform:translateY(20px);font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.3);';
     document.body.appendChild(toast);
   }
   toast.textContent = msg;
@@ -1234,14 +1253,14 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 <style>
 #musicToggle {
   position: fixed;
-  top: 70px;
+  top: 80px;
   right: 20px;
   background: var(--card);
   color: var(--accent);
   border: 2px solid var(--gold);
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   font-size: 20px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -1270,30 +1289,31 @@ document.getElementById('musicToggle').addEventListener('click', function(e) {
 #cart-panel.open ~ #themeToggle,
 body:has(#cart-panel.open) #musicToggle,
 body:has(#cart-panel.open) #themeToggle {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  display: none;
 }
 #musicToggle, #themeToggle { transition: opacity 0.4s ease; }
-</style>
 
-<!-- A PARTIR DAQUI É O NOVO (substitui tudo até </style>) -->
-<style>
-/* Volta a cor original dos botões que tu gostavas */
-#cart-items button {
-  width: 36px;height: 36px;border-radius: 50%;border: none;font: bold 18px Arial;color: #fff;
+/* Bottom sheet no carrinho em mobile */
+@media(max-width:768px){
+  #cart-panel {
+    right:0!important;
+    width:100%!important;
+    max-width:none;
+    border-radius:24px 24px 0 0!important;
+    top:auto!important;
+    bottom:0;
+    height:85vh!important;
+    transform:translateY(100%);
+    transition:transform 0.4s ease;
+  }
+  #cart-panel.open {
+    transform:translateY(0);
+  }
+  #cart-items {
+    max-height:calc(85vh - 180px);
+    overflow-y:auto;
+  }
 }
-#cart-items button:nth-of-type(1),#cart-items button:nth-of-type(3){background:#8b623c}
-#cart-items button:last-of-type{background:#b34747}
-
-/* Aba do carrinho do topo ao fundo + mais larga */
-#cart-panel.open{
-  width:440px!important;max-width:92vw;height:100vh!important;top:0!important;
-  border-radius:24px 0 0 24px!important}
-
-/* Sem scroll lateral no site e sem scroll no carrinho */
-body{overflow-x:hidden}
-#cart-items{max-height:calc(100vh - 260px);overflow:hidden;padding-right:20px}
 </style>
 
 </body>
