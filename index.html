@@ -2,7 +2,6 @@
 <html lang="pt">
 <head>
 <meta charset="utf-8">
-<!-- 🪞 Metadados sociais (WhatsApp, Facebook, Instagram, Twitter, etc.) -->
 <meta property="og:title" content="BioAura — Cosmética Natural Sustentável">
 <meta property="og:description" content="Aluzia-te — valoriza a luz natural da tua pele. Cosmética natural, artesanal e sustentável.">
 <meta property="og:image" content="https://joaosousa2030.github.io/BioAuraSite/logo-bioaura.png">
@@ -12,1314 +11,1589 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BioAura — Cosmética Natural Sustentável">
-<meta name="twitter:description" content="Aluzia-te — valoriza a luz natural da tua pele. Cosmética natural, artesanal e sustentável.">
+<meta name="twitter:description" content="Aluzia-te — valoriza a luz natural da tua pele.">
 <meta name="twitter:image" content="https://joaosousa2030.github.io/BioAuraSite/logo-bioaura.png">
-<meta name="theme-color" content="#caa45d">
-<!-- 🌿 Ícone do site -->
+<meta name="theme-color" content="#1a1208">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="description" content="BioAura — projeto escolar de cosmética natural sustentável que une ciência, biotecnologia e cuidado da pele.">
+<meta name="description" content="BioAura — Cosmética natural, artesanal e sustentável que valoriza a luz natural da tua pele.">
 <title>BioAura — Cosmética Natural Sustentável</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
-<!-- 📱 Manifesto e Service Worker -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <script>
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./serviceWorker.js")
-      .then(() => console.log("✅ Service Worker registado com sucesso"))
-      .catch(err => console.log("❌ Erro no Service Worker:", err));
+      .then(() => console.log("Service Worker registado"))
+      .catch(err => console.log("Erro:", err));
   }
 </script>
 
-  <style>
-    :root{
-      --bg:#bda48a;
-      --card:#e8d8bd;
-      --accent:#6b4a2b;
-      --muted:#3b2b1a;
-      --gold:#caa45d;
-      --maxw:1100px;
-    }
-    *{box-sizing:border-box}
+<style>
+/* ─── DESIGN TOKENS ─── */
+:root {
+  --ink:        #0e0b06;
+  --cream:      #f5f0e8;
+  --warm:       #e8dcc8;
+  --gold:       #b8923a;
+  --gold-light: #d4aa5a;
+  --gold-pale:  #f0e2c0;
+  --bark:       #2c1f0e;
+  --sand:       #c4a97d;
+  --text:       #1a1208;
+  --text-muted: #6b5840;
+  --maxw:       1200px;
+  --serif:      'Cormorant Garamond', Georgia, serif;
+  --sans:       'Jost', system-ui, sans-serif;
+  --ease:       cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 90px;
 }
 
-    /* 🌈 Fundo animado */
-    body{
-  font-family: Montserrat, system-ui, "Segoe UI", Roboto, Arial;
-  margin: 0;
-  background: linear-gradient(180deg,#bda48a,#a9896b,#bda48a);
-  background-size: 400% 400%;
-  animation: gradientMove 20s ease infinite; /* mais lento para mobile */
-  color: var(--muted);
-  cursor: url('cursor.png'), auto;
-
-  /* ✨ Transições suaves ao alternar tema */
-  transition: background 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.4s ease;
-}
-    @keyframes gradientMove {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      body, * { animation: none !important; transition: none !important; }
-    }
-
-    @media(max-width:768px){
-      body { animation: none; background: #bda48a; }
-    }
-
-    header{
-      background:linear-gradient(90deg,#4b2f1a,#6b4a2b);
-      border-bottom:2px solid var(--gold);
-      box-shadow:0 4px 16px rgba(0,0,0,0.3);
-      position:relative;
-      z-index:10;
-    }
-
-    .container{max-width:var(--maxw);margin:0 auto;padding:28px}
-    nav{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
-
-    /* ✨ Fade-in no logótipo e título */
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:14px;
-      opacity:0;
-      transform:translateY(-12px);
-      animation:fadeInTop 1s ease-out forwards;
-    }
-    @keyframes fadeInTop {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .logoimg{height:70px;border-radius:10px}
-    .brand h1{margin:0;font-size:22px;color:#f7efe0;font-family:'Playfair Display',serif}
-    .brand p{margin:0;font-size:12px;color:#e6d3b8}
-
-    .navlinks{display:flex;gap:18px;}
-    .navlinks a{
-      text-decoration:none;color:#f7efe0;font-weight:600;transition:color .2s
-    }
-    .navlinks a:hover{color:var(--gold)}
-
-    /* 🔹 MENU HAMBÚRGUER ANIMADO */
-    .menu-toggle{
-      display:none;
-      background:none;
-      border:none;
-      cursor:pointer;
-      width:32px;
-      height:24px;
-      position:relative;
-    }
-    .menu-toggle span{
-      position:absolute;
-      height:3px;
-      width:100%;
-      background:#f7efe0;
-      left:0;
-      transition:all 0.3s ease;
-      border-radius:2px;
-    }
-    .menu-toggle span:nth-child(1){top:0;}
-    .menu-toggle span:nth-child(2){top:10px;}
-    .menu-toggle span:nth-child(3){top:20px;}
-    .menu-toggle.active span:nth-child(1){
-      transform:rotate(45deg);
-      top:10px;
-    }
-    .menu-toggle.active span:nth-child(2){
-      opacity:0;
-    }
-    .menu-toggle.active span:nth-child(3){
-      transform:rotate(-45deg);
-      top:10px;
-    }
-
-    @media(max-width:800px){
-      .menu-toggle{display:block;}
-      .navlinks{
-        display:none;
-        flex-direction:column;
-        background:#4b2f1a;
-        position:absolute;
-        top:80px;
-        right:20px;
-        padding:10px 20px;
-        border-radius:8px;
-        box-shadow:0 4px 12px rgba(0,0,0,0.4);
-        transform:scale(0.95);
-        opacity:0;
-        transition:all 0.3s ease;
-        z-index: 9999;
-      }
-      .navlinks.show{
-        display:flex;
-        transform:scale(1);
-        opacity:1;
-      }
-      .navlinks a{margin:8px 0;}
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:32px;
-      align-items:center;
-      padding:60px 0 40px; /* mais espaço vertical em mobile */
-    }
-    .hero .lead{
-      background:var(--card);border-radius:16px;padding:28px;
-      box-shadow:0 8px 28px rgba(0,0,0,0.15);
-      border:1px solid rgba(0,0,0,0.1);
-    }
-    .hero h2{font-family:'Playfair Display',serif;margin:0 0 10px;font-size:32px;color:var(--accent)}
-    .hero p{color:#3a2c1f;line-height:1.6}
-    .cta{margin-top:20px}
-
-    /* 💫 Hover dourado no botão */
-    .btn{
-      display:inline-block;
-      padding:14px 24px; /* maior para touch */
-      border-radius:12px;
-      background:linear-gradient(90deg,var(--accent),var(--gold));
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      font-size:15px;
-      transition:transform .3s,box-shadow .3s;
-      box-shadow:0 4px 12px rgba(0,0,0,0.25);
-      position:relative;
-      overflow:hidden;
-      min-height:48px;
-      min-width:120px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .btn::after {
-      content:"";
-      position:absolute;
-      top:0;
-      left:-100%;
-      width:100%;
-      height:100%;
-      background:linear-gradient(120deg,transparent,rgba(255,255,255,0.25),transparent);
-      transition:all 0.6s ease;
-    }
-    .btn:hover::after {
-      left:100%;
-    }
-    .btn:hover{
-      transform:translateY(-3px);
-      box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    }
-
-    /* 🪞 Cartões com profundidade 3D */
-    .card{
-      background:var(--card);
-      border-radius:14px;
-      padding:20px;
-      box-shadow:0 6px 22px rgba(0,0,0,0.08);
-      border:1px solid rgba(0,0,0,0.06);
-      transition:transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .card:hover{
-      transform:translateY(-8px) scale(1.02);
-      box-shadow:0 12px 26px rgba(0,0,0,0.2);
-    }
-
-    section{
-      padding:50px 0; /* mais espaço em mobile */
-      border-top:1px solid rgba(0,0,0,0.1);
-      opacity:0;
-      transform:translateY(30px);
-      transition:all 0.8s ease-out;
-    }
-    section.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    h3{
-      margin-top:0;
-      font-family:'Playfair Display',serif;
-      font-size:clamp(22px,5vw,26px);
-      color:var(--accent);
-      text-shadow:0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .grid,.prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-    @media(max-width:500px){
-      .grid,.prod-grid{grid-template-columns:1fr;gap:32px}
-      .produto-card{max-width:380px;margin:0 auto}
-    }
-    ul{margin:10px 0 0 22px;line-height:1.6}
-
-    /* ✅ Corrige overflow no bloco de notas técnicas */
-    .formula pre {
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow-wrap: break-word;
-      background:#f4e7d1;
-      padding:14px;
-      border-radius:10px;
-      font-family:monospace;
-      border:1px solid #e0d4c2;
-      font-size:14px;
-      color:#3a3a3a;
-      width:100%;
-      max-width:100%;
-      overflow-x:hidden;
-      box-sizing:border-box;
-    }
-
-    .produtos-foto{
-      background:#4b2f1a;
-      padding:60px 0;
-      text-align:center;
-    }
-    .produtos-foto img{
-      max-width:760px;
-      width:92%;
-      border-radius:18px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.5);
-      border:3px solid var(--gold);
-      display:block;
-      margin:0 auto;
-      transition:transform 0.4s ease;
-    }
-    .produtos-foto img:hover {
-      transform: scale(1.02);
-    }
-
-    footer{
-      padding:30px 0;
-      color:#f7efe0;
-      font-size:14px;
-      text-align:center;
-      background:#4b2f1a;
-      border-top:2px solid var(--gold);
-    }
-
-    footer img{
-      height:55px;
-      display:block;
-      margin:0 auto 10px auto;
-      border-radius:8px;
-    }
-
-    #topBtn{
-      display:none;
-      position:fixed;
-      bottom:80px;
-      right:30px;
-      z-index:99;
-      cursor:pointer;
-      background:none;
-      border:none;
-      outline:none;
-      animation:flutuar 3s ease-in-out infinite;
-    }
-
-    .bisnaga{
-      width:45px;
-      height:85px;
-      background:linear-gradient(180deg,var(--accent) 8%,#8b623c 65%,var(--gold) 100%);
-      border-radius:8px 8px 20px 20px;
-      position:relative;
-      box-shadow:0 6px 14px rgba(0,0,0,0.45);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .bisnaga::before{
-      content:"";
-      position:absolute;
-      top:-10px;
-      left:9px;
-      width:27px;
-      height:10px;
-      background:var(--gold);
-      border-radius:3px 3px 0 0;
-      box-shadow:0 1px 3px rgba(0,0,0,0.35);
-    }
-
-    .bisnaga::after{
-      content:"↑";
-      position:absolute;
-      bottom:8px;
-      left:50%;
-      transform:translateX(-50%);
-      color:#fff8e7;
-      font-size:18px;
-      font-weight:800;
-      letter-spacing:1px;
-    }
-
-    @keyframes flutuar{
-      0%,100%{transform:translateY(0);}
-      50%{transform:translateY(-6px);}
-    }
-
-    .bisnaga .reflexo{
-      position:absolute;
-      top:18%;
-      left:-10%;
-      width:18px;
-      height:60%;
-      background:linear-gradient(180deg,rgba(255,255,255,0.18),rgba(255,255,255,0.02));
-      transform:rotate(-12deg);
-      filter:blur(1px);
-      border-radius:6px;
-      opacity:0.85;
-    }
-
-    /* 📱 Tipografia e espaçamento mobile */
-    @media(max-width:600px){
-      body{font-size:17px;line-height:1.7;}
-      h3{font-size:22px;}
-      .btn{font-size:16px;padding:14px 24px;}
-      .card{padding:18px;}
-    }
-
-/* 💫 Brilho animado no título principal */
-.hero h2 {
-  background: linear-gradient(90deg, #5b3a1a, #caa45d, #5b3a1a);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: shine 4s linear infinite;
-  background-size: 200%;
-}
-@keyframes shine {
-  to { background-position: 200%; }
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-/* 🌙 Versão do brilho no modo escuro */
-body.dark .hero h2 {
-  background: linear-gradient(90deg, #e6c177, #fff5cc, #e6c177);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+/* ─── INTRO SPLASH ─── */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: var(--bark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
+}
+#intro.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.intro-inner {
+  text-align: center;
+  animation: introReveal 0.9s var(--ease) 0.3s both;
+}
+@keyframes introReveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+.intro-logo { width: 110px; height: auto; border-radius: 8px; margin-bottom: 24px; }
+.intro-wordmark {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 300;
+  color: var(--gold-pale);
+  letter-spacing: 10px;
+  text-transform: uppercase;
+}
+.intro-tagline {
+  margin-top: 10px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sand);
+}
+.intro-line {
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  margin: 20px auto;
+  animation: lineGrow 1s var(--ease) 0.8s both;
+}
+@keyframes lineGrow { to { width: 80px; } }
+
+/* ─── NAVIGATION ─── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(14, 11, 6, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184, 146, 58, 0.2);
+}
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.brand-logo { height: 48px; width: 48px; object-fit: contain; border-radius: 6px; }
+.brand-text { line-height: 1.2; }
+.brand-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--gold-pale);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.brand-tagline {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--sand);
+  text-transform: uppercase;
 }
 
-/* ⚙️ Melhora desempenho das animações */
-.hero h2,
-.btn,
-.card:hover,
-section.visible {
-  will-change: transform, opacity;
-
-}/* 🖼️ Movimento suave nas imagens */
-img {
-  transition: transform 0.3s ease;
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
 }
-img:hover {
-  transform: scale(1.03);
+.navlinks a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(240, 226, 192, 0.7);
+  text-decoration: none;
+  transition: color 0.25s;
+  position: relative;
+  padding-bottom: 4px;
+}
+.navlinks a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s var(--ease);
+}
+.navlinks a:hover { color: var(--gold-pale); }
+.navlinks a:hover::after { width: 100%; }
+
+.nav-actions { display: flex; align-items: center; gap: 16px; }
+
+.btn-cart {
+  position: relative;
+  background: none;
+  border: 1px solid rgba(184, 146, 58, 0.4);
+  color: var(--gold-pale);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: all 0.25s;
+}
+.btn-cart:hover { background: rgba(184,146,58,0.12); border-color: var(--gold); }
+.btn-cart.flash { box-shadow: 0 0 0 6px rgba(184,146,58,0.2); }
+.cart-badge {
+  position: absolute;
+  top: -3px; right: -3px;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 9px;
+  font-weight: 700;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
 }
 
-/* 💫 Animação suave de entrada das secções */
-section {
+.menu-toggle {
+  display: none;
+  background: none; border: none;
+  cursor: pointer;
+  flex-direction: column; gap: 6px;
+  padding: 4px;
+}
+.menu-toggle span {
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--gold-pale);
+  transition: all 0.3s;
+}
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+@media (max-width: 860px) {
+  .menu-toggle { display: flex; }
+  .navlinks {
+    display: none;
+    position: absolute;
+    top: 88px; left: 0; right: 0;
+    background: rgba(14, 11, 6, 0.98);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    border-bottom: 1px solid rgba(184,146,58,0.2);
+    padding: 8px 0;
+  }
+  .navlinks.open { display: flex; }
+  .navlinks a {
+    width: 100%;
+    padding: 14px 32px;
+    font-size: 12px;
+  }
+  .navlinks a::after { display: none; }
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1a1208 0%, #2c1f0e 40%, #3d2a12 70%, #1a1208 100%);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 70% 50%, rgba(184,146,58,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(196,169,125,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Subtle grain */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 80px 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+.hero-text { animation: heroIn 1.1s var(--ease) 0.2s both; }
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px; height: 1px;
+  background: var(--gold);
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--gold-pale);
+  margin-bottom: 28px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+.hero-desc {
+  font-size: 15px;
+  color: rgba(196, 169, 125, 0.8);
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 36px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none; cursor: pointer;
+  transition: all 0.3s var(--ease);
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.4s var(--ease);
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,146,58,0.3); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 36px;
+  background: transparent;
+  color: var(--gold-pale);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(184,146,58,0.4);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
+
+.hero-visual { animation: heroIn 1.1s var(--ease) 0.5s both; display: flex; justify-content: center; }
+.hero-product-showcase {
+  position: relative;
+  width: 380px; height: 480px;
+}
+.hero-img-frame {
+  width: 100%; height: 100%;
+  border: 1px solid rgba(184,146,58,0.25);
+  position: relative;
+  overflow: hidden;
+  background: rgba(44, 31, 14, 0.5);
+}
+.hero-img-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.hero-img-frame:hover img { transform: scale(1.04); }
+.hero-img-label {
+  position: absolute;
+  bottom: 24px; left: 24px;
+  font-family: var(--serif);
+  font-size: 12px;
+  color: var(--gold-pale);
+  letter-spacing: 1px;
+  background: rgba(14,11,6,0.7);
+  padding: 8px 14px;
+  backdrop-filter: blur(6px);
+}
+.deco-line {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 100px; height: 100px;
+  border: 1px solid rgba(184,146,58,0.3);
+  pointer-events: none;
+}
+.deco-dot {
+  position: absolute;
+  bottom: -16px; left: -16px;
+  width: 32px; height: 32px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+@media (max-width: 860px) {
+  .hero-content { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+  .hero-eyebrow { justify-content: center; }
+  .hero-desc { margin: 0 auto 40px; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { display: none; }
+}
+
+/* ─── SECTION CHROME ─── */
+.section-wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1.1;
+}
+.section-title em { font-style: italic; }
+.section-rule {
+  width: 48px; height: 1px;
+  background: var(--gold);
+  margin: 20px auto 0;
+}
+
+/* ─── BANNER STRIP ─── */
+.banner-strip {
+  background: var(--bark);
+  padding: 28px 0;
+  overflow: hidden;
+}
+.banner-track {
+  display: flex;
+  gap: 64px;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+.banner-item {
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--sand);
+  display: flex; align-items: center; gap: 20px;
+  flex-shrink: 0;
+}
+.banner-item::before { content: '✦'; color: var(--gold); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ─── SOBRE ─── */
+#sobre { padding: 120px 0; background: var(--cream); }
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 96px;
+  align-items: center;
+}
+.sobre-text {}
+.sobre-eyebrow {
+  font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.sobre-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+.sobre-heading {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.5vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--bark);
+  margin-bottom: 28px;
+}
+.sobre-heading em { font-style: italic; color: var(--gold); }
+.sobre-body {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 40px;
+}
+.pilares { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
+.pilar {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px;
+  border: 1px solid rgba(184,146,58,0.15);
+  background: #faf7f2;
+  transition: border-color 0.3s, background 0.3s;
+}
+.pilar:hover { border-color: rgba(184,146,58,0.4); background: var(--gold-pale); }
+.pilar-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  color: var(--ink);
+}
+.pilar-title { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bark); margin-bottom: 4px; }
+.pilar-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.sobre-visual {
+  position: relative;
+}
+.sobre-img-main {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover;
+  border: 1px solid rgba(184,146,58,0.2);
+  display: block;
+}
+.sobre-img-accent {
+  position: absolute;
+  bottom: -32px; right: -32px;
+  width: 55%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 4px solid var(--cream);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+}
+@media (max-width: 860px) {
+  .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
+  .sobre-img-accent { display: none; }
+}
+
+/* ─── PRODUTOS ─── */
+#produtos {
+  padding: 120px 0;
+  background: var(--bark);
+  position: relative;
+  overflow: hidden;
+}
+#produtos::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+#produtos .section-title { color: var(--gold-pale); }
+#produtos .section-eyebrow { color: var(--gold); }
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2px;
+}
+.produto-card {
+  background: #1e1409;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease);
+  cursor: pointer;
+}
+.produto-card:hover { transform: translateY(-4px); }
+.produto-img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #2c1f0e;
+}
+.produto-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.produto-card:hover .produto-img-wrap img { transform: scale(1.06); }
+.produto-badge {
+  position: absolute;
+  top: 20px; left: 20px;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+}
+.produto-body { padding: 32px; }
+.produto-name {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--gold-pale);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.produto-volume {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--sand);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.produto-desc { font-size: 14px; color: rgba(196,169,125,0.7); line-height: 1.7; margin-bottom: 24px; }
+.produto-ingredients {
+  border-top: 1px solid rgba(184,146,58,0.15);
+  padding-top: 20px;
+  margin-bottom: 28px;
+}
+.produto-ing-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.produto-ing-list {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.ing-tag {
+  font-size: 10px;
+  color: var(--sand);
+  border: 1px solid rgba(196,169,125,0.2);
+  padding: 3px 10px;
+  letter-spacing: 0.5px;
+}
+.produto-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.produto-price {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--gold-light);
+}
+.produto-price span { font-size: 14px; color: var(--sand); }
+.btn-add {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  border: 1px solid rgba(184,146,58,0.5);
+  color: var(--gold-pale);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-add:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+/* ─── CIENCIA ─── */
+#ciencia { padding: 120px 0; background: #faf7f2; }
+.ciencia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: rgba(184,146,58,0.1);
+  border: 1px solid rgba(184,146,58,0.1);
+  margin-bottom: 48px;
+}
+.ciencia-card {
+  background: var(--cream);
+  padding: 40px 36px;
+  transition: background 0.3s;
+}
+.ciencia-card:hover { background: #f5ede0; }
+.ciencia-icon {
+  font-size: 28px;
+  margin-bottom: 20px;
+  display: block;
+}
+.ciencia-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--bark);
+  margin-bottom: 14px;
+}
+.ciencia-text { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+.notas-tecnicas {
+  background: var(--bark);
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.notas-tecnicas::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.notas-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--gold-pale);
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+}
+.notas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+.nota-item {
+  border-left: 2px solid var(--gold);
+  padding-left: 16px;
+}
+.nota-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.nota-value { font-size: 15px; color: var(--gold-pale); font-family: var(--serif); }
+
+/* ─── PLANEAMENTO ─── */
+#planeamento { padding: 120px 0; background: var(--cream); }
+.timeline {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 40px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--gold), rgba(184,146,58,0.1));
+}
+.timeline-item {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 48px;
+  align-items: flex-start;
+}
+.timeline-num {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: var(--bark);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--gold-pale);
+  position: relative;
+  z-index: 1;
+}
+.timeline-content {
+  padding-top: 16px;
+  flex: 1;
+}
+.timeline-period {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.timeline-title {
+  font-family: var(--serif); font-size: 22px; font-weight: 400;
+  color: var(--bark); margin-bottom: 12px;
+}
+.timeline-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+/* ─── CONTACTO ─── */
+#contacto { padding: 120px 0; background: var(--bark); position: relative; overflow: hidden; }
+#contacto::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.contacto-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.contacto-inner .section-title { color: var(--gold-pale); }
+.contacto-inner .section-eyebrow { color: var(--gold); }
+.contacto-inner .section-rule { margin: 20px auto 40px; }
+.contacto-desc { font-size: 15px; color: rgba(196,169,125,0.7); line-height: 1.8; margin-bottom: 48px; }
+.contacto-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+.form-input, .form-textarea {
+  background: rgba(240,226,192,0.05);
+  border: 1px solid rgba(184,146,58,0.2);
+  color: var(--gold-pale);
+  padding: 14px 18px;
+  font-family: var(--sans);
+  font-size: 14px;
+  transition: border-color 0.25s, background 0.25s;
+  outline: none;
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--gold);
+  background: rgba(184,146,58,0.06);
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(196,169,125,0.35); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: #0a0804;
+  padding: 56px 0 32px;
+  border-top: 1px solid rgba(184,146,58,0.15);
+}
+.footer-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(184,146,58,0.1);
+  margin-bottom: 32px;
+}
+.footer-brand {}
+.footer-logo-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+}
+.footer-logo { height: 40px; border-radius: 6px; }
+.footer-brand-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--gold-pale);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.footer-slogan { font-size: 13px; color: var(--sand); font-style: italic; font-family: var(--serif); line-height: 1.5; }
+.footer-col-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13px; color: rgba(196,169,125,0.6); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold-pale); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: rgba(196,169,125,0.35);
+  flex-wrap: wrap; gap: 8px;
+}
+.footer-bottom a { color: rgba(196,169,125,0.45); text-decoration: none; }
+@media (max-width: 700px) {
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ─── CART PANEL ─── */
+#cart-panel {
+  position: fixed;
+  top: 0; right: -420px; bottom: 0;
+  width: 400px;
+  background: #14100a;
+  border-left: 1px solid rgba(184,146,58,0.2);
+  z-index: 2000;
+  display: flex; flex-direction: column;
+  transition: right 0.4s var(--ease);
+  box-shadow: -16px 0 48px rgba(0,0,0,0.4);
+}
+#cart-panel.open { right: 0; }
+.cart-head {
+  padding: 32px 28px 24px;
+  border-bottom: 1px solid rgba(184,146,58,0.15);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cart-head-title {
+  font-family: var(--serif);
+  font-size: 22px; font-weight: 300;
+  color: var(--gold-pale);
+  letter-spacing: 1px;
+}
+.cart-close-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--sand); font-size: 18px;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  transition: color 0.2s;
+}
+.cart-close-btn:hover { color: var(--gold-pale); }
+#cart-items {
+  flex: 1; overflow-y: auto; padding: 20px 28px;
+  scrollbar-width: thin; scrollbar-color: rgba(184,146,58,0.3) transparent;
+}
+.cart-item-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 0; border-bottom: 1px solid rgba(184,146,58,0.08);
+  gap: 12px;
+}
+.cart-item-name { font-family: var(--serif); font-size: 16px; color: var(--gold-pale); margin-bottom: 3px; }
+.cart-item-price { font-size: 12px; color: var(--sand); }
+.cart-item-controls { display: flex; align-items: center; gap: 10px; }
+.qty-btn {
+  width: 30px; height: 30px;
+  background: none; border: 1px solid rgba(184,146,58,0.3);
+  color: var(--gold-pale); font-size: 16px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.qty-btn:hover { background: rgba(184,146,58,0.15); border-color: var(--gold); }
+.qty-num { font-size: 15px; color: var(--gold-pale); min-width: 20px; text-align: center; }
+.remove-btn { background: none; border: none; color: rgba(196,169,125,0.4); font-size: 15px; cursor: pointer; padding: 4px; transition: color 0.2s; }
+.remove-btn:hover { color: #c44; }
+.cart-empty-msg { text-align: center; padding: 60px 20px; font-family: var(--serif); font-size: 18px; font-style: italic; color: rgba(196,169,125,0.35); }
+.cart-foot {
+  padding: 24px 28px 32px;
+  border-top: 1px solid rgba(184,146,58,0.15);
+}
+.cart-total-row {
+  display: flex; justify-content: space-between;
+  font-family: var(--serif);
+  font-size: 20px; color: var(--gold-pale);
+  margin-bottom: 20px;
+}
+.cart-total-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--sand); font-family: var(--sans); }
+.cart-foot-btns { display: flex; flex-direction: column; gap: 10px; }
+.btn-checkout {
+  width: 100%; padding: 15px;
+  background: var(--gold); border: none; color: var(--ink);
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; transition: background 0.25s;
+}
+.btn-checkout:hover { background: var(--gold-light); }
+.btn-clear {
+  width: 100%; padding: 12px;
+  background: none; border: 1px solid rgba(184,146,58,0.2);
+  color: var(--sand);
+  font-family: var(--sans); font-size: 10px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-clear:hover { border-color: rgba(184,146,58,0.5); color: var(--gold-pale); }
+
+/* Cart overlay */
+.cart-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1999;
+  backdrop-filter: blur(3px);
+}
+.cart-overlay.show { display: block; }
+
+/* Mobile cart */
+@media (max-width: 480px) {
+  #cart-panel { width: 100%; right: -100%; border-left: none; }
+  #cart-panel.open { right: 0; }
+}
+
+/* ─── TOAST ─── */
+#toast {
+  position: fixed;
+  bottom: 40px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bark);
+  border: 1px solid rgba(184,146,58,0.4);
+  color: var(--gold-pale);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  padding: 14px 28px;
+  z-index: 9999;
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.4s;
+  white-space: nowrap;
 }
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─── SCROLL TO TOP ─── */
+#scrollTop {
+  position: fixed;
+  bottom: 36px; right: 36px;
+  width: 48px; height: 48px;
+  background: var(--bark);
+  border: 1px solid rgba(184,146,58,0.3);
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 500;
+  transition: all 0.25s;
+}
+#scrollTop.show { display: flex; }
+#scrollTop:hover { background: var(--gold); color: var(--ink); }
+
+/* ─── MISC ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 </head>
-
 <body>
-  
-<!-- 🌿 Intro animada do logótipo -->
+
+<!-- Intro Splash -->
 <div id="intro">
-  <div class="intro-content">
-    <img src="logo-bioaura.png" alt="BioAura Logo" class="intro-logo">
+  <div class="intro-inner">
+    <img src="logo-bioaura.png" alt="BioAura" class="intro-logo">
+    <div class="intro-line"></div>
+    <div class="intro-wordmark">BioAura</div>
+    <div class="intro-tagline">Cosmética Natural Sustentável</div>
   </div>
 </div>
 
-  <!-- 🛒 Ícone do carrinho -->
-<div id="cart-icon">
-  🛒<span id="cart-count">0</span>
+<!-- Cart Overlay -->
+<div class="cart-overlay" id="cart-overlay"></div>
+
+<!-- Cart Panel -->
+<div id="cart-panel">
+  <div class="cart-head">
+    <div class="cart-head-title">O teu carrinho</div>
+    <button class="cart-close-btn" id="close-cart">✕</button>
+  </div>
+  <ul id="cart-items"></ul>
+  <div class="cart-foot">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span id="cart-total">€0.00</span>
+    </div>
+    <div class="cart-foot-btns">
+      <button class="btn-checkout" id="checkout-btn">Finalizar Compra</button>
+      <button class="btn-clear" id="clear-cart">Limpar Carrinho</button>
+    </div>
+  </div>
 </div>
 
- <header>
-    <div class="container">
-      <nav>
-        <div class="brand">
-          <img src="logo-bioaura.png" alt="Logo BioAura" class="logoimg" loading="lazy" decoding="async">
-          <div>
-            <h1>BioAura</h1>
-            <p id="slogan"></p>
-          </div>
-        </div>
+<!-- Navigation -->
+<header id="main-header">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <img src="logo-bioaura.png" alt="BioAura" class="brand-logo">
+      <div class="brand-text">
+        <div class="brand-name">BioAura</div>
+        <div class="brand-tagline">Cosmética Natural</div>
+      </div>
+    </a>
 
-        <button class="menu-toggle" aria-label="Abrir menu">
-          <span></span><span></span><span></span>
-        </button>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
 
-        <div class="navlinks" role="navigation">
-          <a href="#sobre">Sobre</a>
-          <a href="#produtos">Produtos</a>
-          <a href="#ciencia">Fundamentos</a>
-          <a href="#planeamento">Planeamento</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-      </nav>
+    <ul class="navlinks" id="navlinks" role="navigation">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#ciencia">Ciência</a></li>
+      <li><a href="#planeamento">Processo</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
 
-      <div class="hero">
-        <div class="lead">
-          <h2>Projeto BioAura — Cosmética Natural Sustentável</h2>
-          <p>Projeto desenvolvido por alunos do 12.º ano (Biologia e Química), com o objetivo de integrar ciência e cuidado corporal, criando cosméticos artesanais seguros e sustentáveis.</p>
-          <div class="cta">
-            <a class="btn" href="#produtos">Ver Produtos</a>
-          </div>
-        </div>
+    <div class="nav-actions">
+      <button class="btn-cart" id="cart-icon" aria-label="Carrinho">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-badge" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
 
-        <div class="card">
-          <h3>Objetivo Principal</h3>
-          <p>Produção artesanal de dois cosméticos naturais:</p>
-          <ul>
-            <li>Bronzeador corporal — 150 mL</li>
-            <li>Creme hidratante e suavizante — 100 mL</li>
-          </ul>
-          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(0,0,0,0.1)">
-          <p style="color:var(--muted);font-size:14px">
-            Utilização de ingredientes seguros e naturais aplicando princípios de química verde, biotecnologia e sustentabilidade.
-          </p>
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Cosmética Artesanal</div>
+      <h1 class="hero-title">
+        A luz natural<br>
+        da tua <em>pele</em>
+      </h1>
+      <p class="hero-desc">
+        Cosméticos formulados com ingredientes naturais, baseados em princípios de química verde e biotecnologia. Feitos com intenção, cuidado e respeito pelo corpo e pelo planeta.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#produtos">
+          Descobrir Produtos
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn-ghost" href="#sobre">A Nossa História</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-product-showcase">
+        <div class="deco-line"></div>
+        <div class="deco-dot"></div>
+        <div class="hero-img-frame">
+          <img src="produtos-bioaura.png" alt="Produtos BioAura" loading="eager">
+          <div class="hero-img-label">Coleção Naturalis</div>
         </div>
       </div>
     </div>
-  </header>
-
-  <section class="produtos-foto">
-    <img src="produtos-bioaura.png" alt="Produtos BioAura — frascos artesanais" loading="lazy" decoding="async">
-  </section>
-
-  <main class="container">
-    <section id="sobre">
-      <h3>A Nossa Essência</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>Conceito BioAura</h4>
-          <p>A BioAura nasceu de um projeto escolar com o propósito de unir ciência e sustentabilidade em produtos de cosmética natural que respeitam o corpo e o planeta.</p>
-          <p><strong>Slogan:</strong> "Aluzia-te"</p>
-        </div>
-        <div class="card">
-          <h4>Pilares Fundamentais</h4>
-          <ul>
-            <li>Química Verde</li>
-            <li>Biotecnologia</li>
-            <li>Sustentabilidade</li>
-            <li>Segurança e testes (patch test)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-<section id="produtos" class="produtos">
-  <h2>Os Nossos Produtos</h2>
-  <div class="produtos-container">
-
-    <!-- 🟤 Bronzeador Natural -->
-    <div class="produto-card">
-      <img src="b.png" alt="Bronzeador Natural BioAura">
-      <h3>Bronzeador Natural — 150 mL</h3>
-      <p><strong>Função:</strong> Realça o tom da pele e hidrata sem alterar a melanina.</p>
-      <ul>
-        <li>Óleo de lavanda — 120 mL</li>
-        <li>Manteiga de karité — 20 g</li>
-        <li>Café moído — 5 g</li>
-        <li>Cacau em pó — 3 g</li>
-        <li>Urucum em pó — 2 g</li>
-      </ul>
-      <p class="preco">Preço: 9.99 🥔</p>
-      <button class="btn-carrinho">🛒 Adicionar ao carrinho</button>
-    </div>
-
-    <!-- 🟡 Creme de Massagem -->
-    <div class="produto-card">
-      <img src="k.png" alt="Creme de Massagem BioAura">
-      <h3>Creme de Massagem — 100 mL</h3>
-      <p><strong>Função:</strong> Hidrata, suaviza e fortalece a barreira cutânea.</p>
-      <ul>
-        <li>Manteiga de karité — 15 g</li>
-        <li>Óleo de amêndoas doces — 20 mL</li>
-        <li>Óleo de rícino — 5 mL</li>
-        <li>Cera de abelha — 5 g</li>
-        <li>Água destilada — 50 mL</li>
-        <li>Gel de aloe vera — 3 mL</li>
-      </ul>
-      <p class="preco">Preço: 7.99 🥔</p>
-      <button class="btn-carrinho">🛒 Adicionar ao carrinho</button>
-    </div>
-
   </div>
 </section>
 
-    <section id="ciencia">
-      <h3>Fundamentos Científicos</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>Química</h4>
-          <p><strong>Extração de pigmentos:</strong> pigmentos hidrofóbicos (café, cacau, urucum) são extraídos para o óleo.</p>
-          <p><strong>Emulsificação:</strong> união da fase oleosa e aquosa através de emulsificantes.</p>
-          <p><strong>Oxidação e antioxidantes:</strong> a vitamina E retarda a oxidação dos óleos vegetais.</p>
-        </div>
-        <div class="card">
-          <h4>Biologia da Pele</h4>
-          <ul>
-            <li><strong>Epiderme:</strong> proteção e hidratação.</li>
-            <li><strong>Derme:</strong> vasos, nervos e glândulas.</li>
-            <li><strong>Hipoderme:</strong> reserva energética e proteção térmica.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:18px">
-        <h4>Notas Técnicas</h4>
-        <div class="formula">
-          <pre>
-- Banho-maria: 60–70 °C
-- Adicionar conservantes a 35–40 °C
-- Embalagem: frascos escuros
-- Testes: patch test para avaliar alergias locais
-          </pre>
-        </div>
-      </div>
-    </section>
-
-    <section id="planeamento">
-      <h3>Planeamento e Execução</h3>
-      <div class="grid">
-        <div class="card">
-          <h4>1.º Período</h4>
-          <ul>
-            <li>Planeamento e criação do logótipo.</li>
-            <li>Pesquisa de ingredientes.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2.º Período</h4>
-          <ul>
-            <li>Criação de patchs de teste e registo de resultados.</li>
-            <li>Ajuste de fórmulas e preparação.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>3.º Período</h4>
-          <ul>
-            <li>Produção final e relatório.</li>
-            <li>Apresentação e divulgação.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="contacto">
-      <h3>Contacto</h3>
-      <div class="card">
-        <p>Para mais informações, entre em contacto com a equipa responsável.</p>
-      </div>
-    </section>
-  </main>
-
-<div style="text-align:center;padding:20px 0;font-size:15px;color:var(--muted);opacity:0.9;">
-  👀 Este site já foi visitado <strong id="visitCounter">0</strong> vezes!
-</div>
-
-<script>
-// Contador de visitas (funciona offline)
-let visitas = localStorage.getItem('bioaura_visitas');
-if (!visitas) visitas = 0;
-visitas = Number(visitas) + 1;
-localStorage.setItem('bioaura_visitas', visitas);
-document.getElementById('visitCounter').textContent = visitas.toLocaleString('pt-PT');
-</script>
-
-  <footer>
-    <img src="logo-bioaura.png" alt="Logo BioAura" loading="lazy">
-    <div>© BioAura — Projeto escolar</div>
-  </footer>
-
-  <button id="topBtn" title="Voltar ao topo">
-    <div class="bisnaga"><div class="reflexo"></div></div>
-  </button>
-
-  <script>
-    // 🔹 Menu hambúrguer com animação
-    const menuBtn=document.querySelector('.menu-toggle');
-    const nav=document.querySelector('.navlinks');
-    menuBtn.addEventListener('click',()=>{
-      menuBtn.classList.toggle('active');
-      nav.classList.toggle('show');
-    });
-
-    // 🔹 Botão "voltar ao topo"
-    const topBtn=document.getElementById("topBtn");
-    window.addEventListener("scroll",()=>{topBtn.style.display=(window.scrollY>300)?"block":"none";});
-    topBtn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:"smooth"});});
-
-    // 🔹 Reflexo animado
-    (function animateReflexo(){
-      const r=document.querySelector('.bisnaga .reflexo');
-      if(!r)return;
-      r.animate([{left:'-14%',opacity:0.6},{left:'60%',opacity:0.08},{left:'140%',opacity:0}],
-      {duration:2600,iterations:Infinity,easing:'ease-in-out'});
-    })();
-
-    // 💨 Efeito de deslizar nas secções
-    const sections=document.querySelectorAll('section');
-    const reveal=()=>{sections.forEach(sec=>{
-      if(sec.getBoundingClientRect().top<window.innerHeight-100){
-        sec.classList.add('visible');
-      }
-    });};
-    window.addEventListener('scroll',reveal);
-    reveal();
-
-  </script>
-
-  <!-- 🌙 Botão modo claro/escuro -->
-  <button id="themeToggle" title="Alternar tema">🌙</button>
-
-  <script>
-  const toggle=document.getElementById('themeToggle');
-  toggle.addEventListener('click',()=>{
-    document.body.classList.toggle('dark');
-    toggle.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
-  });
-  </script>
-
-  <!-- ✍️ Efeito máquina de escrever no slogan -->
- <script>
-const texto = "Aluzia-te — valoriza a luz natural da pele.";
-  let i = 0;
-  function escrever(){
-    if(i < texto.length){
-      document.getElementById("slogan").textContent += texto.charAt(i);
-      i++;
-      setTimeout(escrever, 70); // velocidade da digitação
-    }
-}
-  escrever();
-</script>
-
-  <style>
-  #themeToggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--card);
-    color: var(--accent);
-    border: 2px solid var(--gold);
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    z-index: 999;
-  }
-  #themeToggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-  }
-  body.dark {
-    --gold: #b88e4d; /* tom dourado mais claro e visível */
-    --bg:#2b1f15;
-    --card:#3b2b1a;
-    --accent:#caa45d;
-    --muted:#f4e7d1;
-    background:linear-gradient(180deg,#2b1f15,#3b2b1a,#2b1f15);
-    color:var(--muted);
-    transition:background 0.5s,color 0.5s;
-  }
-
-  /* 🌙 Ajuste de cores no modo escuro */
-body.dark .lead,
-body.dark .card,
-body.dark h2,
-body.dark h3,
-body.dark h4,
-body.dark p,
-body.dark li {
-  color: #f4e7d1 !important;
-}
-
-body.dark .lead {
-  background: #3b2b1a;
-  border: 1px solid rgba(255,255,255,0.15);
-}
-
-body.dark .card {
-  background: #2d2015;
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-}
-
- /* 🧴 Produtos */
-.produtos-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
-}
-
-.produto-card {
-  background: var(--card);
-  border: 1px solid rgba(0,0,0,0.1);
-  border-radius: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  padding: 20px;
-  width: 300px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.produto-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-}
-
-.produto-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 15px;
-  margin-bottom: 15px;
-}
-
-.produto-card h3 {
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.produto-card ul {
-  list-style: none;
-  padding: 0;
-  font-size: 14px;
-  text-align: left;
-  margin: 10px 0 15px;
-}
-
-.btn-carrinho {
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  min-height: 48px;
-}
-
-.btn-carrinho:hover {
-  background: #b88e4d;
-  transform: scale(1.05);
-}
-
-/* 🛒 Ícone fixo */
-#cart-icon {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 26px;
-  cursor: pointer;
-  background: var(--accent);
-  color: white;
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 1000;
-}
-#cart-count {
-  background: red;
-  color: white;
-  font-size: 14px;
-  border-radius: 50%;
-  padding: 2px 6px;
-  position: absolute;
-  top: 2px;
-  right: 4px;
-}
-
-/* 🛍️ Painel lateral */
-#cart-panel {
-  position: fixed;
-  top: 0;
-  right: -400px;
-  width: 300px;
-  height: 100%;
-  background: var(--card);
-  box-shadow: -4px 0 12px rgba(0,0,0,0.3);
-  padding: 20px;
-  transition: right 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 999;
-}
-#cart-panel.open {
-  right: 0;
-}
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.cart-header button {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-#cart-items {
-  list-style: none;
-  padding: 0;
-  margin-top: 15px;
-  flex: 1;
-  overflow-y: auto;
-}
-#cart-items li {
-  margin-bottom: 10px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  padding-bottom: 8px;
-}
-.cart-footer {
-  border-top: 1px solid rgba(0,0,0,0.2);
-  padding-top: 10px;
-  text-align: center;
-}
-#clear-cart {
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  min-height: 44px;
-}
-#clear-cart:hover {
-  background: #b88e4d;
-}
-
- /* ✨ Brilho rápido no ícone do carrinho */
-#cart-icon.flash {
-  box-shadow: 0 0 20px 6px gold;
-  transform: scale(1.2);
-  transition: all 0.4s ease;
-}
-
-/* 💰 Preço dos produtos */
-.preco {
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-/* 💳 Botão "Finalizar Compra" */
-#checkout-btn {
-  background: var(--gold);
-  color: var(--muted);
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 700;
-  margin-top: 8px;
-  min-height: 44px;
-}
-#checkout-btn:hover {
-  background: #b88e4d;
-  transform: scale(1.05);
-}
-</style>
-
-<!-- 🛍️ Painel do carrinho -->
-<div id="cart-panel">
-  <div class="cart-header">
-    <h3>O teu carrinho</h3>
-    <button id="close-cart">✖</button>
+<!-- Banner Strip -->
+<div class="banner-strip">
+  <div class="banner-track">
+    <span class="banner-item">Ingredientes Naturais</span>
+    <span class="banner-item">Química Verde</span>
+    <span class="banner-item">Artesanal</span>
+    <span class="banner-item">Sustentável</span>
+    <span class="banner-item">Biotecnologia</span>
+    <span class="banner-item">Testado Dermatologicamente</span>
+    <span class="banner-item">Sem Parabenos</span>
+    <span class="banner-item">Cruelty Free</span>
+    <!-- duplicate for seamless loop -->
+    <span class="banner-item">Ingredientes Naturais</span>
+    <span class="banner-item">Química Verde</span>
+    <span class="banner-item">Artesanal</span>
+    <span class="banner-item">Sustentável</span>
+    <span class="banner-item">Biotecnologia</span>
+    <span class="banner-item">Testado Dermatologicamente</span>
+    <span class="banner-item">Sem Parabenos</span>
+    <span class="banner-item">Cruelty Free</span>
   </div>
-  <ul id="cart-items"></ul>
-  <div class="cart-footer">
-  <p>Total: <span id="cart-total">0.00 🥔</span></p>
-  <button id="clear-cart">🧹 Limpar Carrinho</button>
-  <button id="checkout-btn">💳 Finalizar Compra</button>
 </div>
-</div>
+
+<!-- Sobre -->
+<section id="sobre">
+  <div class="section-wrap">
+    <div class="sobre-grid">
+      <div class="sobre-text reveal">
+        <div class="sobre-eyebrow">A Nossa Essência</div>
+        <h2 class="sobre-heading">
+          Onde a ciência encontra<br>a <em>natureza</em>
+        </h2>
+        <p class="sobre-body">
+          A BioAura nasceu com um propósito claro: criar cosméticos que respeitam o corpo e o planeta. Cada fórmula é desenvolvida com rigor científico, utilizando apenas ingredientes naturais selecionados pela sua eficácia e segurança.
+        </p>
+        <p class="sobre-body" style="margin-top:-16px">
+          O nosso slogan — <em style="font-family:var(--serif);color:var(--gold)">"Aluzia-te"</em> — é um convite a valorizar a luz que já existe em ti.
+        </p>
+        <div class="pilares">
+          <div class="pilar reveal reveal-delay-1">
+            <div class="pilar-icon">🌿</div>
+            <div>
+              <div class="pilar-title">Química Verde</div>
+              <div class="pilar-desc">Processos e ingredientes que minimizam o impacto ambiental em cada etapa.</div>
+            </div>
+          </div>
+          <div class="pilar reveal reveal-delay-2">
+            <div class="pilar-icon">🔬</div>
+            <div>
+              <div class="pilar-title">Biotecnologia</div>
+              <div class="pilar-desc">Formulações baseadas no conhecimento da biologia celular e molecular.</div>
+            </div>
+          </div>
+          <div class="pilar reveal reveal-delay-3">
+            <div class="pilar-icon">♻️</div>
+            <div>
+              <div class="pilar-title">Sustentabilidade</div>
+              <div class="pilar-desc">Embalagens conscientes, ingredientes rastreáveis e produção responsável.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-visual reveal reveal-delay-2">
+        <img src="produtos-bioaura.png" alt="Produtos BioAura" class="sobre-img-main">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Produtos -->
+<section id="produtos">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">A Nossa Coleção</div>
+      <h2 class="section-title">Os nossos <em>produtos</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="produtos-grid">
+
+      <!-- Bronzeador -->
+      <div class="produto-card reveal" data-name="Bronzeador Natural" data-price="9.99">
+        <div class="produto-img-wrap">
+          <img src="b.png" alt="Bronzeador Natural BioAura" loading="lazy">
+          <div class="produto-badge">Bestseller</div>
+        </div>
+        <div class="produto-body">
+          <div class="produto-volume">150 ml — Bronzeador Corporal</div>
+          <h3 class="produto-name">Bronzeador Natural</h3>
+          <p class="produto-desc">Realça o tom da pele e hidrata profundamente, sem alterar a melanina. A combinação de urucum, cacau e café cria um brilho natural e duradouro.</p>
+          <div class="produto-ingredients">
+            <div class="produto-ing-label">Principais Ingredientes</div>
+            <div class="produto-ing-list">
+              <span class="ing-tag">Óleo de Lavanda</span>
+              <span class="ing-tag">Manteiga de Karité</span>
+              <span class="ing-tag">Café Moído</span>
+              <span class="ing-tag">Cacau</span>
+              <span class="ing-tag">Urucum</span>
+            </div>
+          </div>
+          <div class="produto-footer">
+            <div class="produto-price">€9<span>.99</span></div>
+            <button class="btn-add btn-carrinho">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creme -->
+      <div class="produto-card reveal reveal-delay-2" data-name="Creme de Massagem" data-price="7.99">
+        <div class="produto-img-wrap">
+          <img src="k.png" alt="Creme de Massagem BioAura" loading="lazy">
+          <div class="produto-badge">New</div>
+        </div>
+        <div class="produto-body">
+          <div class="produto-volume">100 ml — Creme Hidratante</div>
+          <h3 class="produto-name">Creme de Massagem</h3>
+          <p class="produto-desc">Hidrata, suaviza e fortalece a barreira cutânea. A manteiga de karité combinada com aloe vera reconstrói e nutre a pele em profundidade.</p>
+          <div class="produto-ingredients">
+            <div class="produto-ing-label">Principais Ingredientes</div>
+            <div class="produto-ing-list">
+              <span class="ing-tag">Karité</span>
+              <span class="ing-tag">Amêndoas Doces</span>
+              <span class="ing-tag">Óleo de Rícino</span>
+              <span class="ing-tag">Cera de Abelha</span>
+              <span class="ing-tag">Aloe Vera</span>
+            </div>
+          </div>
+          <div class="produto-footer">
+            <div class="produto-price">€7<span>.99</span></div>
+            <button class="btn-add btn-carrinho">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Ciência -->
+<section id="ciencia">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Fundamentos</div>
+      <h2 class="section-title">Ciência ao serviço<br>da <em>beleza</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="ciencia-grid reveal">
+      <div class="ciencia-card">
+        <span class="ciencia-icon">⚗️</span>
+        <h4 class="ciencia-title">Extração de Pigmentos</h4>
+        <p class="ciencia-text">Os pigmentos hidrofóbicos presentes no café, cacau e urucum são cuidadosamente extraídos para o óleo através de técnicas de maceração controlada a temperatura ideal.</p>
+      </div>
+      <div class="ciencia-card">
+        <span class="ciencia-icon">🧬</span>
+        <h4 class="ciencia-title">Emulsificação</h4>
+        <p class="ciencia-text">A união estável da fase oleosa e aquosa é conseguida através de emulsificantes naturais, criando texturas suaves com elevada biodisponibilidade cutânea.</p>
+      </div>
+      <div class="ciencia-card">
+        <span class="ciencia-icon">🛡️</span>
+        <h4 class="ciencia-title">Biologia da Pele</h4>
+        <p class="ciencia-text">As fórmulas atuam em sinergia com as três camadas da pele — epiderme, derme e hipoderme — respeitando os mecanismos naturais de hidratação e proteção.</p>
+      </div>
+      <div class="ciencia-card">
+        <span class="ciencia-icon">🌱</span>
+        <h4 class="ciencia-title">Antioxidantes</h4>
+        <p class="ciencia-text">A vitamina E natural retarda a oxidação dos óleos vegetais, prolongando a estabilidade das formulações e protegendo a pele dos radicais livres.</p>
+      </div>
+    </div>
+    <div class="notas-tecnicas reveal" style="margin-top:48px">
+      <div class="notas-title">Parâmetros de Formulação</div>
+      <div class="notas-grid">
+        <div class="nota-item">
+          <div class="nota-label">Temperatura de Fusão</div>
+          <div class="nota-value">60–70 °C (banho-maria)</div>
+        </div>
+        <div class="nota-item">
+          <div class="nota-label">Adição de Conservantes</div>
+          <div class="nota-value">35–40 °C</div>
+        </div>
+        <div class="nota-item">
+          <div class="nota-label">Embalagem</div>
+          <div class="nota-value">Frascos escuros UV-protect</div>
+        </div>
+        <div class="nota-item">
+          <div class="nota-label">Controlo de Segurança</div>
+          <div class="nota-value">Patch test (24–48h)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Planeamento -->
+<section id="planeamento">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">O Nosso Processo</div>
+      <h2 class="section-title">Do conceito ao<br><em>produto final</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-num">I</div>
+        <div class="timeline-content">
+          <div class="timeline-period">1.º Período</div>
+          <h4 class="timeline-title">Conceção e Pesquisa</h4>
+          <p class="timeline-desc">Desenvolvimento do conceito de marca, criação do logótipo e identidade visual. Pesquisa aprofundada sobre ingredientes naturais, propriedades químicas e compatibilidades.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-num">II</div>
+        <div class="timeline-content">
+          <div class="timeline-period">2.º Período</div>
+          <h4 class="timeline-title">Testes e Formulação</h4>
+          <p class="timeline-desc">Criação e aplicação de patches de teste dermatológico com registo sistemático de resultados. Iteração e ajuste das fórmulas para otimizar textura, estabilidade e eficácia.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-2">
+        <div class="timeline-num">III</div>
+        <div class="timeline-content">
+          <div class="timeline-period">3.º Período</div>
+          <h4 class="timeline-title">Produção e Lançamento</h4>
+          <p class="timeline-desc">Produção final, elaboração do relatório técnico e apresentação pública. Divulgação da marca e dos produtos desenvolvidos ao longo do projeto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contacto -->
+<section id="contacto">
+  <div class="section-wrap">
+    <div class="contacto-inner">
+      <div class="section-eyebrow reveal">Fala Connosco</div>
+      <h2 class="section-title reveal" style="color:var(--gold-pale)">Entre em <em>contacto</em></h2>
+      <div class="section-rule reveal"></div>
+      <p class="contacto-desc reveal">Para mais informações sobre os nossos produtos, parcerias ou para simplesmente partilhar a tua experiência com a BioAura.</p>
+      <form class="contacto-form reveal" onsubmit="handleForm(event)">
+        <div class="form-field">
+          <label class="form-label">Nome</label>
+          <input class="form-input" type="text" placeholder="O teu nome completo" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="o.teu@email.com" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Mensagem</label>
+          <textarea class="form-textarea" placeholder="Como podemos ajudar?" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="align-self:flex-start">
+          Enviar Mensagem
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-row">
+          <img src="logo-bioaura.png" alt="BioAura" class="footer-logo">
+          <span class="footer-brand-name">BioAura</span>
+        </div>
+        <p class="footer-slogan">"Aluzia-te — valoriza a luz<br>natural da tua pele."</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navegação</div>
+        <ul class="footer-links">
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#produtos">Produtos</a></li>
+          <li><a href="#ciencia">Ciência</a></li>
+          <li><a href="#planeamento">Processo</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Valores</div>
+        <ul class="footer-links">
+          <li><a href="#ciencia">Química Verde</a></li>
+          <li><a href="#ciencia">Biotecnologia</a></li>
+          <li><a href="#sobre">Sustentabilidade</a></li>
+          <li><a href="#sobre">Cruelty Free</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 BioAura — Cosmética Natural Sustentável</span>
+      <span>Feito com cuidado e ciência</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button id="scrollTop" title="Voltar ao topo" aria-label="Voltar ao topo">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Toast -->
+<div id="toast"></div>
 
 <script>
-// 🛒 CARRINHO FINAL – 100% corrigido (Limpar + Brilho + Sem scroll feio)
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// ─── INTRO ───
+window.addEventListener('load', () => {
+  const intro = document.getElementById('intro');
+  setTimeout(() => intro.classList.add('hidden'), 2000);
+});
 
-const cartCount   = document.getElementById('cart-count');
-const cartItems   = document.getElementById('cart-items');
-const cartTotal   = document.getElementById('cart-total');
-const cartPanel   = document.getElementById('cart-panel');
-const clearBtn    = document.getElementById('clear-cart');      // ← botão limpar
-const checkoutBtn = document.getElementById('checkout-btn');
-
-function updateCart() {
-  cartItems.innerHTML = '';
-  let total = 0;
-  let totalQty = 0;
-
-  if (cart.length === 0) {
-    cartItems.innerHTML = '<li style="text-align:center;padding:40px 20px;color:#888;">O carrinho está vazio</li>';
-  }
-
-  cart.forEach((item, i) => {
-    const subtotal = item.price * item.qty;
-    total += subtotal;
-    totalQty += item.qty;
-
-    const nome = item.name.includes('Bronzeador') ? 'Bronzeador Natural' : 'Creme Hidratante';
-
-    const li = document.createElement('li');
-    li.style.margin = '16px 0';
-    li.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div>
-          <strong style="font-size:16px;">${nome}</strong><br>
-          <small style="color:#777;">${item.price.toFixed(2)} 🥔 cada</small>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <button onclick="changeQty(${i},-1)" style="width:44px;height:44px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">–</button>
-          <strong style="min-width:40px;text-align:center;font-size:18px;">${item.qty}</strong>
-          <button onclick="changeQty(${i},1)" style="width:44px;height:44px;border-radius:50%;border:none;background:#8b623c;color:#fff;font-weight:bold;">+</button>
-          <button onclick="removeItem(${i})" style="width:44px;height:44px;border-radius:50%;border:none;background:#c44;color:#fff;">🗑</button>
-        </div>
-      </div>
-      <div style="text-align:right;margin-top:8px;font-weight:700;color:var(--accent);font-size:17px;">
-        ${subtotal.toFixed(2)} 🥔
-      </div>
-      <hr style="border:none;border-top:1px solid #ddd;margin:14px 0;">
-    `;
-    cartItems.appendChild(li);
+// ─── MOBILE MENU ───
+const menuBtn = document.getElementById('menu-toggle');
+const navlinks = document.getElementById('navlinks');
+menuBtn.addEventListener('click', () => {
+  menuBtn.classList.toggle('active');
+  navlinks.classList.toggle('open');
+});
+navlinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    menuBtn.classList.remove('active');
+    navlinks.classList.remove('open');
   });
+});
 
-  cartTotal.textContent = total.toFixed(2) + '🥔';
-  cartCount.textContent = totalQty || '0';
-  localStorage.setItem('cart', JSON.stringify(cart));
+// ─── CART STATE ───
+let cart = JSON.parse(localStorage.getItem('bioaura_cart') || '[]');
+
+function saveCart() { localStorage.setItem('bioaura_cart', JSON.stringify(cart)); }
+
+function renderCart() {
+  const list = document.getElementById('cart-items');
+  const totalEl = document.getElementById('cart-total');
+  const countEl = document.getElementById('cart-count');
+  list.innerHTML = '';
+
+  let total = 0, qty = 0;
+  if (!cart.length) {
+    list.innerHTML = '<li class="cart-empty-msg">O teu carrinho está vazio</li>';
+  }
+  cart.forEach((item, i) => {
+    total += item.price * item.qty;
+    qty += item.qty;
+    const li = document.createElement('li');
+    li.className = 'cart-item-row';
+    li.innerHTML = `
+      <div style="flex:1;min-width:0">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">€${item.price.toFixed(2)} cada</div>
+      </div>
+      <div class="cart-item-controls">
+        <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+        <span class="qty-num">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+        <button class="remove-btn" onclick="removeItem(${i})">✕</button>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+  totalEl.textContent = '€' + total.toFixed(2);
+  countEl.textContent = qty || '0';
+  saveCart();
 }
 
 function changeQty(i, d) {
   cart[i].qty += d;
-  if (cart[i].qty <= 0) {
-    cart.splice(i, 1);
-    showToast('Item removido');
-  } else if (d > 0) {
-    showToast(); // só mostra mensagem quando clicas no +
-  }
-  updateCart();
+  if (cart[i].qty <= 0) { cart.splice(i, 1); showToast('Item removido'); }
+  else if (d > 0) showToast('Quantidade atualizada');
+  renderCart();
 }
-function removeItem(i) {
-  cart.splice(i, 1);
-  updateCart();
-  showToast('Item removido');
-}
+function removeItem(i) { cart.splice(i, 1); renderCart(); showToast('Item removido'); }
 
-// Limpar carrinho (agora funciona!)
-clearBtn.onclick = () => {
-  cart = [];
-  updateCart();
-  showToast('Carrinho limpo!');
-};
+// Add to cart buttons
+document.querySelectorAll('.btn-carrinho').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const card = e.target.closest('.produto-card');
+    const name = card.dataset.name;
+    const price = parseFloat(card.dataset.price);
+    const existing = cart.find(x => x.name === name);
+    if (existing) existing.qty++; else cart.push({ name, price, qty: 1 });
+    renderCart();
+    showToast('Adicionado ao carrinho');
+    flashCart();
+    flyAnimation(e, card);
+  });
+});
 
-// Brilho no ícone ao adicionar
-function flashCartIcon() {
+function flashCart() {
   const icon = document.getElementById('cart-icon');
   icon.classList.add('flash');
   setTimeout(() => icon.classList.remove('flash'), 600);
 }
 
-// Adicionar ao carrinho + animação + brilho
-document.querySelectorAll('.btn-carrinho').forEach(btn => {
-  btn.onclick = e => {
-    const card = e.target.closest('.produto-card');
-    const name = card.querySelector('h3').textContent;
-    const price = name.includes('Bronzeador') ? 9.99 : 7.99;
+function flyAnimation(e, card) {
+  const img = card.querySelector('img');
+  if (!img) return;
+  const clone = img.cloneNode();
+  const r1 = img.getBoundingClientRect();
+  const r2 = document.getElementById('cart-icon').getBoundingClientRect();
+  Object.assign(clone.style, {
+    position: 'fixed', zIndex: 9999, pointerEvents: 'none', borderRadius: '4px',
+    left: r1.left + 'px', top: r1.top + 'px',
+    width: r1.width + 'px', height: r1.height + 'px',
+    transition: 'all 0.75s cubic-bezier(0.2,0.8,0.4,1)',
+    opacity: '1'
+  });
+  document.body.appendChild(clone);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    clone.style.left = (r2.left + 12) + 'px';
+    clone.style.top = (r2.top + 12) + 'px';
+    clone.style.width = '36px'; clone.style.height = '36px';
+    clone.style.opacity = '0';
+  }));
+  setTimeout(() => clone.remove(), 800);
+}
 
-    const existing = cart.find(x => x.name === name);
-    if (existing) existing.qty++; else cart.push({name, price, qty:1});
-
-    updateCart();
-    showToast();
-    flashCartIcon();   // ← brilho volta!
-
-    // animação voar
-    const img = card.querySelector('img');
-    const clone = img.cloneNode();
-    const r1 = img.getBoundingClientRect();
-    const r2 = document.getElementById('cart-icon').getBoundingClientRect();
-    Object.assign(clone.style, {
-      position:'fixed', zIndex:9999, borderRadius:'16px', pointerEvents:'none',
-      left:r1.left+'px', top:r1.top+'px', width:r1.width+'px', height:r1.height+'px',
-      transition:'all 0.9s cubic-bezier(0.2,0.8,0.4,1)'
-    });
-    document.body.appendChild(clone);
-    setTimeout(() => {
-      clone.style.left = (r2.left + 15)+'px';
-      clone.style.top  = (r2.top + 15)+'px';
-      clone.style.width = '40px'; clone.style.height = '40px'; clone.style.opacity = '0';
-    }, 50);
-    setTimeout(() => clone.remove(), 1000);
-  };
-});
-
-// Abrir / fechar
-document.getElementById('cart-icon').onclick = () => cartPanel.classList.add('open');
-document.getElementById('close-cart').onclick = () => cartPanel.classList.remove('open');
-
-// Checkout
-checkoutBtn.onclick = () => {
-  cartPanel.classList.remove('open');
+// Cart open/close
+document.getElementById('cart-icon').addEventListener('click', openCart);
+document.getElementById('close-cart').addEventListener('click', closeCart);
+document.getElementById('cart-overlay').addEventListener('click', closeCart);
+document.getElementById('clear-cart').addEventListener('click', () => { cart = []; renderCart(); showToast('Carrinho limpo'); });
+document.getElementById('checkout-btn').addEventListener('click', () => {
+  closeCart();
   setTimeout(() => {
-    document.body.innerHTML = `<div style="text-align:center;padding:100px 20px;background:var(--card);margin:40px auto;max-width:600px;border-radius:20px;">
-      <h2 style="color:var(--accent);">Obrigado pela compra!</h2>
-      <p style="font-size:18px;">A equipa <strong>BioAura</strong> agradece!</p>
-      <a href="." class="btn" style="margin-top:30px;display:inline-block;">← Voltar à loja</a>
-    </div>`;
+    document.body.innerHTML = `
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#1a1208;font-family:'Jost',sans-serif;">
+        <div style="text-align:center;padding:80px 40px;max-width:560px;">
+          <div style="font-size:48px;margin-bottom:24px;">✦</div>
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#f0e2c0;margin-bottom:16px;">Obrigada pela tua encomenda</h1>
+          <p style="color:#c4a97d;font-size:15px;line-height:1.8;margin-bottom:40px;">A equipa BioAura recebeu o teu pedido e entrará em contacto em breve.</p>
+          <a href="." style="display:inline-block;padding:14px 36px;background:#b8923a;color:#0e0b06;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;text-decoration:none;">← Voltar à Loja</a>
+        </div>
+      </div>`;
   }, 400);
-};
-
-updateCart();
-</script>
-
-<!-- ✅ Toast de notificação -->
-<div id="toast">Produto adicionado ao carrinho 🛍️</div>
-
-<style>
-#toast {
-  visibility: hidden;
-  min-width: 240px;
-  background: var(--accent);
-  color: #fff8e7;
-  text-align: center;
-  border-radius: 10px;
-  padding: 14px;
-  position: fixed;
-  bottom: 80px;
-  right: 30px;
-  z-index: 9999;
-  font-weight: 600;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-  opacity: 0;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transform: translateY(20px);
-}
-#toast.show {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ✨ Intro animada do logótipo */
-#intro {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, #caa45d, #f4e7d1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.6s ease;
-}
-
-.intro-content {
-  text-align: center;
-}
-
-.intro-logo {
-  width: 180px;
-  height: auto;
-  opacity: 0;
-  transform: scale(0.8);
-  animation: logoFadeIn 1.2s ease forwards;
-  border-radius: 16px; /* 👈 adiciona isto */
-}
-
-/* 💅 Brilho sutil no logótipo */
-.intro-logo {
-  filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
-}
-
-@keyframes logoFadeIn {
-  0% { opacity: 0; transform: scale(0.8); }
-  60% { opacity: 1; transform: scale(1.05); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes introFadeOut {
-  0%, 75% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
-}
-
-/* Escuro no modo dark */
-body.dark #intro {
-  background: linear-gradient(180deg, #2b1f15, #3b2b1a);
-}
-
-</style>
-
-<script>
-// ✅ Função para mostrar toast
-function showToast(msg = 'Adicionado ao carrinho ✓') {
-  let toast = document.getElementById('toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'toast';
-    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background: var(--accent);color: #fff8e7;padding:14px 32px;border-radius:10px;z-index:9999;font-size:16px;opacity:0;transition:opacity 0.6s ease, transform 0.6s ease;transform:translateY(20px);font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.3);';
-    document.body.appendChild(toast);
-  }
-  toast.textContent = msg;
-  toast.classList.add('show');
-  toast.style.opacity = '1';
-  clearTimeout(toast.hideTimer);
-  toast.hideTimer = setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.classList.remove('show');
-  }, 2000);
-}
-</script>
-
-<script>
-// ✨ Fade suave ao navegar entre secções
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.style.opacity = 0;
-      setTimeout(() => {
-        target.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => { target.style.transition = 'opacity 0.8s'; target.style.opacity = 1; }, 200);
-      }, 100);
-    }
-  });
 });
-</script>
 
-<script>
-  // ⏳ Espera o load completo da página antes de esconder o intro
-  window.addEventListener('load', () => {
-    const intro = document.getElementById('intro');
-    setTimeout(() => {
-      intro.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }, 2200); // 2.2 segundos
-  });
-</script>
-
-<audio id="bg-music" src="lofi-study-calm-peaceful-chill-hop-112191.mp3" loop></audio>
-
-<script>
-  // Tocar música após qualquer clique do usuário
-  document.addEventListener("click", () => {
-    const audio = document.getElementById("bg-music");
-    audio.volume = 0.4; // volume suave
-    audio.play();
-  }, { once: true });
-</script>
-
-// Mutar musica
-<button id="musicToggle" title="Silenciar música">🔊</button>
-
-<style>
-#musicToggle {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  background: var(--card);
-  color: var(--accent);
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 999;
-  transition: all 0.3s ease;
+function openCart() {
+  document.getElementById('cart-panel').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
-#musicToggle:hover { transform: scale(1.12); }
-</style>
+function closeCart() {
+  document.getElementById('cart-panel').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
 
-<script>
-document.getElementById('musicToggle').addEventListener('click', function(e) {
-  const audio = document.getElementById('bg-music');
-  if (audio.muted) {
-    audio.muted = false;
-    e.target.textContent = '🔊';
-  } else {
-    audio.muted = true;
-    e.target.textContent = '🔇';
-  }
+// ─── TOAST ───
+let toastTimer;
+function showToast(msg = 'Adicionado ao carrinho') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ─── SCROLL REVEAL ───
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => revealObs.observe(el));
+
+// ─── SCROLL TO TOP ───
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('show', window.scrollY > 400);
 });
+scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ─── FORM ───
+function handleForm(e) {
+  e.preventDefault();
+  showToast('Mensagem enviada — obrigada!');
+  e.target.reset();
+}
+
+renderCart();
 </script>
-
-<style>
-/* Quando o carrinho está aberto, esconde os dois botões flutuantes */
-#cart-panel.open ~ #musicToggle,
-#cart-panel.open ~ #themeToggle,
-body:has(#cart-panel.open) #musicToggle,
-body:has(#cart-panel.open) #themeToggle {
-  display: none;
-}
-#musicToggle, #themeToggle { transition: opacity 0.4s ease; }
-
-/* Bottom sheet no carrinho em mobile */
-@media(max-width:768px){
-  #cart-panel {
-    right:0!important;
-    width:100%!important;
-    max-width:none;
-    border-radius:24px 24px 0 0!important;
-    top:auto!important;
-    bottom:0;
-    height:85vh!important;
-    transform:translateY(100%);
-    transition:transform 0.4s ease;
-  }
-  #cart-panel.open {
-    transform:translateY(0);
-  }
-  #cart-items {
-    max-height:calc(85vh - 180px);
-    overflow-y:auto;
-  }
-}
-</style>
-
 </body>
 </html>
