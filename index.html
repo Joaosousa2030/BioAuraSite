@@ -62,6 +62,58 @@ body {
   line-height: 1.6;
 }
 
+/* ─── SCROLL PROGRESS BAR ─── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  z-index: 10001;
+  transition: width 0.1s linear;
+  transform-origin: left;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, opacity 0.3s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(184,146,58,0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s, border-color 0.3s;
+}
+.cursor-ring.hovered {
+  width: 52px; height: 52px;
+  border-color: var(--gold);
+  background: rgba(184,146,58,0.05);
+}
+@media (hover: none) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ─── HEADER SCROLL STATE ─── */
+header {
+  transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
+}
+header.scrolled {
+  background: rgba(10, 8, 4, 0.99);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+}
+
 /* ─── INTRO SPLASH ─── */
 #intro {
   position: fixed;
@@ -105,9 +157,25 @@ body {
   margin: 20px auto;
   animation: lineGrow 1s var(--ease) 0.8s both;
 }
-@keyframes lineGrow { to { width: 80px; } }
+.intro-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.intro-particles span {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFade 2s ease-in-out forwards;
+}
+@keyframes particleFade {
+  0%   { opacity: 0; transform: translateY(0); }
+  40%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-60px); }
+}
 
-/* ─── NAVIGATION ─── */
 header {
   position: sticky;
   top: 0;
@@ -547,7 +615,38 @@ header {
   .sobre-img-accent { display: none; }
 }
 
-/* ─── PRODUTOS ─── */
+/* ─── SOBRE STATS ─── */
+.sobre-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(184,146,58,0.15);
+  border: 1px solid rgba(184,146,58,0.15);
+  margin-top: 40px;
+}
+.stat-item {
+  background: #faf7f2;
+  padding: 24px 20px;
+  text-align: center;
+  transition: background 0.3s;
+}
+.stat-item:hover { background: var(--gold-pale); }
+.stat-num {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+
 #produtos {
   padding: 120px 0;
   background: var(--bark);
@@ -660,7 +759,134 @@ header {
 }
 .btn-add:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
 
-/* ─── CIENCIA ─── */
+/* ─── PRODUTO EXTRAS ─── */
+.produto-wishlist {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: rgba(14,11,6,0.7);
+  border: 1px solid rgba(184,146,58,0.2);
+  color: rgba(196,169,125,0.6);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+  backdrop-filter: blur(4px);
+}
+.produto-wishlist:hover { color: #e87878; border-color: #e87878; background: rgba(232,120,120,0.1); }
+.produto-wishlist.active { color: #e87878; border-color: #e87878; background: rgba(232,120,120,0.12); }
+
+.produto-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.stars { color: var(--gold); font-size: 11px; letter-spacing: 1px; }
+.rating-count { font-size: 11px; color: var(--sand); opacity: 0.7; }
+
+.btn-add {
+  position: relative;
+  overflow: hidden;
+}
+.btn-add::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+  z-index: 0;
+}
+.btn-add:hover::after { transform: scaleX(1); }
+.btn-add span, .btn-add svg { position: relative; z-index: 1; }
+.btn-add:hover { color: var(--ink); border-color: var(--gold); }
+
+/* ─── FORM ENHANCEMENTS ─── */
+.form-field {
+  position: relative;
+}
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+  color: var(--gold-light);
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--gold);
+  background: rgba(184,146,58,0.06);
+  box-shadow: 0 0 0 3px rgba(184,146,58,0.08);
+}
+.form-input.error, .form-textarea.error {
+  border-color: #c44;
+  box-shadow: 0 0 0 3px rgba(204,68,68,0.08);
+}
+.form-hint {
+  font-size: 10px;
+  color: #c44;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  display: none;
+}
+.form-hint.show { display: block; }
+
+/* ─── FOOTER SOCIAL ─── */
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.social-btn {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(184,146,58,0.2);
+  color: rgba(196,169,125,0.5);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.25s;
+  border-radius: 2px;
+}
+.social-btn:hover { border-color: var(--gold); color: var(--gold-pale); background: rgba(184,146,58,0.08); }
+
+/* ─── QUOTE BANNER ─── */
+.quote-section {
+  background: linear-gradient(135deg, #1a1208 0%, #2c1f0e 100%);
+  padding: 80px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quote-section::before {
+  content: '"';
+  position: absolute;
+  top: -40px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif);
+  font-size: 300px;
+  color: rgba(184,146,58,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.quote-text {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold-pale);
+  max-width: 680px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+  position: relative;
+}
+.quote-author {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+
 #ciencia { padding: 120px 0; background: #faf7f2; }
 .ciencia-grid {
   display: grid;
@@ -1009,8 +1235,16 @@ footer {
 </head>
 <body>
 
+<!-- Scroll Progress -->
+<div id="progress-bar"></div>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
 <!-- Intro Splash -->
 <div id="intro">
+  <div class="intro-particles" id="intro-particles"></div>
   <div class="intro-inner">
     <img src="logo-bioaura.png" alt="BioAura" class="intro-logo">
     <div class="intro-line"></div>
@@ -1170,6 +1404,20 @@ footer {
             </div>
           </div>
         </div>
+        <div class="sobre-stats reveal">
+          <div class="stat-item">
+            <div class="stat-num">100<span style="font-size:18px">%</span></div>
+            <div class="stat-label">Natural</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Parabenos</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Sustentável</div>
+          </div>
+        </div>
       </div>
       <div class="sobre-visual reveal reveal-delay-2">
         <img src="produtos-bioaura.png" alt="Produtos BioAura" class="sobre-img-main">
@@ -1193,10 +1441,15 @@ footer {
         <div class="produto-img-wrap">
           <img src="b.png" alt="Bronzeador Natural BioAura" loading="lazy">
           <div class="produto-badge">Bestseller</div>
+          <button class="produto-wishlist" aria-label="Adicionar aos favoritos">♡</button>
         </div>
         <div class="produto-body">
           <div class="produto-volume">150 ml — Bronzeador Corporal</div>
           <h3 class="produto-name">Bronzeador Natural</h3>
+          <div class="produto-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-count">(24 avaliações)</span>
+          </div>
           <p class="produto-desc">Realça o tom da pele e hidrata profundamente, sem alterar a melanina. A combinação de urucum, cacau e café cria um brilho natural e duradouro.</p>
           <div class="produto-ingredients">
             <div class="produto-ing-label">Principais Ingredientes</div>
@@ -1212,7 +1465,7 @@ footer {
             <div class="produto-price">€9<span>.99</span></div>
             <button class="btn-add btn-carrinho">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-              Adicionar
+              <span>Adicionar</span>
             </button>
           </div>
         </div>
@@ -1223,10 +1476,15 @@ footer {
         <div class="produto-img-wrap">
           <img src="k.png" alt="Creme de Massagem BioAura" loading="lazy">
           <div class="produto-badge">New</div>
+          <button class="produto-wishlist" aria-label="Adicionar aos favoritos">♡</button>
         </div>
         <div class="produto-body">
           <div class="produto-volume">100 ml — Creme Hidratante</div>
           <h3 class="produto-name">Creme de Massagem</h3>
+          <div class="produto-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-count">(17 avaliações)</span>
+          </div>
           <p class="produto-desc">Hidrata, suaviza e fortalece a barreira cutânea. A manteiga de karité combinada com aloe vera reconstrói e nutre a pele em profundidade.</p>
           <div class="produto-ingredients">
             <div class="produto-ing-label">Principais Ingredientes</div>
@@ -1242,7 +1500,7 @@ footer {
             <div class="produto-price">€7<span>.99</span></div>
             <button class="btn-add btn-carrinho">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-              Adicionar
+              <span>Adicionar</span>
             </button>
           </div>
         </div>
@@ -1251,6 +1509,12 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- Quote -->
+<div class="quote-section reveal">
+  <p class="quote-text">"Aluzia-te — valoriza a luz natural da tua pele."</p>
+  <div class="quote-author">BioAura — Cosmética Natural</div>
+</div>
 
 <!-- Ciência -->
 <section id="ciencia">
@@ -1355,14 +1619,17 @@ footer {
         <div class="form-field">
           <label class="form-label">Nome</label>
           <input class="form-input" type="text" placeholder="O teu nome completo" required>
+          <span class="form-hint">Por favor, introduz o teu nome.</span>
         </div>
         <div class="form-field">
           <label class="form-label">Email</label>
           <input class="form-input" type="email" placeholder="o.teu@email.com" required>
+          <span class="form-hint">Por favor, introduz o teu email.</span>
         </div>
         <div class="form-field">
           <label class="form-label">Mensagem</label>
           <textarea class="form-textarea" placeholder="Como podemos ajudar?" required></textarea>
+          <span class="form-hint">Por favor, escreve a tua mensagem.</span>
         </div>
         <button type="submit" class="btn-primary" style="align-self:flex-start">
           Enviar Mensagem
@@ -1383,6 +1650,17 @@ footer {
           <span class="footer-brand-name">BioAura</span>
         </div>
         <p class="footer-slogan">"Aluzia-te — valoriza a luz<br>natural da tua pele."</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="TikTok">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Pinterest">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.141-.828 3.329-.236.995.499 1.806 1.476 1.806 1.771 0 3.135-1.868 3.135-4.566 0-2.386-1.716-4.054-4.165-4.054-2.837 0-4.5 2.127-4.5 4.327 0 .857.33 1.775.741 2.277a.3.3 0 01.069.286c-.075.314-.244.995-.277 1.134-.044.183-.146.222-.337.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+          </a>
+        </div>
       </div>
       <div>
         <div class="footer-col-title">Navegação</div>
@@ -1420,10 +1698,59 @@ footer {
 <div id="toast"></div>
 
 <script>
+// ─── SCROLL PROGRESS BAR ───
+const progressBar = document.getElementById('progress-bar');
+function updateProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+// ─── CUSTOM CURSOR ───
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = -100, my = -100, rx = -100, ry = -100;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a, button, .produto-card, .pilar, .ciencia-card').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+});
+
+// ─── HEADER SCROLL STATE ───
+const header = document.getElementById('main-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
 // ─── INTRO ───
 window.addEventListener('load', () => {
+  // Generate particles
+  const particles = document.getElementById('intro-particles');
+  for (let i = 0; i < 20; i++) {
+    const s = document.createElement('span');
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*1.5}s;animation-duration:${1.5+Math.random()}s;`;
+    particles.appendChild(s);
+  }
   const intro = document.getElementById('intro');
-  setTimeout(() => intro.classList.add('hidden'), 2000);
+  setTimeout(() => intro.classList.add('hidden'), 2200);
+});
+
+// ─── WISHLIST ───
+document.querySelectorAll('.produto-wishlist').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    btn.classList.toggle('active');
+    btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
+    showToast(btn.classList.contains('active') ? 'Adicionado aos favoritos' : 'Removido dos favoritos');
+  });
 });
 
 // ─── MOBILE MENU ───
@@ -1583,15 +1910,48 @@ reveals.forEach(el => revealObs.observe(el));
 const scrollBtn = document.getElementById('scrollTop');
 window.addEventListener('scroll', () => {
   scrollBtn.classList.toggle('show', window.scrollY > 400);
-});
+}, { passive: true });
 scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// ─── FORM ───
+// ─── FORM VALIDATION ───
 function handleForm(e) {
   e.preventDefault();
+  const form = e.target;
+  let valid = true;
+  form.querySelectorAll('.form-input, .form-textarea').forEach(field => {
+    field.classList.remove('error');
+    const hint = field.parentElement.querySelector('.form-hint');
+    if (hint) hint.classList.remove('show');
+    if (!field.value.trim()) {
+      field.classList.add('error');
+      if (hint) hint.classList.add('show');
+      valid = false;
+    }
+  });
+  if (!valid) return;
   showToast('Mensagem enviada — obrigada!');
-  e.target.reset();
+  form.reset();
 }
+
+// ─── ANIMATE STAT NUMBERS ───
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.stat-num').forEach(el => {
+      const target = parseInt(el.textContent);
+      if (isNaN(target)) return;
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const interval = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current + (el.innerHTML.includes('%') ? '%' : '');
+        if (current >= target) clearInterval(interval);
+      }, 30);
+    });
+    statObs.unobserve(e.target);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.sobre-stats').forEach(el => statObs.observe(el));
 
 renderCart();
 </script>
