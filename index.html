@@ -1606,7 +1606,7 @@ body.dark footer { background: #0e0a04 !important; }
             </div>
           </div>
           <div class="produto-footer">
-            <div class="produto-price">🥔9<span>.99</span></div>
+            <div class="produto-price">$9<span>.99</span></div>
             <button class="btn-add btn-carrinho">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
               <span>Adicionar</span>
@@ -1641,7 +1641,7 @@ body.dark footer { background: #0e0a04 !important; }
             </div>
           </div>
           <div class="produto-footer">
-            <div class="produto-price">🥔7<span>.99</span></div>
+            <div class="produto-price">$7<span>.99</span></div>
             <button class="btn-add btn-carrinho">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
               <span>Adicionar</span>
@@ -1945,7 +1945,7 @@ function renderCart() {
     `;
     list.appendChild(li);
   });
-  totalEl.textContent = '🥔' + total.toFixed(2);
+  totalEl.textContent = '$' + total.toFixed(2);
   countEl.textContent = qty || '0';
   saveCart();
 }
