@@ -579,7 +579,7 @@ header {
   display: flex; align-items: flex-start; gap: 16px;
   padding: 20px;
   border: 1px solid rgba(184,146,58,0.15);
-  background: #faf7f2;
+  background: var(--cream);
   transition: border-color 0.3s, background 0.3s;
 }
 .pilar:hover { border-color: rgba(184,146,58,0.4); background: var(--gold-pale); }
@@ -625,7 +625,7 @@ header {
   margin-top: 40px;
 }
 .stat-item {
-  background: #faf7f2;
+  background: var(--cream);
   padding: 24px 20px;
   text-align: center;
   transition: background 0.3s;
@@ -887,7 +887,7 @@ header {
 }
 
 
-#ciencia { padding: 120px 0; background: #faf7f2; }
+#ciencia { padding: 120px 0; background: var(--cream); }
 .ciencia-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -901,7 +901,7 @@ header {
   padding: 40px 36px;
   transition: background 0.3s;
 }
-.ciencia-card:hover { background: #f5ede0; }
+.ciencia-card:hover { background: var(--warm); }
 .ciencia-icon {
   font-size: 28px;
   margin-bottom: 20px;
@@ -1238,54 +1238,72 @@ body {
 }
 
 body.dark {
-  --cream:      #1a1208;
-  --warm:       #231809;
-  --text:       #f0e2c0;
-  --text-muted: #c4a97d;
+  --cream:      #1c1309;
+  --warm:       #261a0c;
   --gold-pale:  #f0e2c0;
   --sand:       #c4a97d;
-  background: #1a1208;
-  color: var(--text);
+  --text:       #ede0c8;
+  --text-muted: #b89e7a;
+  --bark:       #e8d5b0;
+  background: #1c1309;
+  color: #ede0c8;
 }
 
-body.dark .card-body,
+/* Todas as secções claras ficam escuras */
+body.dark #sobre,
+body.dark #ciencia,
+body.dark #planeamento,
+body.dark #contacto,
+body.dark section { background: #1c1309 !important; }
+
+/* Cards e painéis */
+body.dark .pilar,
+body.dark .stat-item,
+body.dark .ciencia-card,
 body.dark .prod-card,
 body.dark .timeline-card,
-body.dark .pillar-card,
+body.dark .processo-card,
 body.dark .form-card,
-body.dark .science-card,
-body.dark .ingredient-panel,
-body.dark .contact-card,
-body.dark .formula-block,
-body.dark .processo-card {
-  background: #231809;
-  border-color: rgba(184,146,58,0.2);
-  color: var(--text);
+body.dark .contact-card {
+  background: #261a0c !important;
+  border-color: rgba(184,146,58,0.25) !important;
 }
 
-body.dark .section-eyebrow,
-body.dark .section-title,
-body.dark .section-lead,
-body.dark h2, body.dark h3, body.dark h4,
-body.dark p, body.dark li, body.dark span,
-body.dark label {
-  color: var(--text);
+body.dark .pilar:hover,
+body.dark .stat-item:hover,
+body.dark .ciencia-card:hover { background: #30200e !important; }
+
+/* Todos os textos ficam legíveis */
+body.dark h1, body.dark h2, body.dark h3, body.dark h4,
+body.dark p, body.dark li, body.dark span, body.dark label,
+body.dark .section-title, body.dark .section-lead, body.dark .section-eyebrow,
+body.dark .pilar-title, body.dark .pilar-desc,
+body.dark .prod-name, body.dark .prod-desc, body.dark .prod-price,
+body.dark .stat-num, body.dark .stat-label,
+body.dark .timeline-year, body.dark .timeline-title, body.dark .timeline-desc,
+body.dark .processo-title, body.dark .processo-desc,
+body.dark .contact-label, body.dark .contact-value,
+body.dark .form-label, body.dark .footer-slogan {
+  color: #ede0c8 !important;
 }
 
+/* Inputs do formulário */
 body.dark .form-input,
 body.dark .form-textarea {
   background: #2c1f0e;
-  border-color: rgba(184,146,58,0.25);
-  color: var(--text);
+  border-color: rgba(184,146,58,0.3);
+  color: #ede0c8;
 }
+body.dark .form-input::placeholder,
+body.dark .form-textarea::placeholder { color: rgba(196,169,125,0.45); }
 
+/* Hero mantém-se escuro (já era) */
 body.dark .hero {
-  background: linear-gradient(160deg, #0e0a04 0%, #1a1208 40%, #231809 70%, #0e0a04 100%);
+  background: linear-gradient(160deg, #0e0a04 0%, #1c1309 40%, #261a0c 70%, #0e0a04 100%);
 }
 
-body.dark footer {
-  background: #0e0a04;
-}
+/* Footer */
+body.dark footer { background: #0e0a04 !important; }
 
 /* ─── FLOATING NAV BUTTONS (theme + music) ─── */
 .floating-btn {
