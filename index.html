@@ -1231,6 +1231,93 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ─── DARK MODE ─── */
+body {
+  transition: background 0.5s, color 0.5s;
+}
+
+body.dark {
+  --cream:      #1a1208;
+  --warm:       #231809;
+  --text:       #f0e2c0;
+  --text-muted: #c4a97d;
+  --gold-pale:  #f0e2c0;
+  --sand:       #c4a97d;
+  background: #1a1208;
+  color: var(--text);
+}
+
+body.dark .card-body,
+body.dark .prod-card,
+body.dark .timeline-card,
+body.dark .pillar-card,
+body.dark .form-card,
+body.dark .science-card,
+body.dark .ingredient-panel,
+body.dark .contact-card,
+body.dark .formula-block,
+body.dark .processo-card {
+  background: #231809;
+  border-color: rgba(184,146,58,0.2);
+  color: var(--text);
+}
+
+body.dark .section-eyebrow,
+body.dark .section-title,
+body.dark .section-lead,
+body.dark h2, body.dark h3, body.dark h4,
+body.dark p, body.dark li, body.dark span,
+body.dark label {
+  color: var(--text);
+}
+
+body.dark .form-input,
+body.dark .form-textarea {
+  background: #2c1f0e;
+  border-color: rgba(184,146,58,0.25);
+  color: var(--text);
+}
+
+body.dark .hero {
+  background: linear-gradient(160deg, #0e0a04 0%, #1a1208 40%, #231809 70%, #0e0a04 100%);
+}
+
+body.dark footer {
+  background: #0e0a04;
+}
+
+/* ─── FLOATING NAV BUTTONS (theme + music) ─── */
+.floating-btn {
+  position: fixed;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(20, 14, 6, 0.85);
+  border: 1px solid rgba(184,146,58,0.35);
+  color: var(--gold-pale);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  z-index: 998;
+  transition: all 0.25s;
+}
+.floating-btn:hover {
+  background: rgba(184,146,58,0.15);
+  border-color: var(--gold);
+  transform: scale(1.08);
+}
+
+#theme-toggle { bottom: 100px; right: 36px; }
+#music-toggle { bottom: 152px; right: 36px; }
+
+@media (max-width: 600px) {
+  #theme-toggle { bottom: 96px; right: 20px; }
+  #music-toggle { bottom: 148px; right: 20px; }
+  #scrollTop    { bottom: 44px;  right: 20px; }
+}
 </style>
 </head>
 <body>
@@ -1308,6 +1395,13 @@ footer {
     </div>
   </div>
 </header>
+
+<!-- Floating: Theme + Music -->
+<button class="floating-btn" id="theme-toggle" title="Alternar tema" aria-label="Alternar modo escuro">🌙</button>
+<button class="floating-btn" id="music-toggle" title="Música" aria-label="Tocar/pausar música">🎵</button>
+
+<!-- Background music -->
+<audio id="bg-music" src="lofi-study-calm-peaceful-chill-hop-112191.mp3" loop preload="none"></audio>
 
 <!-- Hero -->
 <section class="hero" id="home">
@@ -1954,6 +2048,52 @@ const statObs = new IntersectionObserver(entries => {
 document.querySelectorAll('.sobre-stats').forEach(el => statObs.observe(el));
 
 renderCart();
+
+// ─── DARK MODE ───
+const themeBtn = document.getElementById('theme-toggle');
+const savedTheme = localStorage.getItem('bioaura-theme');
+if (savedTheme === 'dark') {
+  document.body.classList.add('dark');
+  themeBtn.textContent = '☀️';
+}
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  themeBtn.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('bioaura-theme', isDark ? 'dark' : 'light');
+});
+
+// ─── MUSIC ───
+const audio = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-toggle');
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    audio.volume = 0.35;
+    audio.play().catch(() => {});
+    musicStarted = true;
+    musicBtn.textContent = '🔊';
+  }
+}
+
+// Inicia música no primeiro clique do utilizador (política dos browsers)
+document.addEventListener('click', startMusic, { once: true });
+
+musicBtn.addEventListener('click', (e) => {
+  e.stopPropagation(); // não dispara o listener de "primeiro clique" se ainda não iniciou
+  if (!musicStarted) {
+    startMusic();
+    return;
+  }
+  if (audio.paused) {
+    audio.play();
+    musicBtn.textContent = '🔊';
+  } else {
+    audio.pause();
+    musicBtn.textContent = '🔇';
+  }
+});
 </script>
 </body>
 </html>
