@@ -31,20 +31,34 @@
 <style>
 /* ─── DESIGN TOKENS ─── */
 :root {
+  /* Cores fixas (nunca mudam) */
   --ink:        #0e0b06;
-  --cream:      #f5f0e8;
-  --warm:       #e8dcc8;
   --gold:       #b8923a;
   --gold-light: #d4aa5a;
   --gold-pale:  #f0e2c0;
-  --bark:       #2c1f0e;
   --sand:       #c4a97d;
-  --text:       #1a1208;
-  --text-muted: #6b5840;
   --maxw:       1200px;
   --serif:      'Cormorant Garamond', Georgia, serif;
   --sans:       'Jost', system-ui, sans-serif;
   --ease:       cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* ── MODO CLARO (light) ── */
+  --bg:            #f5f0e8;   /* fundo principal */
+  --bg-warm:       #e8dcc8;   /* fundo alternativo levemente mais escuro */
+  --bg-dark:       #2c1f0e;   /* secções escuras (bark) */
+  --bg-darker:     #1a1208;   /* fundo mais escuro ainda */
+  --surface:       #f5f0e8;   /* cards / superfícies */
+  --surface-hover: #e8dcc8;
+  --text:          #1a1208;   /* texto principal */
+  --text-muted:    #6b5840;   /* texto secundário */
+  --text-on-dark:  #f0e2c0;   /* texto sobre fundos escuros */
+  --text-muted-on-dark: #c4a97d;
+  --border-subtle: rgba(184,146,58,0.15);
+
+  /* aliases semânticos usados em todo o CSS */
+  --cream: var(--bg);
+  --warm:  var(--bg-warm);
+  --bark:  var(--bg-dark);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,7 +70,7 @@ html {
 
 body {
   font-family: var(--sans);
-  background: var(--cream);
+  background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   line-height: 1.6;
@@ -544,7 +558,7 @@ header {
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* ─── SOBRE ─── */
-#sobre { padding: 120px 0; background: var(--cream); }
+#sobre { padding: 120px 0; background: var(--bg); }
 .sobre-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -564,7 +578,7 @@ header {
   font-size: clamp(36px, 3.5vw, 52px);
   font-weight: 300;
   line-height: 1.1;
-  color: var(--bark);
+  color: var(--text);
   margin-bottom: 28px;
 }
 .sobre-heading em { font-style: italic; color: var(--gold); }
@@ -579,10 +593,10 @@ header {
   display: flex; align-items: flex-start; gap: 16px;
   padding: 20px;
   border: 1px solid rgba(184,146,58,0.15);
-  background: var(--cream);
+  background: var(--bg);
   transition: border-color 0.3s, background 0.3s;
 }
-.pilar:hover { border-color: rgba(184,146,58,0.4); background: var(--gold-pale); }
+.pilar:hover { border-color: rgba(184,146,58,0.4); background: var(--bg-warm); }
 .pilar-icon {
   width: 36px; height: 36px; flex-shrink: 0;
   background: var(--gold);
@@ -590,7 +604,7 @@ header {
   font-size: 15px;
   color: var(--ink);
 }
-.pilar-title { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bark); margin-bottom: 4px; }
+.pilar-title { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin-bottom: 4px; }
 .pilar-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 .sobre-visual {
   position: relative;
@@ -607,7 +621,7 @@ header {
   width: 55%;
   aspect-ratio: 1;
   object-fit: cover;
-  border: 4px solid var(--cream);
+  border: 4px solid var(--bg);
   box-shadow: 0 16px 48px rgba(0,0,0,0.15);
 }
 @media (max-width: 860px) {
@@ -625,12 +639,12 @@ header {
   margin-top: 40px;
 }
 .stat-item {
-  background: var(--cream);
+  background: var(--bg);
   padding: 24px 20px;
   text-align: center;
   transition: background 0.3s;
 }
-.stat-item:hover { background: var(--gold-pale); }
+.stat-item:hover { background: var(--bg-warm); }
 .stat-num {
   font-family: var(--serif);
   font-size: 36px;
@@ -887,7 +901,7 @@ header {
 }
 
 
-#ciencia { padding: 120px 0; background: var(--cream); }
+#ciencia { padding: 120px 0; background: var(--bg); }
 .ciencia-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -897,11 +911,11 @@ header {
   margin-bottom: 48px;
 }
 .ciencia-card {
-  background: var(--cream);
+  background: var(--bg);
   padding: 40px 36px;
   transition: background 0.3s;
 }
-.ciencia-card:hover { background: var(--warm); }
+.ciencia-card:hover { background: var(--bg-warm); }
 .ciencia-icon {
   font-size: 28px;
   margin-bottom: 20px;
@@ -911,7 +925,7 @@ header {
   font-family: var(--serif);
   font-size: 22px;
   font-weight: 400;
-  color: var(--bark);
+  color: var(--text);
   margin-bottom: 14px;
 }
 .ciencia-text { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
@@ -948,7 +962,7 @@ header {
 .nota-value { font-size: 15px; color: var(--gold-pale); font-family: var(--serif); }
 
 /* ─── PLANEAMENTO ─── */
-#planeamento { padding: 120px 0; background: var(--cream); }
+#planeamento { padding: 120px 0; background: var(--bg); }
 .timeline {
   position: relative;
   max-width: 760px;
@@ -988,7 +1002,7 @@ header {
 }
 .timeline-title {
   font-family: var(--serif); font-size: 22px; font-weight: 400;
-  color: var(--bark); margin-bottom: 12px;
+  color: var(--text); margin-bottom: 12px;
 }
 .timeline-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
 
@@ -1238,64 +1252,82 @@ body {
 }
 
 body.dark {
-  --cream:      #1c1309;
-  --warm:       #261a0c;
-  --gold-pale:  #f0e2c0;
-  --sand:       #c4a97d;
-  --text:       #ede0c8;
-  --text-muted: #b89e7a;
-  --bark:       #e8d5b0;
+  /* Tokens semânticos adaptados ao modo escuro */
+  --bg:            #1c1309;
+  --bg-warm:       #261a0c;
+  --bg-dark:       #0e0a04;    /* bark no dark = mais escuro ainda */
+  --bg-darker:     #0a0704;
+  --surface:       #261a0c;
+  --surface-hover: #30200e;
+  --text:          #ede0c8;    /* texto principal claro */
+  --text-muted:    #c4a97d;    /* texto secundário dourado-acastanhado */
+  --text-on-dark:  #f0e2c0;    /* texto sobre fundos escuros */
+  --text-muted-on-dark: #c4a97d;
+  --border-subtle: rgba(184,146,58,0.2);
+
+  /* aliases */
+  --cream: var(--bg);
+  --warm:  var(--bg-warm);
+  --bark:  #0e0a04;            /* bark escuro = fundo quase preto */
+
   background: #1c1309;
   color: #ede0c8;
 }
 
-/* Todas as secções claras ficam escuras */
+/* Secções de fundo claro ficam escuras */
 body.dark #sobre,
 body.dark #ciencia,
-body.dark #planeamento,
-body.dark #contacto,
-body.dark section { background: #1c1309 !important; }
+body.dark #planeamento { background: #1c1309 !important; }
 
-/* Cards e painéis */
+/* Secções que já eram escuras (bark) ficam ainda mais escuras */
+body.dark #produtos,
+body.dark #contacto,
+body.dark .quote-section,
+body.dark .banner-strip { background: #0e0a04 !important; }
+
+/* Cards e superfícies */
 body.dark .pilar,
 body.dark .stat-item,
-body.dark .ciencia-card,
-body.dark .prod-card,
-body.dark .timeline-card,
-body.dark .processo-card,
-body.dark .form-card,
-body.dark .contact-card {
+body.dark .ciencia-card {
   background: #261a0c !important;
   border-color: rgba(184,146,58,0.25) !important;
 }
-
 body.dark .pilar:hover,
 body.dark .stat-item:hover,
 body.dark .ciencia-card:hover { background: #30200e !important; }
 
-/* Todos os textos ficam legíveis */
-body.dark h1, body.dark h2, body.dark h3, body.dark h4,
-body.dark p, body.dark li, body.dark span, body.dark label,
-body.dark .section-title, body.dark .section-lead, body.dark .section-eyebrow,
-body.dark .pilar-title, body.dark .pilar-desc,
-body.dark .prod-name, body.dark .prod-desc, body.dark .prod-price,
-body.dark .stat-num, body.dark .stat-label,
-body.dark .timeline-year, body.dark .timeline-title, body.dark .timeline-desc,
-body.dark .processo-title, body.dark .processo-desc,
-body.dark .contact-label, body.dark .contact-value,
-body.dark .form-label, body.dark .footer-slogan {
-  color: #ede0c8 !important;
-}
+/* Produto cards (estavam no bark, agora ficam escuros) */
+body.dark .produto-card { background: #1a1007 !important; }
+
+/* Notas técnicas (dentro de #ciencia) */
+body.dark .notas-tecnicas { background: #0e0a04 !important; }
+
+/* Timeline num box */
+body.dark .timeline-num { background: #0e0a04 !important; }
+
+/* Textos em secções claras */
+body.dark .section-title,
+body.dark .sobre-heading,
+body.dark .timeline-title,
+body.dark .ciencia-title,
+body.dark .pilar-title { color: #ede0c8 !important; }
+
+body.dark .sobre-body,
+body.dark .pilar-desc,
+body.dark .ciencia-text,
+body.dark .timeline-desc { color: #c4a97d !important; }
+
+body.dark .stat-label { color: #c4a97d !important; }
 
 /* Inputs do formulário */
 body.dark .form-input,
 body.dark .form-textarea {
-  background: #2c1f0e;
-  border-color: rgba(184,146,58,0.3);
+  background: #261a0c;
+  border-color: rgba(184,146,58,0.35);
   color: #ede0c8;
 }
 body.dark .form-input::placeholder,
-body.dark .form-textarea::placeholder { color: rgba(196,169,125,0.45); }
+body.dark .form-textarea::placeholder { color: rgba(196,169,125,0.4); }
 
 /* Hero mantém-se escuro (já era) */
 body.dark .hero {
