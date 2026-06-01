@@ -1471,6 +1471,7 @@ body.dark footer { background: #0e0a04 !important; }
     </button>
 
     <ul class="navlinks" id="navlinks" role="navigation">
+      <li><a href="#" data-page="home">Início</a></li>
       <li><a href="#" data-page="sobre">Sobre</a></li>
       <li><a href="#" data-page="produtos">Produtos</a></li>
       <li><a href="#" data-page="ciencia">Ciência</a></li>
@@ -2064,7 +2065,7 @@ function renderCart() {
     `;
     list.appendChild(li);
   });
-  totalEl.textContent = '$' + total.toFixed(2);
+  totalEl.textContent = '€' + total.toFixed(2);
   countEl.textContent = qty || '0';
   saveCart();
 }
