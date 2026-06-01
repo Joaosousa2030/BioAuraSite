@@ -1370,6 +1370,47 @@ body.dark footer { background: #0e0a04 !important; }
   #music-toggle { bottom: 148px; right: 20px; }
   #scrollTop    { bottom: 44px;  right: 20px; }
 }
+
+/* ─── PÁGINA / CENA SYSTEM ─── */
+.page-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+  min-height: calc(100vh - 88px);
+}
+.page-section.active {
+  display: block;
+  opacity: 1;
+  transform: none;
+}
+/* animação de entrada */
+.page-section.entering {
+  display: block;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* active nav link highlight */
+.navlinks a.nav-active {
+  color: var(--gold-light) !important;
+}
+.navlinks a.nav-active::after {
+  width: 100% !important;
+}
+
+/* home page wraps hero + banner together */
+#page-home { padding: 0; }
+#page-home .hero { min-height: 92vh; }
+
+/* secções dentro das páginas não precisam de min-height própria */
+#page-sobre #sobre,
+#page-produtos #produtos,
+#page-ciencia #ciencia,
+#page-planeamento #planeamento,
+#page-contacto #contacto {
+  min-height: unset;
+}
 </style>
 </head>
 <body>
@@ -1430,11 +1471,11 @@ body.dark footer { background: #0e0a04 !important; }
     </button>
 
     <ul class="navlinks" id="navlinks" role="navigation">
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#produtos">Produtos</a></li>
-      <li><a href="#ciencia">Ciência</a></li>
-      <li><a href="#planeamento">Processo</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#" data-page="sobre">Sobre</a></li>
+      <li><a href="#" data-page="produtos">Produtos</a></li>
+      <li><a href="#" data-page="ciencia">Ciência</a></li>
+      <li><a href="#" data-page="planeamento">Processo</a></li>
+      <li><a href="#" data-page="contacto">Contacto</a></li>
     </ul>
 
     <div class="nav-actions">
@@ -1455,6 +1496,9 @@ body.dark footer { background: #0e0a04 !important; }
 <!-- Background music -->
 <audio id="bg-music" src="lofi-study-calm-peaceful-chill-hop-112191.mp3" loop preload="none"></audio>
 
+<!-- ══════════════ PÁGINA: HOME ══════════════ -->
+<div class="page-section active" id="page-home">
+
 <!-- Hero -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
@@ -1469,11 +1513,11 @@ body.dark footer { background: #0e0a04 !important; }
         Cosméticos formulados com ingredientes naturais, baseados em princípios de química verde e biotecnologia. Feitos com intenção, cuidado e respeito pelo corpo e pelo planeta.
       </p>
       <div class="hero-actions">
-        <a class="btn-primary" href="#produtos">
+        <a class="btn-primary" href="#" data-page="produtos">
           Descobrir Produtos
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a class="btn-ghost" href="#sobre">A Nossa História</a>
+        <a class="btn-ghost" href="#" data-page="sobre">A Nossa História</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -1511,6 +1555,11 @@ body.dark footer { background: #0e0a04 !important; }
     <span class="banner-item">Cruelty Free</span>
   </div>
 </div>
+
+</div><!-- /page-home -->
+
+<!-- ══════════════ PÁGINA: SOBRE ══════════════ -->
+<div class="page-section" id="page-sobre">
 
 <!-- Sobre -->
 <section id="sobre">
@@ -1571,6 +1620,11 @@ body.dark footer { background: #0e0a04 !important; }
     </div>
   </div>
 </section>
+
+</div><!-- /page-sobre -->
+
+<!-- ══════════════ PÁGINA: PRODUTOS ══════════════ -->
+<div class="page-section" id="page-produtos">
 
 <!-- Produtos -->
 <section id="produtos">
@@ -1662,6 +1716,11 @@ body.dark footer { background: #0e0a04 !important; }
   <div class="quote-author">BioAura — Cosmética Natural</div>
 </div>
 
+</div><!-- /page-produtos -->
+
+<!-- ══════════════ PÁGINA: CIÊNCIA ══════════════ -->
+<div class="page-section" id="page-ciencia">
+
 <!-- Ciência -->
 <section id="ciencia">
   <div class="section-wrap">
@@ -1715,6 +1774,11 @@ body.dark footer { background: #0e0a04 !important; }
     </div>
   </div>
 </section>
+
+</div><!-- /page-ciencia -->
+
+<!-- ══════════════ PÁGINA: PROCESSO ══════════════ -->
+<div class="page-section" id="page-planeamento">
 
 <!-- Planeamento -->
 <section id="planeamento">
@@ -1786,6 +1850,44 @@ body.dark footer { background: #0e0a04 !important; }
   </div>
 </section>
 
+</div><!-- /page-planeamento -->
+
+<!-- ══════════════ PÁGINA: CONTACTO ══════════════ -->
+<div class="page-section" id="page-contacto">
+
+<!-- Contacto -->
+<section id="contacto">
+  <div class="section-wrap">
+    <div class="contacto-inner">
+      <div class="section-eyebrow reveal">Fala Connosco</div>
+      <h2 class="section-title reveal" style="color:var(--gold-pale)">Entre em <em>contacto</em></h2>
+      <div class="section-rule reveal"></div>
+      <p class="contacto-desc reveal">Para mais informações sobre os nossos produtos, parcerias ou para simplesmente partilhar a tua experiência com a BioAura.</p>
+      <form class="contacto-form reveal" onsubmit="handleForm(event)">
+        <div class="form-field">
+          <label class="form-label">Nome</label>
+          <input class="form-input" type="text" placeholder="O teu nome completo" required>
+          <span class="form-hint">Por favor, introduz o teu nome.</span>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="o.teu@email.com" required>
+          <span class="form-hint">Por favor, introduz o teu email.</span>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Mensagem</label>
+          <textarea class="form-textarea" placeholder="Como podemos ajudar?" required></textarea>
+          <span class="form-hint">Por favor, escreve a tua mensagem.</span>
+        </div>
+        <button type="submit" class="btn-primary" style="align-self:flex-start">
+          Enviar Mensagem
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- Footer -->
 <footer>
   <div class="footer-inner">
@@ -1811,20 +1913,20 @@ body.dark footer { background: #0e0a04 !important; }
       <div>
         <div class="footer-col-title">Navegação</div>
         <ul class="footer-links">
-          <li><a href="#sobre">Sobre Nós</a></li>
-          <li><a href="#produtos">Produtos</a></li>
-          <li><a href="#ciencia">Ciência</a></li>
-          <li><a href="#planeamento">Processo</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#" data-page="sobre">Sobre Nós</a></li>
+          <li><a href="#" data-page="produtos">Produtos</a></li>
+          <li><a href="#" data-page="ciencia">Ciência</a></li>
+          <li><a href="#" data-page="planeamento">Processo</a></li>
+          <li><a href="#" data-page="contacto">Contacto</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Valores</div>
         <ul class="footer-links">
-          <li><a href="#ciencia">Química Verde</a></li>
-          <li><a href="#ciencia">Biotecnologia</a></li>
-          <li><a href="#sobre">Sustentabilidade</a></li>
-          <li><a href="#sobre">Cruelty Free</a></li>
+          <li><a href="#" data-page="ciencia">Química Verde</a></li>
+          <li><a href="#" data-page="ciencia">Biotecnologia</a></li>
+          <li><a href="#" data-page="sobre">Sustentabilidade</a></li>
+          <li><a href="#" data-page="sobre">Cruelty Free</a></li>
         </ul>
       </div>
     </div>
@@ -1834,6 +1936,8 @@ body.dark footer { background: #0e0a04 !important; }
     </div>
   </div>
 </footer>
+
+</div><!-- /page-contacto -->
 
 <!-- Scroll to Top -->
 <button id="scrollTop" title="Voltar ao topo" aria-label="Voltar ao topo">
@@ -1899,18 +2003,64 @@ document.querySelectorAll('.produto-wishlist').forEach(btn => {
   });
 });
 
+// ─── PAGE NAVIGATION SYSTEM ───
+const pages = ['home', 'sobre', 'produtos', 'ciencia', 'planeamento', 'contacto'];
+
+function navigateTo(pageId) {
+  // Hide all pages
+  pages.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) {
+      el.classList.remove('active', 'entering');
+    }
+  });
+
+  // Show target page with animation
+  const target = document.getElementById('page-' + pageId);
+  if (target) {
+    target.classList.add('entering');
+    // Force reflow then animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        target.classList.remove('entering');
+        target.classList.add('active');
+      });
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  // Update active nav link
+  document.querySelectorAll('.navlinks a[data-page]').forEach(a => {
+    a.classList.toggle('nav-active', a.dataset.page === pageId);
+  });
+
+  // Re-trigger scroll reveal for the new page
+  setTimeout(() => {
+    target?.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+      revealObs.observe(el);
+    });
+  }, 100);
+}
+
+// Handle all data-page links
+document.addEventListener('click', e => {
+  const link = e.target.closest('[data-page]');
+  if (link) {
+    e.preventDefault();
+    const page = link.dataset.page;
+    navigateTo(page);
+    // Close mobile menu if open
+    menuBtn.classList.remove('active');
+    navlinks.classList.remove('open');
+  }
+});
+
 // ─── MOBILE MENU ───
 const menuBtn = document.getElementById('menu-toggle');
 const navlinks = document.getElementById('navlinks');
 menuBtn.addEventListener('click', () => {
   menuBtn.classList.toggle('active');
   navlinks.classList.toggle('open');
-});
-navlinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    menuBtn.classList.remove('active');
-    navlinks.classList.remove('open');
-  });
 });
 
 // ─── CART STATE ───
